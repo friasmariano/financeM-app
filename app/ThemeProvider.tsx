@@ -20,14 +20,14 @@ export default function ThemeProvider() {
     <button
       style={{
         position: 'fixed',
-        bottom: '1rem',
-        right: '1rem',
+        right: '0',
         padding: '0.5rem 1rem',
         background: 'gray',
         color: 'white',
         border: 'none',
-        borderRadius: '0.25rem',
+        borderRadius: '30px 0px 0px 30px',
         cursor: 'pointer',
+        bottom: '50%'
       }}
       aria-label='Toggle theme'
       title='Toggle theme'

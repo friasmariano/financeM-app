@@ -2,8 +2,10 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import themeReducer from './features/theme/store/theme-slice';
+import navReducer from './features/nav/store/nav-slice';
 
 const rootReducer = combineReducers({
+    nav: navReducer,
     theme: themeReducer
 })
 

@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --sidebar-gradient: linear-gradient(to bottom, #e0e0e0, #ffffff);
 }
 
 /* @theme inline {
@@ -22,10 +24,66 @@
 html.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+
+  --sidebar-gradient: linear-gradient(180deg,rgba(29, 29, 29, 1) 0%, rgba(51, 51, 51, 1) 100%);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 body {
+  margin: 0;
+  display: grid;
+  grid: auto-flow min-content / repeat(12, 1fr);
+
+  grid-template-areas:
+    "sidebar main main"
+    "sidebar main main"
+    "sidebar main main"
+    "sidebar footer footer";
+
+  grid-template-rows: auto auto auto auto;
+
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: var(--sidebar-gradient);
+
+  grid-column-start: 1;
+  grid-column-end: 3;
+
+  grid-row-start: 1;
+  grid-row-end: 13;
+
+  padding: 20px 20px 20px 20px;
+}
+
+.main {
+  grid-area: main;
+  background-color: #fff;
+
+  grid-column-start: 3;
+  grid-column-end: 13;
+
+  grid-row-start: 1;
+  grid-row-end: 13;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: #fff;
+
+  grid-column-start: 3;
+  grid-column-end: 12;
+
+  grid-row-start: 12;
+  grid-row-end: 13;
 }

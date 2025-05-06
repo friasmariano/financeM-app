@@ -5,6 +5,9 @@ import ThemeProvider from "./ThemeProvider";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./fontawesome.config";
 import StoreProvider from "./StoreProvider";
+import Sidebar from "@/components/Sidebar";
+import Main from "@/components/Main";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +35,9 @@ export default function RootLayout({
         <StoreProvider>
           {children}
 
+          <Sidebar />
+          <Main />
+          <Footer />
           <ThemeProvider />
         </StoreProvider>
       </body>
