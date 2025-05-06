@@ -4,7 +4,7 @@ const themeSlice = createSlice({
     name: 'theme',
     initialState: {
         data: {
-            isDark: false
+            isDark: true
         }
     },
     reducers: {

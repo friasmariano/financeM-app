@@ -1,20 +1,20 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import { useAppDispatch, useAppSelector } from '../lib/hooks';
+import { toggle } from '../lib/features/theme/store/theme-slice'
 
 export default function ThemeProvider() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const dispatch = useAppDispatch();
+  const isDark = useAppSelector((state) => state.theme.data.isDark);
 
   useEffect(() => {
+    const themeClass = isDark ? 'dark' : 'light';
     document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  }
+    document.documentElement.classList.add(themeClass);
+  }, [isDark]);
 
   return (
     <button
@@ -31,10 +31,10 @@ export default function ThemeProvider() {
       }}
       aria-label='Toggle theme'
       title='Toggle theme'
-      onClick={toggleTheme}
+      onClick={() => dispatch(toggle())}
     >
       <FontAwesomeIcon
-        icon={theme === 'dark' ? faSun : faMoon}
+        icon={isDark ? faSun : faMoon}
         size="lg"
         color="white"
       />
