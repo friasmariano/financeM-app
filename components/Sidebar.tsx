@@ -1,4 +1,7 @@
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faSun } from '@fortawesome/free-solid-svg-icons';
+
 export default function Sidebar() {
     return (
         <section className="sidebar">
@@ -9,10 +12,26 @@ export default function Sidebar() {
             </div>
 
             <ul>
-                <li style={{ padding: '15px 0px 20px 20px' }}>Overview</li>
-                <li style={{ padding: '0px 0px 20px 20px' }}>Transactions</li>
-                <li style={{ padding: '0px 0px 20px 20px' }}>Budgets</li>
-                <li style={{ padding: '0px 0px 20px 20px' }}>Bills</li>
+                <li style={{ padding: '15px 0px 20px 20px' }}>
+                    <i className="bi bi-house"
+                       style={{ marginRight: '10px' }}></i>
+                    Overview
+                </li>
+                <li style={{ padding: '0px 0px 20px 20px' }}>
+                    <i className="bi bi-arrow-left-right"
+                       style={{ marginRight: '10px' }}></i>
+                    Transactions
+                </li>
+                <li style={{ padding: '0px 0px 20px 20px' }}>
+                    <i className="bi bi-pie-chart"
+                       style={{ marginRight: '10px' }}></i>
+                    Budgets
+                </li>
+                <li style={{ padding: '0px 0px 20px 20px' }}>
+                    <i className="bi bi-file-earmark-break"
+                       style={{ marginRight: '10px' }}></i>
+                    Bills
+                </li>
             </ul>
         </section>
     )

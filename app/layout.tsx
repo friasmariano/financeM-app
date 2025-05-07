@@ -8,6 +8,7 @@ import StoreProvider from "./StoreProvider";
 import Sidebar from "@/components/Sidebar";
 import Main from "@/components/Main";
 import Footer from "@/components/Footer";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
