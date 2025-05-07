@@ -18,17 +18,7 @@ export default function ThemeProvider() {
 
   return (
     <button
-      style={{
-        position: 'fixed',
-        right: '0',
-        padding: '0.5rem 1rem',
-        background: 'gray',
-        color: 'white',
-        border: 'none',
-        borderRadius: '30px 0px 0px 30px',
-        cursor: 'pointer',
-        bottom: '50%'
-      }}
+      className="theme-button"
       aria-label='Toggle theme'
       title='Toggle theme'
       onClick={() => dispatch(toggle())}
@@ -36,7 +26,6 @@ export default function ThemeProvider() {
       <FontAwesomeIcon
         icon={isDark ? faSun : faMoon}
         size="lg"
-        color="white"
       />
     </button>
   );

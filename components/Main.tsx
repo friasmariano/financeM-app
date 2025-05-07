@@ -1,24 +1,14 @@
 
-export default function Main() {
+import React from "react";
+
+type MainProps = {
+  children: React.ReactNode;
+};
+
+export default function Main({ children }: MainProps) {
     return (
         <main className="main">
-            <section style={{ padding: '60px 20px 30px 80px', display: 'flex', gap: '20px' }}>
-                <div style={{ width: '305px', height: '125px',
-                              backgroundColor: 'teal',
-                              borderRadius: '30px' }}>
-
-                </div>
-                <div style={{ width: '305px', height: '125px',
-                              backgroundColor: '#C9FFE9',
-                              borderRadius: '30px' }}>
-
-                </div>
-                <div style={{ width: '305px', height: '125px',
-                              backgroundColor: '#FFC194',
-                              borderRadius: '30px' }}>
-
-                </div>
-            </section>
+            {children}
         </main>
     )
 }

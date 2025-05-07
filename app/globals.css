@@ -2,9 +2,23 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #185366;
+
+  --text-color: #185366;
 
   --sidebar-gradient: linear-gradient(to bottom, #e0e0e0, #ffffff);
+
+  --blue-card-gradient: linear-gradient(0deg,#92E7FF 0%, #F0FBFF 100%);
+  --blue-card-text: #2f92b9;
+
+  --green-card-gradient: linear-gradient(0deg,#C9FFE9 0%, #FFFFFF 100%);
+  --green-card-text: #61E0AC;
+
+  --orange-card-gradient: linear-gradient(0deg,#FFC194 0%, #FFFDFB 100%);
+  --orange-card-text: #FFC399;
+
+  --theme-button-gradient: linear-gradient(0deg,#31a8c9 0%, #c1ecfc 100%);
+  --theme-button-text: #19566a;
 }
 
 /* @theme inline {
@@ -22,10 +36,22 @@
 } */
 
 html.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: linear-gradient(180deg, #183d53 0%, #0b202c 100%);
+  --foreground: #ffffff;
 
-  --sidebar-gradient: linear-gradient(180deg,rgba(29, 29, 29, 1) 0%, rgba(51, 51, 51, 1) 100%);
+  --sidebar-gradient: linear-gradient(0deg,rgb(27, 27, 27) 0%, rgb(40, 40, 40) 100%);
+
+  --blue-card-gradient: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
+  --blue-card-text: #4bd6f5;
+
+  --green-card-gradient: linear-gradient(0deg,#2E634D 0%, #48BB8B 100%);
+  --green-card-text: #61E0AC;
+
+  --orange-card-gradient: linear-gradient(0deg,#8C4F24 0%, #D6722C 100%);
+  --orange-card-text: #F48D44;
+
+  --theme-button-gradient: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
+  --theme-button-text: rgb(232, 232, 232);
 }
 
 html, body {
@@ -68,7 +94,7 @@ body {
 
 .main {
   grid-area: main;
-  background-color: #fff;
+  background-color: var(--background);
 
   grid-column-start: 3;
   grid-column-end: 13;
@@ -79,11 +105,49 @@ body {
 
 .footer {
   grid-area: footer;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0);
 
   grid-column-start: 3;
-  grid-column-end: 12;
+  grid-column-end: 13;
 
   grid-row-start: 12;
   grid-row-end: 13;
+
+  padding: 0px 0px 20px 30px;
+}
+
+/* Components Sections */
+.card {
+  width: 305px;
+  height: 125px;
+  border-radius: 30px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.blue-card {
+  background: var(--blue-card-gradient);
+  color: var(--blue-card-text);
+}
+
+.green-card {
+  background: var(--green-card-gradient);
+  color: var(--green-card-text);
+}
+
+.orange-card {
+  background: var(--orange-card-gradient);
+  color: var(--orange-card-text);
+}
+
+.theme-button {
+  background: var(--theme-button-gradient);
+  color: var(--theme-button-text);
+
+  position: fixed;
+  right: 0;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 30px 0px 0px 30px;
+  cursor: pointer;
+  bottom: 50%;
 }

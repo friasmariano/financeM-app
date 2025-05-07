@@ -2,7 +2,7 @@
 export default function Footer() {
     return (
         <footer className="footer">
-            <p>Footer Content</p>
+            <p>© 2025 FinanceM </p>
         </footer>
     )
 }
