@@ -51,7 +51,7 @@ html.dark {
   --green-card-text: #61E0AC;
 
   --orange-card-gradient: linear-gradient(0deg,#8C4F24 0%, #D6722C 100%);
-  --orange-card-text: #F48D44;
+  --orange-card-text: #ff9951;
 
   --theme-button-gradient: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
   --theme-button-text: rgb(232, 232, 232);
@@ -73,16 +73,33 @@ body {
   grid: auto-flow min-content / repeat(12, 1fr);
 
   grid-template-areas:
+    "navbar navbar navbar"
     "sidebar main main"
     "sidebar main main"
     "sidebar main main"
     "sidebar footer footer";
 
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: 62px auto auto auto auto;
 
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  grid-area: navbar;
+  background: var(--sidebar-gradient);
+
+  height: 62px;
+
+  grid-column-start: 1;
+  grid-column-end: 13;
+
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 15px 0px 20px 40px;
 }
 
 .sidebar {
@@ -92,9 +109,15 @@ body {
   grid-column-start: 1;
   grid-column-end: 3;
 
-  grid-row-start: 1;
+  grid-row-start: 2;
   grid-row-end: 13;
 
+  padding: 55px 20px 0px 0px;
+
+  min-width: 255px;
+  max-width: 255px;
+
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar > ul > li:hover {
@@ -102,6 +125,10 @@ body {
   background: var(--sidebar-link-background);
   color: var(--sidebar-link-text);
   font-weight: bold;
+}
+
+.sidebar-text {
+  display: inline-block;
 }
 
 .sidebar-active-route {
@@ -120,6 +147,8 @@ body {
 
   grid-row-start: 1;
   grid-row-end: 13;
+
+  padding: 65px 0px 0px 0px;
 }
 
 .footer {
@@ -133,6 +162,44 @@ body {
   grid-row-end: 13;
 
   padding: 0px 0px 20px 30px;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    min-width: 100px;
+    max-width: 100px;
+  }
+
+  .sidebar-text {
+    display: none;
+  }
+}
+
+@media (max-width: 728px) {
+  .sidebar {
+    display: none;
+  }
+
+  body {
+    margin: 0;
+    display: grid;
+    grid: auto-flow min-content / repeat(12, 1fr);
+
+    grid-template-areas:
+      "navbar navbar navbar"
+      "main main"
+      "main main"
+      "main main"
+      "footer footer";
+
+    grid-template-rows: 62px auto auto auto auto;
+  }
+
+  .main, .footer {
+    grid-column-start: 1;
+    grid-column-end: 13;
+  }
+
 }
 
 /* Components Sections */

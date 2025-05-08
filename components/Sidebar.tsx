@@ -24,12 +24,6 @@ export default function Sidebar() {
 
     return (
         <section className="sidebar">
-            <div style={{ display: 'flex', padding: '50px 0px 40px 40px' }}>
-                <h1 style={{ fontSize: '1.3rem', fontWeight: '600'}}>
-                    financeM
-                </h1>
-            </div>
-
             <ul>
                {links.map((link, index) => (
                 <li key={link.href}
@@ -40,7 +34,7 @@ export default function Sidebar() {
                     >
                     <Link href={link.href}>
                         <i className={`bi ${link.hovered || pathname === link.href ? link.hoverIcon : link.icon} mr-2`}></i>
-                        <span>{link.label}</span>
+                        <span className='sidebar-text'>{link.label}</span>
                     </Link>
                 </li>
                ))}
