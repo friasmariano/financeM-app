@@ -3,10 +3,12 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import themeReducer from './features/theme/store/theme-slice';
 import navReducer from './features/nav/store/nav-slice';
+import sidebarReducer from './features/sidebar/store/sidebar-slice';
 
 const rootReducer = combineReducers({
     nav: navReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    sidebar: sidebarReducer
 })
 
 const persisteConfig = {

@@ -1,16 +1,24 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useAppDispatch, useAppSelector} from '../lib/hooks';
+import { toggle } from '../lib/features/sidebar/store/sidebar-slice'
 
 export default function Sidebar() {
+    const dispatch = useAppDispatch();
+
+    const isOpened = useAppSelector((state) => state.sidebar.data.isOpened);
+
     const [links, setLinks] = useState([
         { href: '/', label: 'Overview', icon: 'bi-house', hoverIcon: 'bi-house-fill', hovered: false },
         { href: '/transactions', label: 'Transactions', icon: 'bi bi-clipboard-data', hoverIcon: 'bi bi-clipboard-data-fill', hovered: false },
         { href: '/budgets', label: 'Budgets', icon: 'bi-pie-chart', hoverIcon: 'bi bi-pie-chart-fill', hovered: false },
         { href: '/bills', label: 'Bills', icon: 'bi-file-earmark-break', hoverIcon: 'bi-file-earmark-break-fill', hovered: false },
-    ])
+    ]);
+
+    const [isMobile, setIsMobile] = useState(false);
 
     const pathname = usePathname();
 
@@ -22,8 +30,30 @@ export default function Sidebar() {
         )
     }
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, [])
+
+    const handleBackdropClick = () => {
+        // const event = new CustomEvent('sidebar:backdrop-click');
+        // window.dispatchEvent(event);
+
+        dispatch(toggle());
+    };
+
     return (
-        <section className="sidebar">
+        <>
+            {isMobile && isOpened && (
+                <div className="sidebar-backdrop" onClick={handleBackdropClick}></div>
+            )}
+            <section className={`${isMobile ? 'sidebar-mobile' : 'sidebar'} ${!isOpened && isMobile ? 'hidden' : ''}`}>
             <ul>
                {links.map((link, index) => (
                 <li key={link.href}
@@ -40,5 +70,6 @@ export default function Sidebar() {
                ))}
             </ul>
         </section>
+        </>
     )
 }
