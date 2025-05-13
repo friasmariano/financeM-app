@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
-import { toggle } from '../lib/features/theme/store/theme-slice'
+import { toggle } from '../lib/features/theme/store/theme-slice';
 
 export default function ThemeProvider() {
   const dispatch = useAppDispatch();

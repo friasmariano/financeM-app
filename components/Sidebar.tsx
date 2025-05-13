@@ -42,9 +42,6 @@ export default function Sidebar() {
     }, [])
 
     const handleBackdropClick = () => {
-        // const event = new CustomEvent('sidebar:backdrop-click');
-        // window.dispatchEvent(event);
-
         dispatch(toggle());
     };
 
@@ -53,22 +50,25 @@ export default function Sidebar() {
             {isMobile && isOpened && (
                 <div className="sidebar-backdrop" onClick={handleBackdropClick}></div>
             )}
-            <section className={`${isMobile ? 'sidebar-mobile' : 'sidebar'} ${!isOpened && isMobile ? 'hidden' : ''}`}>
-            <ul>
-               {links.map((link, index) => (
-                <li key={link.href}
-                    style={{ padding: '10px 0px 10px 40px', margin: '0px 0px 12px 0px'}}
-                    onMouseEnter={() => setHover(index, true)}
-                    onMouseLeave={() => setHover(index, false)}
-                    className={pathname === link.href ? 'sidebar-active-route' : ''}
-                    >
-                    <Link href={link.href}>
-                        <i className={`bi ${link.hovered || pathname === link.href ? link.hoverIcon : link.icon} mr-2`}></i>
-                        <span className='sidebar-text'>{link.label}</span>
-                    </Link>
-                </li>
-               ))}
-            </ul>
+            <section className={`fixed top-0 left-0 h-screen w-[255px] md:w-[100px] lg:w-[255px] 
+                                 z-[1000] p-[100px_20px_0_0] shadow-[4px_4px_20px_rgba(0,0,0,0.2)] 
+                                 transition-transform duration-300 ease-in-out
+                                ${isMobile ? (isOpened ? 'translate-x-0' : '-translate-x-full') : ''}`}
+                     style={{ background: 'var(--sidebar-gradient)'}}>
+                <ul style={{ padding: '0px', margin: '0px', listStyleType: 'none'}}>
+                {links.map((link, index) => (
+                    <li key={link.href}
+                        style={{ padding: '10px 0px 10px 40px', margin: '0px 0px 12px 0px'}}
+                        onMouseEnter={() => setHover(index, true)}
+                        onMouseLeave={() => setHover(index, false)}
+                        className={pathname === link.href ? 'sidebar-active-route' : ''}>
+                        <Link href={link.href} style={{ }}>
+                            <i className={`bi ${link.hovered || pathname === link.href ? link.hoverIcon : link.icon} mr-2`}></i>
+                            <span className='sidebar-text'>{link.label}</span>
+                        </Link>
+                    </li>
+                ))}
+                </ul>
         </section>
         </>
     )
