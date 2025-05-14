@@ -50,8 +50,8 @@ export default function Sidebar() {
             {isMobile && isOpened && (
                 <div className="sidebar-backdrop" onClick={handleBackdropClick}></div>
             )}
-            <section className={`fixed top-0 left-0 h-screen w-[255px] md:w-[100px] lg:w-[255px] 
-                                 z-[1000] p-[100px_20px_0_0] shadow-[4px_4px_20px_rgba(0,0,0,0.2)] 
+            <section className={`fixed top-0 left-0 h-screen w-[255px] md:w-[100px] lg:w-[255px]
+                                 z-[1000] p-[100px_20px_0_0] shadow-[4px_4px_20px_rgba(0,0,0,0.2)]
                                  transition-transform duration-300 ease-in-out
                                 ${isMobile ? (isOpened ? 'translate-x-0' : '-translate-x-full') : ''}`}
                      style={{ background: 'var(--sidebar-gradient)'}}>

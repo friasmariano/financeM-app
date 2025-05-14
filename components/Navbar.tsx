@@ -1,11 +1,14 @@
 'use client';
 
 import { useAppDispatch } from '../lib/hooks'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toggle } from '../lib/features/sidebar/store/sidebar-slice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
     const dispatch = useAppDispatch();
+    const [isDropDownOpen, setDropDownOpen] = useState(false);
 
     useEffect(() => {
         const handleBackdropClick = () => {
@@ -19,37 +22,56 @@ export default function Navbar() {
     }, [dispatch]);
 
     return(
-        <section className="c-navbar">
-            <div style={{ display: 'flex', padding: '0px', margin: '0px' }}>
-                <div style={{ display: 'flex', padding: '0px', margin: '0px' }}>
+        <section className="navbar">
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0px', margin: '0px' }}>
+                {/* Left */}
+                <div style={{ display: 'flex', alignItems: 'center', padding: '0px', margin: '0px' }}>
                     <button
-                        style={{ margin: '-4px 10px 20px 0px', fontSize: '1.5rem',
+                        style={{ margin: '-11px 10px 20px 0px', fontSize: '1.5rem',
                                  cursor: 'pointer'}}
                         onClick={() => dispatch(toggle())}
                     >
-                        <i className="bi bi-list block md:hidden" style={{ color: 'var(--foreground)' }}></i>
+                        <i className="bi bi-list block md:hidden"
+                           style={{ position: 'absolute', color: 'var(--foreground)'}}></i>
                     </button>
-                    <h1 style={{ fontSize: '1.3rem', fontWeight: '600', color: 'var(--foreground)'}}>
+                    <h1 style={{ fontSize: '1.3rem', fontWeight: '600',
+                                 color: 'var(--foreground)',
+                                 margin: '0px 20px 0px 25px'}}>
                         financeM
                     </h1>
                 </div>
-                <div style={{ position: 'absolute',
-                              top: '0px', right: '0px',
-                              fontSize: '1rem',
-                              padding: '15px 30px 0px 0px'
-                }}>
-                    <div className="dropdown">
-                        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            John Doe
-                        </button>
-                        <ul className="dropdown-menu">
-                            <li><a className="dropdown-item" href="#">Action</a></li>
-                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                            <li><a className="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </div>
+
+                {/* Right */}
+                <div style={{ position: 'relative'}}>
+                    <div
+                        onClick={() => setDropDownOpen(prev => !prev)}
+                        style={{
+                            cursor: 'pointer',
+                            fontWeight: '500',
+                            color: 'var(--foreground)',
+                            padding: '0.5rem 1.3rem 0px 0',
+                            borderRadius: '4px'
+                         }}>
+                            <span style={{ margin: '0px 20px 0px 13px', userSelect: 'none'}}>John Doe</span>
+                            <FontAwesomeIcon icon={isDropDownOpen ? faChevronUp: faChevronDown} />
+                            </div>
                 </div>
             </div>
+            {isDropDownOpen && (
+                <div style={{ position: 'relative' }}>
+                    <ul className="dropdown">
+                        <li>
+                            Profile
+                        </li>
+                        <li>
+                            Account Info
+                        </li>
+                        <li>
+                            Logout
+                        </li>
+                    </ul>
+                </div>
+            )}
         </section>
     );
 }

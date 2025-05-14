@@ -10,8 +10,6 @@ import Main from "@/components/Main";
 import Footer from "@/components/Footer";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from "@/components/Navbar";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import BootstrapJS from "@/components/BootstrapJS";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +38,6 @@ export default function RootLayout({
           <Navbar />
           <Sidebar />
           <Main>
-            <BootstrapJS />
             {children}
           </Main>
           <Footer />
