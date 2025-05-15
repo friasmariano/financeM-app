@@ -23,6 +23,9 @@
 
   --sidebar-link-background: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
   --sidebar-link-text: white;
+
+  --login-card-gradient: linear-gradient(0deg,#b2eeff 0%, #fbfbfb 100%);
+  --green-button-gradient: linear-gradient(180deg,rgb(101, 255, 165) 0%, rgb(34, 158, 85) 100%);
 }
 
 /* @theme inline {
@@ -60,6 +63,9 @@ html.dark {
 
   --sidebar-link-background: linear-gradient(0deg,#31a8c9 0%, #c1ecfc 100%);
   --sidebar-link-text: #0B2730;
+
+  --login-card-gradient: linear-gradient(0deg, #08202e 0%, rgba(54, 147, 179, 0.7) 100%);
+  --green-button-gradient: linear-gradient(180deg,rgba(76, 217, 135, 1) 0%, rgba(24, 125, 66, 1) 100%);
 }
 
 html, body {
@@ -314,4 +320,50 @@ body {
   border-radius: 30px 0px 0px 30px;
   cursor: pointer;
   bottom: 50%;
+}
+
+input {
+  width: 250px;
+  height: 45px;
+  border-radius: 25px;
+
+  color: var(--foreground);
+
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05),
+              inset -2px -2px 5px rgba(2, 2, 2, 0.05);
+
+  padding: 0px 0px 0px 15px;
+}
+
+.login-container {
+  display: flex;
+  margin: 20vh auto 0px auto;
+  flex-direction: column;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+
+  width: 600px;
+  height: 345px;
+  background: var(--login-card-gradient);
+  border-radius: 30px;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  width: 170px;
+  height: 40px;
+
+  border-radius: 20px;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  padding: 0px 0px 0px 30px;
+}
+
+.is-green {
+  background: var(--green-button-gradient);
 }
