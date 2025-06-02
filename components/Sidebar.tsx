@@ -10,12 +10,13 @@ export default function Sidebar() {
     const dispatch = useAppDispatch();
 
     const isOpened = useAppSelector((state) => state.sidebar.data.isOpened);
+    const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
 
     const [links, setLinks] = useState([
         { href: '/', label: 'Overview', icon: 'bi-house', hoverIcon: 'bi-house-fill', hovered: false },
-        { href: '/transactions', label: 'Transactions', icon: 'bi bi-clipboard-data', hoverIcon: 'bi bi-clipboard-data-fill', hovered: false },
-        { href: '/budgets', label: 'Budgets', icon: 'bi-pie-chart', hoverIcon: 'bi bi-pie-chart-fill', hovered: false },
-        { href: '/bills', label: 'Bills', icon: 'bi-file-earmark-break', hoverIcon: 'bi-file-earmark-break-fill', hovered: false },
+        // { href: '/transactions', label: 'Transactions', icon: 'bi bi-clipboard-data', hoverIcon: 'bi bi-clipboard-data-fill', hovered: false },
+        // { href: '/budgets', label: 'Budgets', icon: 'bi-pie-chart', hoverIcon: 'bi bi-pie-chart-fill', hovered: false },
+        // { href: '/bills', label: 'Bills', icon: 'bi-file-earmark-break', hoverIcon: 'bi-file-earmark-break-fill', hovered: false },
     ]);
 
     const [isMobile, setIsMobile] = useState(false);
@@ -46,11 +47,12 @@ export default function Sidebar() {
     };
 
     return (
-        <>
+        loggedIn ? (
+        <section>
             {isMobile && isOpened && (
                 <div className="sidebar-backdrop" onClick={handleBackdropClick}></div>
             )}
-            <section className={`fixed top-0 left-0 h-screen w-[255px] md:w-[100px] lg:w-[255px]
+            <div className={`fixed top-0 left-0 h-screen w-[255px] md:w-[100px] lg:w-[255px]
                                  z-[1000] p-[100px_20px_0_0] shadow-[4px_4px_20px_rgba(0,0,0,0.2)]
                                  transition-transform duration-300 ease-in-out
                                 ${isMobile ? (isOpened ? 'translate-x-0' : '-translate-x-full') : ''}`}
@@ -69,7 +71,7 @@ export default function Sidebar() {
                     </li>
                 ))}
                 </ul>
-        </section>
-        </>
+            </div>
+        </section>) : (<p></p>)
     )
 }

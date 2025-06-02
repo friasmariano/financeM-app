@@ -4,11 +4,13 @@ import { persistReducer, persistStore } from 'redux-persist';
 import themeReducer from './features/theme/store/theme-slice';
 import navReducer from './features/nav/store/nav-slice';
 import sidebarReducer from './features/sidebar/store/sidebar-slice';
+import authReducer from './features/auth/store/auth-slice';
 
 const rootReducer = combineReducers({
     nav: navReducer,
     theme: themeReducer,
-    sidebar: sidebarReducer
+    sidebar: sidebarReducer,
+    auth: authReducer
 })
 
 const persisteConfig = {
