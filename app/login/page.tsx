@@ -1,8 +1,13 @@
 'use client';
 
+import { Button, Badge, HStack, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAppDispatch } from "@/lib/hooks";
 import { setLoginStatus } from "@/lib/features/auth/store/auth-slice";
+import { authService } from '@/services/authService';
+
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export default function Login() {
     const dispatch = useAppDispatch();
@@ -11,20 +16,7 @@ export default function Login() {
 
     const authenticate = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/auth/authenticate', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({username, password})
-            })
-
-            if (!response.ok) {
-                throw new Error('Login failed');
-            }
-
-            const data = await response.json();
+            const data = await authService.login({ username, password });
 
             console.log('Authentication successful:', data);
         }
@@ -35,6 +27,22 @@ export default function Login() {
 
         // dispatch(setLoginStatus());
     }
+
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            password: ''
+        },
+        onSubmit: (values, actions) => {
+            authenticate();
+        },
+        validationSchema: Yup.object({
+            username: Yup.string()
+                .required('Username is required'),
+            password: Yup.string()
+                .required('Password is required')
+        })
+    })
 
     return(
         <section className="login-container">
@@ -59,6 +67,23 @@ export default function Login() {
                     <span style={{ marginRight: '12px', opacity: '0.5' }}>|</span>
                     <span>Login</span>
                 </button>
+
+                <HStack>
+                    <Button>Click me</Button>
+                    <Button>Click me</Button>
+                </HStack>
+
+                <Stack align="flex-start">
+                    <Badge variant="solid" colorPalette="blue">
+                        <i className="bi bi-star-fill"></i>
+                        New
+                    </Badge>
+                    <Badge variant="solid" colorPalette="green">
+                        New
+                        <i className="bi bi-at"></i>
+                    </Badge>
+                </Stack>
+
             </div>
         </section>
     )

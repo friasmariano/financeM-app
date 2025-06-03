@@ -1,22 +1,24 @@
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || '';
+const API_URL = process.env.NEXT_PUBLIC_API_BASE || '';
 
 export async function fetchClient<T>(
     path: string,
     options: RequestInit = {}
 ): Promise<T> {
-    const rest = await fetch(`${API_BASE}${path}`, {
+    const url = `${API_URL}${path.startsWith('/') ? path:  '/' + path}`;
+
+    const response = await fetch(url, {
         headers: {
             'Content-Type': 'application/json',
             ...options.headers,
         },
         ...options
-    });
+    })
 
-    if (!rest.ok) {
-        const error = await rest.text();
-        throw new Error(error || 'API error');
+    if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error || `Request to ${url} failed with status ${response.status}`);
     }
 
-    return rest.json();
+    return response.json();
 }
