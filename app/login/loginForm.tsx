@@ -1,6 +1,5 @@
 'use client';
 
-import { Input } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { authService } from '@/services/authService';
@@ -13,7 +12,6 @@ export default function LoginForm() {
     const authenticate = async (values: any) => {
         try {
             const data = await authService.login(values);
-            console.log("Login successful:", data);
             dispatch(setLoginStatus());
         } catch (error: any) {
             console.error("Login error:", error);
@@ -36,22 +34,41 @@ export default function LoginForm() {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <div>
-                <label htmlFor="username">Username</label>
-                <Input id="username" {...formik.getFieldProps('username')} />
+        <form onSubmit={e => {
+            if (!formik.isValid) {
+                e.preventDefault();
+                return;
+            }
+            formik.handleSubmit(e);
+        }}>
+            <div className="flex flex-col items-center gap-3">
+                <input
+                    id="username"
+                    type="text"
+                    placeholder="username"
+                    {...formik.getFieldProps('username')}
+                />
+                <div className="text-sm text-red-400">
+                    {!!formik.errors.username && formik.touched.username && (<p>{formik.errors.username}</p>)}
+                </div>
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="password"
+                    {...formik.getFieldProps('password')}
+                />
+                <div className="text-sm text-red-400">
+                    {!!formik.errors.password && formik.touched.password && (<p>{formik.errors.password}</p>)}
+                </div>
             </div>
 
-            <div>
-                <label htmlFor="password">Password</label>
-                <Input id="password" type="password" {...formik.getFieldProps('password')} />
-            </div>
-
-            <div style={{ marginTop: '50px', color: 'white', fontWeight: '500' }}>
-                <button className="button is-green" type="submit">
-                    <i className="bi bi-key" style={{ marginRight: '10px' }}></i>
-                    <span style={{ marginRight: '12px', opacity: '0.5' }}>|</span>
-                    <span>Login</span>
+            <div className="flex flex-col items-center gap-3 mt-9">
+                               <button
+                    className={`button is-green text-center cursor-pointer ${!formik.isValid ? 'opacity-50' : ''}`}
+                    type="submit"
+                    disabled={!formik.isValid || formik.isSubmitting}>
+                    Login
                 </button>
             </div>
         </form>
