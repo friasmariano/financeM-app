@@ -1,7 +1,7 @@
 import { fetchClient } from "./http/fetchClient";
 
 export const authService = {
-    login: async (credentials: { username: string; password: string }) => {
+    login: async (credentials: { username: string; password: string; }) => {
         return fetchClient("/auth/authenticate", {
             method: "POST",
             body: JSON.stringify(credentials),
