@@ -3,12 +3,12 @@
 
 export default function Home() {
   return (
-    <>
-      <section style={{ padding: '50px 20px 0px 90px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
+    <section>
+      <div style={{ padding: '50px 20px 0px 90px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
         <h1 className="text-4xl font-medium">Overview</h1>
-      </section>
+      </div>
 
-      <section style={{ padding: '60px 20px 30px 80px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
+      <div style={{ padding: '60px 20px 30px 80px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
         <div className="card blue-card">
             <div style={{ display: 'flex', flexDirection: 'column', padding: '32px 0px 0px 30px'}}>
                 <h1  style={{ fontSize: '1.2rem' }}>Current Balance</h1>
@@ -34,7 +34,7 @@ export default function Home() {
             </div>
         </div>
 
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

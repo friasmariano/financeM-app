@@ -5,12 +5,20 @@ import { useEffect, useState } from 'react';
 import { toggle } from '../lib/features/sidebar/store/sidebar-slice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { logout } from "@/lib/features/auth/store/auth-slice";
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
     const dispatch = useAppDispatch();
     const [isDropDownOpen, setDropDownOpen] = useState(false);
 
     const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
+    const router = useRouter();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        router.push('/login');
+    }
 
     useEffect(() => {
         const handleBackdropClick = () => {
@@ -28,7 +36,8 @@ export default function Navbar() {
             <section className="navbar">
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0px', margin: '0px' }}>
                     {/* Left */}
-                    <div style={{ display: 'flex', alignItems: 'center', padding: '0px', margin: '0px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', padding: '0px', margin: '0px' }}
+                         onMouseLeave={() => setDropDownOpen(false)}>
                         <button
                             style={{ margin: '-11px 10px 20px 0px', fontSize: '1.5rem',
                                     cursor: 'pointer'}}
@@ -43,6 +52,12 @@ export default function Navbar() {
                             financeM
                         </h1>
                     </div>
+
+                    {/* Spacer */}
+                    <div
+                        style={{ flex: 1 }}
+                        onMouseEnter={() => setDropDownOpen(false)}
+                    />
 
                     {/* Right */}
                     <div style={{ position: 'relative'}}>
@@ -61,16 +76,19 @@ export default function Navbar() {
                     </div>
                 </div>
                 {isDropDownOpen && (
-                    <div style={{ position: 'relative' }}>
+                    <div
+                        style={{ position: 'relative' }}
+                        onMouseLeave={() => setDropDownOpen(false)}
+                        onMouseEnter={() => setDropDownOpen(true)}
+                    >
                         <ul className="dropdown">
+                            <li className="font-semibold">Profile</li>
+                            <hr className="my-1 border-gray-300 opacity-50" />
+                            <li>Account Info</li>
                             <li>
-                                Profile
-                            </li>
-                            <li>
-                                Account Info
-                            </li>
-                            <li>
-                                Logout
+                                <button onClick={handleLogout} className="cursor-pointer">
+                                    Logout
+                                </button>
                             </li>
                         </ul>
                     </div>

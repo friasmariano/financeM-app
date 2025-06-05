@@ -220,13 +220,20 @@ body {
   grid-area: main;
   background-color: var(--background);
 
-  grid-column-start: 1;
   grid-column-end: 13;
 
   grid-row-start: 1;
   grid-row-end: 13;
 
   padding: 65px 0px 0px 0px;
+}
+
+.main-logged-in {
+  grid-column-start: 3;
+}
+
+.main-logged-out {
+  grid-column-start: 1;
 }
 
 .footer {
