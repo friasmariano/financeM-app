@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(to bottom, #ffffff, #bfbfbf);
+  --button-background: linear-gradient(to bottom, #183d53 0%, #0b202c 100%);
+  --button-foreground: white;
+
   --background-color: #ffffff;
   --foreground: #185366;
 
@@ -44,8 +47,11 @@
 
 html.dark {
   --background-color: #183d53;
-  --background: linear-gradient(180deg, #183d53 0%, #0b202c 100%);
+  --background: linear-gradient(to bottom, #183d53 0%, #0b202c 100%);
   --foreground: #ffffff;
+
+  --button-background: linear-gradient(to bottom, #ffffff, #bfbfbf);
+  --button-foreground: #183d53;
 
   --sidebar-gradient: linear-gradient(0deg,rgb(27, 27, 27) 0%, rgb(40, 40, 40) 100%);
 
@@ -76,9 +82,7 @@ html, body {
 }
 
 body {
-  margin: 0;
   display: grid;
-  grid: auto-flow min-content / repeat(12, 1fr);
 
   grid-template-areas:
     "navbar navbar navbar"
@@ -89,10 +93,19 @@ body {
 
   grid-template-rows: 62px auto auto auto auto;
 
+  margin: 0;
+
   background: var(--background);
+  background-size: 100% calc(100% + 100px);
+  background-repeat: repeat-y;
+  background-position: top left;
+
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+
+  min-height: 100%;
 }
+
 
 .navbar {
   grid-area: navbar;
@@ -218,12 +231,12 @@ body {
 
 .main {
   grid-area: main;
-  background-color: var(--background);
+  /* background-color: var(--background); */
 
   grid-column-end: 13;
 
   grid-row-start: 1;
-  grid-row-end: 13;
+  grid-row-end: 5;
 
   padding: 65px 0px 0px 0px;
 }
@@ -238,15 +251,25 @@ body {
 
 .footer {
   grid-area: footer;
-  background-color: rgba(0, 0, 0, 0);
 
   grid-column-start: 3;
   grid-column-end: 13;
 
-  grid-row-start: 12;
-  grid-row-end: 13;
+  grid-row-start: 5;
+  grid-row-end: 6;
 
   padding: 0px 0px 20px 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logged-in {
+  grid-column-start: 3;
+}
+.footer-logged-out {
+  grid-column-start: 1;
 }
 
 @media (max-width: 1024px) {
@@ -362,7 +385,7 @@ input {
   height: 40px;
 
   border-radius: 20px;
-  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
 
   display: flex;
   align-items: center;
