@@ -11,11 +11,11 @@ export default function Home() {
           width={50}
           height={50}
         />
-        <h1 className="text-xl ml-2 drop-shadow font-semibold">FinanceM</h1>
+        <h1 className="text-xl ml-2 drop-shadow font-semibold drop-shadow">FinanceM</h1>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        <p style={{ textAlign: 'center', margin: 'auto', padding: '2vw 20vw 1vw 20vw' }}>
+        <p className="text-center mx-auto px-[20vw] pt-[2vw] pb-[1vw] drop-shadow">
           Take control of your finances by making it easy to manage your bills, set and track your budget, and monitor all your transactions in one place. This app provides everything you need to achieve your financial goals.
         </p>
 
@@ -30,7 +30,7 @@ export default function Home() {
             To get started, you can log in or register using the links below.
         </p>
 
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', gap: '0.75rem' }} className="drop-shadow">
           <Link href="/login"
                 style={{ background: 'var(--button-background)',
                          color: 'var(--button-foreground)' }} className="button">Login</Link>
