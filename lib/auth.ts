@@ -9,8 +9,9 @@ export default async function getAuthenticatedUser() {
     if (!token) return null;
 
     try {
-        return verify(token, process.env.JWT_SECRET!);
-    } catch {
+        return verify(token, process.env.JWT_PRIVATE_KEY!);
+    } catch(err) {
+        console.log("Invalid token", err);
         return null;
     }
 }

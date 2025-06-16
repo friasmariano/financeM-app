@@ -1,4 +1,16 @@
+
+import getAuthenticatedUser from "@/lib/auth";
+import { redirect } from 'next/navigation';
+
 export default function DashboardPage() {
+  const user = getAuthenticatedUser();
+
+  console.log('User:', user);
+
+  if(!user) {
+    redirect('/login');
+  }
+
   return (
     <section>
       <div style={{ padding: '50px 20px 0px 90px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>

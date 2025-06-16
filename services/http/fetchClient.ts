@@ -7,7 +7,8 @@ export async function fetchClient<T>(
 ): Promise<T> {
     const url = `${API_URL}${path.startsWith('/') ? path:  '/' + path}`;
 
-    const response = await fetch(url, {
+    try {
+        const response = await fetch(url, {
         headers: {
             'Content-Type': 'application/json',
             ...options.headers,
@@ -16,9 +17,26 @@ export async function fetchClient<T>(
     })
 
     if (!response.ok) {
-        const error = await response.text();
-        throw new Error(error || `Request to ${url} failed with status ${response.status}`);
+        let errorText = '';
+
+        try {
+         errorText = await response.text();
+        }
+        catch {
+
+        }
+
+        throw new Error(errorText || `Request to ${url} failed with status ${response.status}`);
     }
 
-    return response.json();
+    try {
+        return await response.json();
+    } catch(jsonError) {
+        throw new Error(`Failed to parse JSON response from ${url}: ${jsonError}`);
+    }
+
+
+    } catch(error) {
+        throw new Error(`Fetch error for ${url}: ${error instanceof Error ? error.message : error}`);
+    }
 }
