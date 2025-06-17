@@ -6,14 +6,23 @@ import { authService } from '@/services/authService';
 import { useAppDispatch } from "@/lib/hooks";
 import { login } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
+import { TokenResponse } from '@/types/TokenResponse';
 
 export default function LoginForm() {
+
     const dispatch = useAppDispatch();
     const router = useRouter();
 
-    const authenticate = async (values: any) => {
+    const authenticate = async (values: { username: string; password: string }) => {
         try {
             const data = await authService.login(values);
+            console.log("Login successful:", data);
+
+            if (!data) {
+                alert("Login failed. Please check your credentials.");
+                return;
+            }
+
             dispatch(login());
             router.push('/');
         } catch (error: any) {
@@ -21,6 +30,8 @@ export default function LoginForm() {
             alert("Login failed. Please check your credentials.");
         }
     };
+
+
 
     const formik = useFormik({
         initialValues: {

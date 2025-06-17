@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { logout } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
+import { authService } from '@/services/authService';
 
 export default function Navbar() {
     const dispatch = useAppDispatch();
@@ -15,9 +16,15 @@ export default function Navbar() {
     const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
     const router = useRouter();
 
-    const handleLogout = () => {
-        dispatch(logout());
-        router.push('/login');
+    const handleLogout = async () => {
+        try {
+            await authService.logout();
+        } catch (error) {
+            console.log("Logout failed:", error);
+        } finally {
+            dispatch(logout());
+            router.push('/login');
+        }
     }
 
     useEffect(() => {

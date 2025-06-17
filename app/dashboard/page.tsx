@@ -2,10 +2,8 @@
 import getAuthenticatedUser from "@/lib/auth";
 import { redirect } from 'next/navigation';
 
-export default function DashboardPage() {
-  const user = getAuthenticatedUser();
-
-  console.log('User:', user);
+export default async function DashboardPage() {
+  const user = await getAuthenticatedUser();
 
   if(!user) {
     redirect('/login');

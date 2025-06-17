@@ -1,16 +1,13 @@
+import { TokenResponse } from "@/types/TokenResponse";
 import { fetchClient } from "./http/fetchClient";
 
 export const authService = {
-    login: async (credentials: { username: string; password: string; }) => {
-        return fetchClient("/auth/authenticate", {
-            method: "POST",
-            body: JSON.stringify(credentials),
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-    },
+    login: async (credentials: { username: string; password: string }): Promise<TokenResponse | null> => {
+    return await fetchClient<TokenResponse>("auth/authenticate", {
+      method: "POST",
+      body: JSON.stringify(credentials),
+    });
+  },
 
     register: async (data: any) => {
         return fetchClient("auth/register", {
@@ -21,7 +18,8 @@ export const authService = {
 
     logout: async() => {
         return fetchClient("/auth/logout", {
-            method: "POST"
+            method: "POST",
+            credentials: 'include'
         })
     }
 }

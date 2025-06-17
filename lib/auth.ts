@@ -5,13 +5,19 @@ import { verify } from "jsonwebtoken";
 export default async function getAuthenticatedUser() {
     const cookieStore = await cookies();
     const token = cookieStore.get("jwt")?.value;
+    let decoded: any = null;
 
-    if (!token) return null;
+    if (!token) {
+        return null;
+    }
 
     try {
-        return verify(token, process.env.JWT_PRIVATE_KEY!);
-    } catch(err) {
-        console.log("Invalid token", err);
+        decoded = verify(token, process.env.JWT_PUBLIC_KEY!);
+        return decoded;
+    } catch (error) {
+        if (process.env.NODE_ENV !== 'production') {
+            console.error("JWT verification failed:", error);
+        }
         return null;
     }
 }
