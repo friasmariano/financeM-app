@@ -1,7 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import getAuthenticatedUser from "@/lib/auth";
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+export default async function Home() {
+  const user = await getAuthenticatedUser();
+
+  console.log("User in login page:", user);
+
+    if(user) {
+      redirect('/dashboard');
+  }
+
   return (
     <section style={{ minHeight: '95vh'}}>
       <div className="flex items-center justify-center p-2">
