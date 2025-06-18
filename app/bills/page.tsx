@@ -1,6 +1,13 @@
+import getAuthenticatedUser from "@/lib/auth";
+import { redirect } from 'next/navigation';
 
+export default async function BillsPage() {
+    const user = await getAuthenticatedUser();
 
-export default function BillsPage() {
+    if (!user) {
+        redirect('/login');
+    }
+
     return (
         <>
         </>

@@ -15,6 +15,7 @@ export default async function DashboardPage() {
         <h1 className="text-4xl font-medium">Overview</h1>
       </div>
 
+      {/* Balance, Income & Expenses */}
       <div style={{ padding: '60px 20px 30px 80px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
         <div className="card blue-card">
             <div style={{ display: 'flex', flexDirection: 'column', padding: '32px 0px 0px 30px'}}>
@@ -40,7 +41,13 @@ export default async function DashboardPage() {
                 </p>
             </div>
         </div>
+      </div>
 
+      {/* Pots... */}
+      <div style={{ padding: '20px 20px 30px 80px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
+        <div className="card card-big neutral-card">
+
+        </div>
       </div>
     </section>
   );
