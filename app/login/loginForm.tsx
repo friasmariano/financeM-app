@@ -24,7 +24,8 @@ export default function LoginForm() {
             }
 
             dispatch(login());
-            router.push('/');
+            router.push('/dashboard');
+
         } catch (error: any) {
             console.error("Login error:", error);
             alert("Login failed. Please check your credentials.");

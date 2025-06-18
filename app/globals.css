@@ -92,6 +92,7 @@ body {
     "sidebar footer footer";
 
   grid-template-rows: 62px auto auto auto auto;
+  grid-template-columns: 255px repeat(10, 1fr);
 
   margin: 0;
 
@@ -153,7 +154,7 @@ body {
   background: var(--sidebar-gradient);
 
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 2;
 
   grid-row-start: 2;
   grid-row-end: 13;
@@ -231,7 +232,6 @@ body {
 
 .main {
   grid-area: main;
-  /* background-color: var(--background); */
 
   grid-column-end: 13;
 
@@ -242,7 +242,7 @@ body {
 }
 
 .main-logged-in {
-  grid-column-start: 3;
+  grid-column-start: 2;
 }
 
 .main-logged-out {

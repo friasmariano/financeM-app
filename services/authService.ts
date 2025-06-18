@@ -3,10 +3,11 @@ import { fetchClient } from "./http/fetchClient";
 
 export const authService = {
     login: async (credentials: { username: string; password: string }): Promise<TokenResponse | null> => {
-    return await fetchClient<TokenResponse>("auth/authenticate", {
-      method: "POST",
-      body: JSON.stringify(credentials),
-    });
+        return await fetchClient<TokenResponse>("auth/authenticate", {
+        method: "POST",
+        credentials: 'include',
+        body: JSON.stringify(credentials),
+        });
   },
 
     register: async (data: any) => {

@@ -10,11 +10,11 @@ export async function fetchClient<T>(
 
     try {
         const response = await fetch(url, {
+            ...options,
             headers: {
                 'Content-Type': 'application/json',
                 ...options.headers,
-            },
-            ...options
+            }
         });
 
         if (!response.ok) {
@@ -25,11 +25,21 @@ export async function fetchClient<T>(
             } catch {}
 
             console.log(`Request to ${url} failed with status ${response.status}: ${errorText}`);
-            return null;  // Instead of throw, return null
+            return null;
         }
 
+
         try {
-            return await response.json();
+            if (response.status === 204) {
+                return null;
+            }
+
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return await response.json();
+            }
+
+            return null;
         } catch (jsonError) {
             console.error(`Failed to parse JSON response from ${url}:`, jsonError);
             return null;

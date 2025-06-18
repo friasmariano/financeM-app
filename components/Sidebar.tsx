@@ -13,7 +13,7 @@ export default function Sidebar() {
     const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
 
     const [links, setLinks] = useState([
-        { href: '/', label: 'Overview', icon: 'bi-house', hoverIcon: 'bi-house-fill', hovered: false },
+        { href: '/dashboard', label: 'Overview', icon: 'bi-house', hoverIcon: 'bi-house-fill', hovered: false },
         // { href: '/transactions', label: 'Transactions', icon: 'bi bi-clipboard-data', hoverIcon: 'bi bi-clipboard-data-fill', hovered: false },
         // { href: '/budgets', label: 'Budgets', icon: 'bi-pie-chart', hoverIcon: 'bi bi-pie-chart-fill', hovered: false },
         // { href: '/bills', label: 'Bills', icon: 'bi-file-earmark-break', hoverIcon: 'bi-file-earmark-break-fill', hovered: false },
