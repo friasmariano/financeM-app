@@ -16,7 +16,7 @@ export default async function getAuthenticatedUser() {
         return decoded;
     } catch (error) {
         if (process.env.NODE_ENV !== 'production') {
-            console.error("JWT verification failed:", error);
+            console.log("JWT verification failed:", error);
         }
         return null;
     }

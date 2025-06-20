@@ -5,6 +5,8 @@ import { redirect } from 'next/navigation';
 export default async function DashboardPage() {
   const user = await getAuthenticatedUser();
 
+  console.log("User:", user);
+
   if(!user) {
     redirect('/login');
   }
