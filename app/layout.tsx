@@ -10,7 +10,7 @@ import Sidebar from "@/components/Sidebar";
 import Main from "@/components/Main";
 import Footer from "@/components/Footer";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/NavbarServer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

@@ -1,15 +1,15 @@
 'use client';
 
-import { useAppDispatch, useAppSelector } from '../lib/hooks'
+import { useAppDispatch, useAppSelector } from '../../lib/hooks'
 import { useEffect, useState } from 'react';
-import { toggle } from '../lib/features/sidebar/store/sidebar-slice'
+import { toggle } from '../../lib/features/sidebar/store/sidebar-slice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { logout } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/authService';
 
-export default function Navbar() {
+export default function NavbarClient({ isAuthenticated }:  { isAuthenticated: boolean}) {
     const dispatch = useAppDispatch();
     const [isDropDownOpen, setDropDownOpen] = useState(false);
 
@@ -37,6 +37,12 @@ export default function Navbar() {
             window.removeEventListener('sidebar:backdrop-click', handleBackdropClick);
         };
     }, [dispatch]);
+
+    useEffect(() => {
+        if (!loggedIn && isAuthenticated) {
+            dispatch(logout());
+        }
+    },[isAuthenticated, loggedIn, dispatch]);
 
     return (
         loggedIn ? (
