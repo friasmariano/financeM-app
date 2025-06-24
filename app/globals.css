@@ -71,7 +71,7 @@ html.dark {
   --orange-card-gradient: linear-gradient(0deg,#8C4F24 0%, #D6722C 100%);
   --orange-card-text: #ff9951;
 
-  --neutral-card-gradient: linear-gradient(0deg, #F0EDED 0%, #ffffff 100%);
+  --neutral-card-gradient: linear-gradient(0deg, #a5a5a5 0%, #ededed 100%);
   --neutral-card-text: #333333;
 
   --theme-button-gradient: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
@@ -343,7 +343,7 @@ body {
 }
 
 .card-big {
-  width: 400px;
+  width: 500px;
   height: 200px;
 }
 

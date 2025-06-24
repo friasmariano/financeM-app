@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import { toggle } from '../../lib/features/sidebar/store/sidebar-slice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { logout } from "@/lib/features/auth/store/auth-slice";
+import { logout, login } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/authService';
 
-export default function NavbarClient({ isAuthenticated }:  { isAuthenticated: boolean}) {
+export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boolean }) {
     const dispatch = useAppDispatch();
     const [isDropDownOpen, setDropDownOpen] = useState(false);
 
@@ -19,10 +19,10 @@ export default function NavbarClient({ isAuthenticated }:  { isAuthenticated: bo
     const handleLogout = async () => {
         try {
             await authService.logout();
+            dispatch(logout());
         } catch (error) {
             console.log("Logout failed:", error);
         } finally {
-            dispatch(logout());
             router.push('/login');
         }
     }
@@ -39,10 +39,11 @@ export default function NavbarClient({ isAuthenticated }:  { isAuthenticated: bo
     }, [dispatch]);
 
     useEffect(() => {
-        if (!loggedIn && isAuthenticated) {
+        if (!isAuthenticated && loggedIn) {
             dispatch(logout());
         }
-    },[isAuthenticated, loggedIn, dispatch]);
+
+    }, [isAuthenticated]);
 
     return (
         loggedIn ? (
