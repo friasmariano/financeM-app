@@ -3,11 +3,14 @@ import getAuthenticatedUser from "@/lib/auth";
 import { redirect } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import Card from "@/components/Card";
+import LabelTag from "@/components/LabelTag";
+import { PieChart } from "@/components/charts/pie";
+import { DonutChart } from "@/components/charts/DonutChart";
+import { PieChart as PieChart2 } from "@/components/charts/pie";
 
 export default async function DashboardPage() {
   const user = await getAuthenticatedUser();
-
-  console.log("User:", user);
 
   if(!user) {
     redirect('/login');
@@ -91,8 +94,7 @@ export default async function DashboardPage() {
                           margin: '20px 20px 20px 20px',
                           padding: '2px 20px 0px 15px',
                           borderRadius: '25px',
-                          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-                          border: '1px solid red'}}>
+                          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
                 <div style={{ display: 'flex'}}>
                   <div style={{ fontSize: '2.2rem', fontWeight: '600',
                                 display: 'flex', margin: '7px 0px 0px 0px',
@@ -199,11 +201,20 @@ export default async function DashboardPage() {
                           width: '1px', height: '100px',
                           padding: '1px',
                           opacity: '0'}}>
-
             </div>
           </div>
         </div>
       </div>
+
+      <Card
+        title="Budgets"
+        hasDetails={false}
+        width="600px"
+        height="390px">
+          {/* <DonutChart /> */}
+          <PieChart />
+      </Card>
+
     </section>
   );
 }

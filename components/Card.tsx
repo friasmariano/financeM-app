@@ -6,12 +6,15 @@ type CardProps = {
     title: string;
     children: React.ReactNode;
     hasDetails?: boolean;
+    height?: string;
+    width?: string;
 }
 
-export default function Card({ title, hasDetails, children }: CardProps) {
+export default function Card({ title, hasDetails, children, width = "500px", height = "265px" }: CardProps) {
     return(
         <div style={{ padding: '20px 20px 30px 80px', display: 'flex', gap: '20px', minWidth: '60vw', flexWrap: 'wrap' }}>
-            <div className="card card-big neutral-card">
+            <div className="card neutral-card"
+                 style={{ width: `${width}`, height: `${height}` }}>
                 {/* Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between'}}>
                 <div style={{ borderRadius: '30px 25px 25px 0px', width: '160px', height: '60px',
@@ -32,13 +35,10 @@ export default function Card({ title, hasDetails, children }: CardProps) {
                 </div>
 
                 {/* Body */}
-                <div style={{ display: 'flex',
-                            height: '100px',
-                            marginTop: '25px',
-                            borderRadius: '30px'}}>
-                    {
-                        children
-                    }
+                <div style={{
+                              marginTop: '25px',
+                              borderRadius: '30px'}}>
+                    {children}
                 </div>
             </div>
         </div>

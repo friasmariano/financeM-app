@@ -107,7 +107,7 @@ body {
   margin: 0;
 
   background: var(--background);
-  background-size: cover;
+  background-size: calc(cover + 200px);
   background-repeat: repeat-y;
   background-position: top left;
 
