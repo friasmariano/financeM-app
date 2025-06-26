@@ -107,8 +107,8 @@ body {
   margin: 0;
 
   background: var(--background);
-  background-size: calc(cover + 200px);
-  background-repeat: repeat-y;
+  background-size: auto calc(100vh + 80vh);
+  background-repeat: no-repeat;
   background-position: top left;
 
   color: var(--foreground);

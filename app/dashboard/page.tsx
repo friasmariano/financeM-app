@@ -5,9 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Card from "@/components/Card";
 import LabelTag from "@/components/LabelTag";
-import { PieChart } from "@/components/charts/pie";
+import { PieChart } from "@/components/charts/PieChart";
 import { DonutChart } from "@/components/charts/DonutChart";
-import { PieChart as PieChart2 } from "@/components/charts/pie";
 
 export default async function DashboardPage() {
   const user = await getAuthenticatedUser();
@@ -211,8 +210,19 @@ export default async function DashboardPage() {
         hasDetails={false}
         width="600px"
         height="390px">
-          {/* <DonutChart /> */}
-          <PieChart />
+          <div className="grid grid-cols-2 gap-4 items-center pl-12 pt-1.5">
+            <DonutChart />
+            <div className="pl-3">
+              <LabelTag
+              color={colors[0]}
+              title="Total Budget"
+              subtitle="$1,500.00" />
+            <LabelTag
+              color={colors[0]}
+              title="Total Budget"
+              subtitle="$1,500.00" />
+            </div>
+          </div>
       </Card>
 
     </section>

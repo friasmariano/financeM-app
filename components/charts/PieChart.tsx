@@ -1,5 +1,6 @@
 import React from "react";
 import { pie, arc, PieArcDatum } from "d3";
+import { ClientTooltip, TooltipContent, TooltipTrigger } from "@/helpers/ClientTooltip";
 
 type DataItem = {
   name: string;
@@ -12,17 +13,17 @@ const data: DataItem[] = [
   {
     name: "Technology",
     value: 731,
-    colorFrom: "text-pink-400",
-    colorTo: "text-pink-400",
+    colorFrom: "text-pink-200",
+    colorTo: "text-pink-500",
   },
-  { name: "Industrials", value: 631, colorFrom: "text-purple-400", colorTo: "text-purple-400" },
-  { name: "Cyclical", value: 331, colorFrom: "text-indigo-400", colorTo: "text-indigo-400" },
-  { name: "Energy", value: 232, colorFrom: "text-sky-400", colorTo: "text-sky-400" },
-  { name: "Defensive", value: 101, colorFrom: "text-lime-400", colorTo: "text-lime-400" },
-  { name: "Financials", value: 42, colorFrom: "text-amber-400", colorTo: "text-amber-400" },
+  { name: "Industrials", value: 631, colorFrom: "text-purple-400", colorTo: "text-purple-800" },
+  { name: "Cyclical", value: 331, colorFrom: "text-indigo-400", colorTo: "text-indigo-800" },
+  { name: "Energy", value: 232, colorFrom: "text-sky-400", colorTo: "text-sky-800" },
+  { name: "Defensive", value: 101, colorFrom: "text-lime-400", colorTo: "text-lime-800" },
+  { name: "Financials", value: 42, colorFrom: "text-amber-400", colorTo: "text-amber-800" },
 ];
 
-export  default function PieChart() {
+export function PieChart() {
   // Chart dimensions
   const radius = Math.PI * 100;
   const gap = 0.02; // Gap between slices
@@ -62,7 +63,9 @@ export  default function PieChart() {
             const midAngle = (d.startAngle + d.endAngle) / 2;
 
             return (
-                 <g key={i}>
+              <ClientTooltip key={i}>
+                <TooltipTrigger>
+                  <g key={i}>
                     <path fill={`url(#pieColors-${i})`} d={arcGenerator(d)!} />
                     <linearGradient
                       id={`pieColors-${i}`}
@@ -76,7 +79,15 @@ export  default function PieChart() {
                       <stop offset="100%" stopColor={"currentColor"} className={d.data.colorTo} />
                     </linearGradient>
                   </g>
-              );
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div>{d.data.name}</div>
+                  <div className="text-gray-500 text-sm">
+                    {d.data.value.toLocaleString("en-US")}
+                  </div>
+                </TooltipContent>
+              </ClientTooltip>
+            );
           })}
         </svg>
 

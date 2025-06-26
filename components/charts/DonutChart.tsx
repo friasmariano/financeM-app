@@ -47,14 +47,13 @@ export function DonutChart() {
   // Minimum angle to display text
   const minAngle = 20; // Adjust this value as needed
 
-  const colors = ["#7e4cfe", "#895cfc", "#956bff", "#a37fff", "#b291fd", "#b597ff"];
+  const colors = ["rgb(209, 0, 49)", "rgb(4, 125, 141)", "rgb(12, 156, 60)", "rgb(223, 153, 0)", "rgb(0, 161, 225)", "rgb(216, 11, 96)"];
 
   return (
     <div className="relative">
       <svg
         viewBox={`-${radius} -${radius} ${radius * 2} ${radius * 2}`}
-        className="max-w-[16rem] mx-auto overflow-visible"
-      >
+        className="max-w-[16rem] mx-auto overflow-visible">
         {/* Define clip paths and colors for each slice */}
         <defs>
           {arcs.map((d, i) => (
@@ -84,7 +83,7 @@ export function DonutChart() {
                   <g clipPath={`url(#donut-c0-clip-${i})`}>
                     <path
                       fill={`url(#donut-c0-gradient-${i})`}
-                      stroke="#ffffff33" // Lighter stroke for a 3D effect
+                      stroke="rgba(0, 0, 0, 0.15)" // Lighter stroke for a 3D effect
                       strokeWidth={lightStrokeEffect} // Adjust stroke width for the desired effect
                       d={arcGenerator(d) || undefined}
                     />
