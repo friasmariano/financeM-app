@@ -59,8 +59,18 @@ export default async function DashboardPage() {
                 </p>
             </div>
         </div>
+
+        <div className="card red-card">
+              <div style={{ display: 'flex', flexDirection: 'column', padding: '32px 0px 0px 30px'}}>
+                <h1  style={{ fontSize: '1.2rem' }}>Projects</h1>
+                <p style={{ fontSize: '1.9rem', fontWeight: '600' }}>
+                  $1,700.50
+                </p>
+            </div>
+        </div>
       </div>
 
+      {/* Cards */}
       <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }} className="pl-20">
         <Card
           title="Pots"
@@ -171,21 +181,45 @@ export default async function DashboardPage() {
             <div style={{ display: 'flex', flexDirection: 'column',
                           gap: '20px', padding: '10px 0px 50px 55px',
                           maxHeight: '285px', overflow: 'scroll' }}>
-              <div className="flex items-center gap-5 pb-1">
-                <div className="w-18 h-18 rounded-full bg-gray-200"></div>
-                <p style={{ fontSize: '1.06rem' }}>Emma Richardson</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="flex">
+                  <div className="w-18 h-18 rounded-full bg-gray-200"></div>
+                  <p style={{ fontSize: '1rem', padding: '25px 0px 0px 20px' }}>Emma Richardson</p>
+                </div>
+                <div className="pr-10">
+                  <p style={{ fontSize: '1.25rem', fontWeight: '600', color: 'green' }}>+$75.50</p>
+                  <p style={{ fontSize: '0.9rem' }}>19 Febraury 2025</p>
+                </div>
               </div>
-              <div className="flex items-center gap-5 pb-1">
-                <div className="w-18 h-18 rounded-full bg-gray-200"></div>
-                <p style={{ fontSize: '1.06rem' }}>Emma Richardson</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="flex">
+                  <div className="w-18 h-18 rounded-full bg-gray-200"></div>
+                  <p style={{ fontSize: '1rem', padding: '25px 0px 0px 20px' }}>Savory Bites Bistro</p>
+                </div>
+                <div className="pr-10">
+                  <p style={{ fontSize: '1.25rem', fontWeight: '600', color: 'rgb(71, 71, 71)' }}>-$50.05</p>
+                  <p style={{ fontSize: '0.9rem' }}>19 Febraury 2025</p>
+                </div>
               </div>
-              <div className="flex items-center gap-5 pb-1">
-                <div className="w-18 h-18 rounded-full bg-gray-200"></div>
-                <p style={{ fontSize: '1.06rem' }}>Emma Richardson</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="flex">
+                  <div className="w-18 h-18 rounded-full bg-gray-200"></div>
+                  <p style={{ fontSize: '1rem', padding: '25px 0px 0px 20px' }}>Daniel Menendez</p>
+                </div>
+                <div className="pr-10">
+                  <p style={{ fontSize: '1.25rem', fontWeight: '600', color: 'green' }}>+$125.20</p>
+                  <p style={{ fontSize: '0.9rem' }}>19 Febraury 2025</p>
+                </div>
               </div>
-              <div className="flex items-center gap-5 pb-1">
-                <div className="w-18 h-18 rounded-full bg-gray-200"></div>
-                <p style={{ fontSize: '1.06rem' }}>Emma Richardson</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="flex">
+                  <div className="w-18 h-18 rounded-full bg-gray-200"></div>
+                  <p style={{ fontSize: '1rem', padding: '25px 0px 0px 20px' }}>Lynda Park</p>
+                </div>
+                <div className="pr-10">
+                  <p style={{ fontSize: '1.25rem', fontWeight: '600', color: 'rgb(71, 71, 71)' }}>-$25.50</p>
+                  <p style={{ fontSize: '0.9rem' }}>19 Febraury 2025</p>
+                </div>
               </div>
             </div>
         </Card>

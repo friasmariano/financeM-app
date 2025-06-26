@@ -8,13 +8,21 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { logout, login } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/authService';
+import { useRef } from 'react';
 
 export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boolean }) {
     const dispatch = useAppDispatch();
     const [isDropDownOpen, setDropDownOpen] = useState(false);
 
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [currentScrollPos, setCurrentScrollPos] = useState(0);
+    const [translateYPos, setTranslateYPos] = useState("");
+    const [isDescending, setIsDescending] = useState(true);
+
     const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
     const router = useRouter();
+
+    const navbarRef = useRef<HTMLElement>(null);
 
     const handleLogout = async () => {
         try {
@@ -45,9 +53,35 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
 
     }, [isAuthenticated]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setPrevScrollPos(window.scrollY);
+
+            setTimeout(() => {
+            setCurrentScrollPos(window.scrollY);
+            }, 250);
+
+            if (currentScrollPos < prevScrollPos) {
+            setTranslateYPos('-200px');
+            setIsDescending(false);
+            } else {
+            setTranslateYPos('0px');
+            setIsDescending(true);
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        }
+
+    }, [window.scrollY]);
+
     return (
         loggedIn ? (
-            <section className="navbar">
+            <nav className={`navbar ${isDescending ? 'slideDown' : 'fadeOut'}`}
+                 style={{ translate: `0px ${translateYPos}`}}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0px', margin: '0px' }}>
                     {/* Left */}
                     <div style={{ display: 'flex', alignItems: 'center', padding: '0px', margin: '0px' }}
@@ -107,7 +141,7 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
                         </ul>
                     </div>
                 )}
-            </section>
+            </nav>
         ) : <p></p>
     );
 }

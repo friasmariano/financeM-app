@@ -23,6 +23,9 @@
   --orange-card-gradient: linear-gradient(0deg,#FFC194 0%, #FFFDFB 100%);
   --orange-card-text: #FFC399;
 
+  --red-card-gradient: linear-gradient(0deg,#ff9494 0%, #fffbfb 100%);
+  --red-card-text: #f43c3c;
+
   --neutral-card-gradient: linear-gradient(0deg, #F0EDED 0%, #ffffff 100%);
   --neutral-card-text: #333333;
 
@@ -70,6 +73,9 @@ html.dark {
 
   --orange-card-gradient: linear-gradient(0deg,#8C4F24 0%, #D6722C 100%);
   --orange-card-text: #ff9951;
+
+  --red-card-gradient: linear-gradient(0deg,#8c1d1d 0%, #f13a3a 100%);
+  --red-card-text: #fb9292;
 
   --neutral-card-gradient: linear-gradient(0deg, #a5a5a5 0%, #ededed 100%);
   --neutral-card-text: #333333;
@@ -361,6 +367,11 @@ body {
   color: var(--orange-card-text);
 }
 
+.red-card {
+  background: var(--red-card-gradient);
+  color: var(--red-card-text);
+}
+
 .neutral-card {
   background: var(--neutral-card-gradient);
   color: var(--neutral-card-text);
@@ -446,4 +457,30 @@ input {
 ::-webkit-scrollbar-track {
   background: rgba(241, 241, 241, 0);
   border-radius: 10px;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.fadeOut {
+    animation-name: fadeOut;
+    animation-duration: 1.35;
+    transition-timing-function: ease-in-out;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.slideDown {
+    animation-name: slideDown;
+    animation-duration: 1s;
+    transition-timing-function: ease-in-out;
 }
