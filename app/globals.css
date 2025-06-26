@@ -432,7 +432,7 @@ input {
 /* Apply to the whole page or a scrollable element */
 ::-webkit-scrollbar {
   width: 10px; /* vertical scrollbar */
-  height: 10px; /* horizontal scrollbar */
+  height: 0px; /* horizontal scrollbar */
 }
 
 ::-webkit-scrollbar-thumb {

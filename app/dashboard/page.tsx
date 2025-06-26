@@ -1,12 +1,10 @@
 
 import getAuthenticatedUser from "@/lib/auth";
 import { redirect } from 'next/navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Card from "@/components/Card";
 import LabelTag from "@/components/LabelTag";
-import { PieChart } from "@/components/charts/PieChart";
 import { DonutChart } from "@/components/charts/DonutChart";
+import TotalTag from "@/components/TotalTag";
 
 export default async function DashboardPage() {
   const user = await getAuthenticatedUser();
@@ -63,167 +61,117 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Pots... */}
-      <div style={{ padding: '20px 20px 30px 80px', display: 'flex', gap: '20px', minWidth: '60vw', flexWrap: 'wrap' }}>
-        <div className="card card-big neutral-card">
-          {/* Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-            <div style={{ borderRadius: '30px 25px 25px 0px', width: '160px', height: '60px',
-                          background: 'linear-gradient(0deg,rgb(180, 180, 180) 0%,rgb(231, 231, 231) 100%)',
-                          padding: '17px 0px 20px 30px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
-                  <p  style={{ fontSize: '1.4rem', fontWeight: '600' }}>
-                    Pots
-                  </p>
-            </div>
-            <div style={{ padding: '30px 30px 0px 0px', fontSize: '0.9rem', opacity: '.6'}}>
-              See Details
-              <FontAwesomeIcon icon={faCaretRight}
-                style={{ marginLeft: '5px' }} />
-            </div>
-          </div>
-
-          {/* Body */}
-          <div style={{ display: 'flex',
-                        height: '100px',
-                        marginTop: '25px',
-                        borderRadius: '30px'}}>
-            <div style={{ display: 'flex',
-                          background: 'linear-gradient(0deg,rgb(148, 148, 148) 0%,rgb(197, 197, 197) 100%)',
-                          width: '160px', height: '67px',
-                          margin: '20px 20px 20px 20px',
-                          padding: '2px 20px 0px 15px',
-                          borderRadius: '25px',
-                          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
-                <div style={{ display: 'flex'}}>
-                  <div style={{ fontSize: '2.2rem', fontWeight: '600',
-                                display: 'flex', margin: '7px 0px 0px 0px',
-                                padding: '0px 0px 0px 3px', color: 'rgb(15, 145, 93)'}}>
-                    $
-                  </div>
-                  <div style={{ width: '1px', height: '50px',
-                                backgroundColor: 'grey',
-                                margin: '10px 10px 0px 10px' }}>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0px', marginTop: '8px'}}>
-                    <p style={{ fontSize: '0.85rem' }}>Total Saved</p>
-                    <p style={{ fontSize: '1.75rem', fontWeight: '600', margin: '-6px 0px 0px 0px' }}>
-                      850.00
-                    </p>
-                  </div>
-                </div>
-            </div>
-
-            <div style={{ width: '500px', display: 'flex', flexWrap: 'wrap',
-                          height: '170px', overflow: 'auto'}}>
-              {/* 1 */}
-              <div style={{ display: 'flex', margin: '15px', width: '105px' }}>
-                <div style={{ width: '2.75px', height: '50px',
-                              backgroundColor: ' #178178', borderRadius: '10px',
-                              boxShadow: '0px 3px 20px rgba(0, 0, 0, 0.5)'}}>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '0px 0px 0px 10px'}}>
-                  <p style={{ fontSize: '0.85rem' }}>
-                    Savings
-                  </p>
-                  <p style={{ fontWeight: '600', fontSize: '1.30rem'}}>
-                    $150.00
-                  </p>
-                </div>
-              </div>
-
-              {/* 2 */}
-              <div style={{ display: 'flex', margin: '15px', width: '105px' }}>
-                <div style={{ width: '2.75px', height: '50px',
-                              backgroundColor: 'rgb(21, 176, 190)', borderRadius: '10px',
-                              boxShadow: '0px 3px 20px rgba(0, 0, 0, 0.5)'}}>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '0px 0px 0px 10px'}}>
-                  <p style={{ fontSize: '0.85rem' }}>
-                    Gift
-                  </p>
-                  <p style={{ fontWeight: '600', fontSize: '1.30rem'}}>
-                    $40.00
-                  </p>
-                </div>
-              </div>
-
-              {/* 3 */}
-              <div style={{ display: 'flex', margin: '15px', width: '105px' }}>
-                <div style={{ width: '2.75px', height: '50px',
-                              backgroundColor: ' #AB1855', borderRadius: '10px',
-                              boxShadow: '0px 3px 20px rgba(0, 0, 0, 0.5)'}}>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '0px 0px 0px 10px'}}>
-                  <p style={{ fontSize: '0.85rem' }}>
-                    Concert Ticket
-                  </p>
-                  <p style={{ fontWeight: '600', fontSize: '1.30rem'}}>
-                    $40.00
-                  </p>
-                </div>
-              </div>
-
-              {/* 4 */}
-              <div style={{ display: 'flex', margin: '15px', width: '105px' }}>
-                <div style={{ width: '2.75px', height: '50px',
-                              backgroundColor: ' #E26721', borderRadius: '10px',
-                              boxShadow: '0px 3px 20px rgba(0, 0, 0, 0.5)'}}>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '0px 0px 0px 10px'}}>
-                  <p style={{ fontSize: '0.85rem' }}>
-                    New Laptop
-                  </p>
-                  <p style={{ fontWeight: '600', fontSize: '1.30rem'}}>
-                    $40.00
-                  </p>
-                </div>
-              </div>
-
-              {/* 5 */}
-              <div style={{ display: 'flex', margin: '15px', width: '105px' }}>
-                <div style={{ width: '2.75px', height: '50px',
-                              backgroundColor: ' #CC4444', borderRadius: '10px',
-                              boxShadow: '0px 3px 20px rgba(0, 0, 0, 0.5)'}}>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '0px 0px 0px 10px'}}>
-                  <p style={{ fontSize: '0.85rem' }}>
-                    Vacations
-                  </p>
-                  <p style={{ fontWeight: '600', fontSize: '1.30rem'}}>
-                    $40.00
-                  </p>
+      <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }} className="pl-20">
+        <Card
+          title="Pots"
+          hasDetails={true}
+          width="600px"
+          height="300px">
+            <div className="grid grid-cols-2 gap-4 items-center pl-12 pt-1.5">
+              <TotalTag />
+              <div className="pl-3">
+                <div style={{ display: 'flex', gap: '0px', flexWrap: 'wrap', maxHeight: '170px', overflow: 'scroll' }}>
+                  <LabelTag
+                    color={colors[0]}
+                    title="Savings"
+                    subtitle="$1,500.00" />
+                  <LabelTag
+                    color={colors[6]}
+                    title="Gift"
+                    subtitle="$1,500.00" />
+                  <LabelTag
+                    color={colors[0]}
+                    title="Concert Tickets"
+                    subtitle="$1,500.00" />
+                  <LabelTag
+                    color={colors[5]}
+                    title="New Laptop"
+                    subtitle="$1,500.00" />
                 </div>
               </div>
             </div>
+        </Card>
 
-            <div style={{ border: '1px solid red',
-                          width: '1px', height: '100px',
-                          padding: '1px',
-                          opacity: '0'}}>
+        <Card
+          title="Recurring Bills"
+          hasDetails={true}
+          headerWidth="240px"
+          width="600px"
+          height="300px">
+            <div style={{ display: 'flex', flexDirection: 'column',
+                          padding: '0px 0px 0px 35px',
+                          maxHeight: '170px', overflow: 'scroll' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <LabelTag
+                    color={colors[0]}
+                    title="Savings"
+                    titleBold={true} />
+                  <p style={{ padding: '30px 65px 0px 10px',}}>
+                    $1,500.00
+                  </p>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <LabelTag
+                  color={colors[6]}
+                  title="Gift"
+                  titleBold={true} />
+                  <p style={{ padding: '30px 65px 0px 10px'}}>
+                    $1,200.00
+                  </p>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <LabelTag
+                  color={colors[9]}
+                  title="Concert Tickets"
+                  titleBold={true} />
+                  <p style={{ padding: '30px 65px 0px 10px',}}>
+                    $3,000.00
+                  </p>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <LabelTag
+                  color={colors[2]}
+                  title="New Laptop"
+                  titleBold={true} />
+                <p style={{ padding: '30px 65px 0px 10px',}}>
+                    $4,000.00
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
+        </Card>
       </div>
 
-      <Card
-        title="Budgets"
-        hasDetails={false}
-        width="600px"
-        height="390px">
-          <div className="grid grid-cols-2 gap-4 items-center pl-12 pt-1.5">
-            <DonutChart />
-            <div className="pl-3">
-              <LabelTag
-              color={colors[0]}
-              title="Total Budget"
-              subtitle="$1,500.00" />
-            <LabelTag
-              color={colors[0]}
-              title="Total Budget"
-              subtitle="$1,500.00" />
+      <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }} className="pl-20">
+        <Card
+          title="Budgets"
+          hasDetails={false}
+          width="600px"
+          height="390px">
+            <div className="grid grid-cols-2 gap-4 items-center pl-12 pt-1.5">
+              <DonutChart />
+              <div className="pl-3">
+                <LabelTag
+                  color={colors[0]}
+                  title="Total Budget"
+                  subtitle="$1,500.00" />
+                <LabelTag
+                  color={colors[6]}
+                  title="Total Budget"
+                  subtitle="$1,500.00" />
+              </div>
             </div>
-          </div>
-      </Card>
+        </Card>
+        <Card
+          title="Transactions"
+          hasDetails={true}
+          width="600px"
+          height="390px"
+          headerWidth="240px">
+            <div className="grid grid-cols-2 gap-4 items-center pl-12 pt-1.5">
+              #1
+            </div>
+        </Card>
+      </div>
 
     </section>
   );

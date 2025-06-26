@@ -8,21 +8,22 @@ type CardProps = {
     hasDetails?: boolean;
     height?: string;
     width?: string;
+    headerWidth?: string;
 }
 
-export default function Card({ title, hasDetails, children, width = "500px", height = "265px" }: CardProps) {
+export default function Card({ title, hasDetails, children, width = "500px", height = "265px", headerWidth = "180px" }: CardProps) {
     return(
-        <div style={{ padding: '20px 20px 30px 80px', display: 'flex', gap: '20px', minWidth: '60vw', flexWrap: 'wrap' }}>
+        <div style={{ padding: '20px 20px 30px 0px', display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
             <div className="card neutral-card"
                  style={{ width: `${width}`, height: `${height}` }}>
                 {/* Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-                <div style={{ borderRadius: '30px 25px 25px 0px', width: '160px', height: '60px',
+                <div style={{ borderRadius: '30px 25px 25px 0px', width: `${headerWidth}`, height: '60px',
                                 background: 'linear-gradient(0deg,rgb(180, 180, 180) 0%,rgb(231, 231, 231) 100%)',
                                 padding: '17px 0px 20px 30px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
-                        <p  style={{ fontSize: '1.4rem', fontWeight: '600' }}>
+                    <p  style={{ fontSize: '1.4rem', fontWeight: '600' }}>
                         {title}
-                        </p>
+                    </p>
                 </div>
 
                 {hasDetails && (
