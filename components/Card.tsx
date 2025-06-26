@@ -5,13 +5,14 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 type CardProps = {
     title: string;
     children: React.ReactNode;
+    detailsText?: string;
     hasDetails?: boolean;
     height?: string;
     width?: string;
     headerWidth?: string;
 }
 
-export default function Card({ title, hasDetails, children, width = "500px", height = "265px", headerWidth = "180px" }: CardProps) {
+export default function Card({ title, hasDetails, children, width = "500px", height = "265px", headerWidth = "180px", detailsText = 'See Details' }: CardProps) {
     return(
         <div style={{ padding: '20px 20px 30px 0px', display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
             <div className="card neutral-card"
@@ -28,7 +29,7 @@ export default function Card({ title, hasDetails, children, width = "500px", hei
 
                 {hasDetails && (
                     <div style={{ padding: '30px 30px 0px 0px', fontSize: '0.9rem', opacity: '.6'}}>
-                        See Details
+                        {detailsText}
                     <FontAwesomeIcon icon={faCaretRight}
                         style={{ marginLeft: '5px' }} />
                     </div>

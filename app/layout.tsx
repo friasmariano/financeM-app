@@ -8,7 +8,7 @@ import "./fontawesome.config";
 import StoreProvider from "./StoreProvider";
 import Sidebar from "@/components/Sidebar";
 import Main from "@/components/Main";
-import Footer from "@/components/Footer";
+import FooterServer from "@/components/Footer/FooterServer";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from "@/components/Navbar/NavbarServer";
 
@@ -41,7 +41,7 @@ export default function RootLayout({
         <Main>
           {children}
         </Main>
-        <Footer />
+        <FooterServer />
         <ThemeProvider />
         </StoreProvider>
       </body>

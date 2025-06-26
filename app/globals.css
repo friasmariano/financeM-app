@@ -107,7 +107,7 @@ body {
   margin: 0;
 
   background: var(--background);
-  background-size: auto calc(100vh + 80vh);
+  background-size: cover + 100px;
   background-repeat: no-repeat;
   background-position: top left;
 
@@ -268,13 +268,12 @@ body {
 .footer {
   grid-area: footer;
 
-  grid-column-start: 7;
-  grid-column-end: 10;
+  grid-column-end: 12;
 
   grid-row-start: 5;
   grid-row-end: 6;
 
-  padding: 0px 0px 20px 30px;
+  padding: 0px 0px 20px 0px;
 
   display: flex;
   align-items: center;

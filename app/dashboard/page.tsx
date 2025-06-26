@@ -164,11 +164,29 @@ export default async function DashboardPage() {
         <Card
           title="Transactions"
           hasDetails={true}
+          detailsText="View All"
           width="600px"
           height="390px"
           headerWidth="240px">
-            <div className="grid grid-cols-2 gap-4 items-center pl-12 pt-1.5">
-              #1
+            <div style={{ display: 'flex', flexDirection: 'column',
+                          gap: '20px', padding: '10px 0px 50px 55px',
+                          maxHeight: '285px', overflow: 'scroll' }}>
+              <div className="flex items-center gap-5 pb-1">
+                <div className="w-18 h-18 rounded-full bg-gray-200"></div>
+                <p style={{ fontSize: '1.06rem' }}>Emma Richardson</p>
+              </div>
+              <div className="flex items-center gap-5 pb-1">
+                <div className="w-18 h-18 rounded-full bg-gray-200"></div>
+                <p style={{ fontSize: '1.06rem' }}>Emma Richardson</p>
+              </div>
+              <div className="flex items-center gap-5 pb-1">
+                <div className="w-18 h-18 rounded-full bg-gray-200"></div>
+                <p style={{ fontSize: '1.06rem' }}>Emma Richardson</p>
+              </div>
+              <div className="flex items-center gap-5 pb-1">
+                <div className="w-18 h-18 rounded-full bg-gray-200"></div>
+                <p style={{ fontSize: '1.06rem' }}>Emma Richardson</p>
+              </div>
             </div>
         </Card>
       </div>
