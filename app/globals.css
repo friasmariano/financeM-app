@@ -139,6 +139,11 @@ body {
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
   padding: 15px 0px 20px 40px;
   z-index: 10900;
+
+  position: sticky;
+  top: 0;
+
+  transition: transform 0.5s ease-in-out;
 }
 
 .dropdown {

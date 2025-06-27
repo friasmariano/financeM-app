@@ -51,6 +51,7 @@ export default async function DashboardPage() {
                 </p>
             </div>
         </div>
+
         <div className="card orange-card">
               <div style={{ display: 'flex', flexDirection: 'column', padding: '32px 0px 0px 30px', color: '#F48D44'}}>
                 <h1  style={{ fontSize: '1.2rem' }}>Expenses</h1>
@@ -64,7 +65,7 @@ export default async function DashboardPage() {
               <div style={{ display: 'flex', flexDirection: 'column', padding: '32px 0px 0px 30px'}}>
                 <h1  style={{ fontSize: '1.2rem' }}>Projects</h1>
                 <p style={{ fontSize: '1.9rem', fontWeight: '600' }}>
-                  $1,700.50
+                  $3,600.00
                 </p>
             </div>
         </div>

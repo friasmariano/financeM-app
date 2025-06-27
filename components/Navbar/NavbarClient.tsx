@@ -18,6 +18,7 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
     const [currentScrollPos, setCurrentScrollPos] = useState(0);
     const [translateYPos, setTranslateYPos] = useState("");
     const [isDescending, setIsDescending] = useState(true);
+    const lastScrollY = useRef(0);
 
     const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
     const router = useRouter();
@@ -55,33 +56,23 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
 
     useEffect(() => {
         const handleScroll = () => {
-            setPrevScrollPos(window.scrollY);
-
-            setTimeout(() => {
-            setCurrentScrollPos(window.scrollY);
-            }, 250);
-
-            if (currentScrollPos < prevScrollPos) {
-            setTranslateYPos('-200px');
-            setIsDescending(false);
-            } else {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY.current && currentScrollY > 60) {
+            setTranslateYPos('-80px');
+        } else {
             setTranslateYPos('0px');
-            setIsDescending(true);
-            }
         }
+        lastScrollY.current = currentScrollY;
+        };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        }
-
-    }, [window.scrollY]);
 
     return (
         loggedIn ? (
-            <nav className={`navbar ${isDescending ? 'slideDown' : 'fadeOut'}`}
-                 style={{ translate: `0px ${translateYPos}`}}>
+            <nav ref={navbarRef} className="navbar" style={{ transform: `translateY(${translateYPos})` }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0px', margin: '0px' }}>
                     {/* Left */}
                     <div style={{ display: 'flex', alignItems: 'center', padding: '0px', margin: '0px' }}
