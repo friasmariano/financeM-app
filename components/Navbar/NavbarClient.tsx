@@ -69,6 +69,32 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                navbarRef.current &&
+                !navbarRef.current.contains(event.target as Node)
+            ) {
+                setDropDownOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleEscape = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setDropDownOpen(false);
+            }
+        };
+
+        document.addEventListener("keydown", handleEscape);
+        return () => document.removeEventListener("keydown", handleEscape);
+    }, []);
 
     return (
         loggedIn ? (
@@ -115,17 +141,14 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
                     </div>
                 </div>
                 {isDropDownOpen && (
-                    <div
-                        style={{ position: 'relative' }}
-                        onMouseLeave={() => setDropDownOpen(false)}
-                        onMouseEnter={() => setDropDownOpen(true)}
-                    >
-                        <ul className="dropdown">
-                            <li className="font-semibold">Profile</li>
+                    <div style={{ position: 'relative' }}
+                         onMouseLeave={() => setDropDownOpen(false)}>
+                        <ul className="dropdown transition-all duration-200 ease-in-out bg-white shadow-md rounded p-2 z-50 absolute right-0 mt-2 w-48">
+                            <li className="font-semibold cursor-pointer p-2 rounded">Profile</li>
                             <hr className="my-1 border-gray-300 opacity-50" />
-                            <li>Account Info</li>
+                            <li className="cursor-pointer rounded">Account Info</li>
                             <li>
-                                <button onClick={handleLogout} className="cursor-pointer">
+                                <button onClick={handleLogout} className="cursor-pointer rounded w-full text-left">
                                     Logout
                                 </button>
                             </li>
