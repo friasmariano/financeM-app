@@ -12,7 +12,7 @@
 
   --sidebar-background: rgba(255, 255, 255, 0.5);
   --sidebar-gradient: linear-gradient(to bottom, rgba(224, 224, 224, 0.2), rgba(255, 255, 255, 0.2));
-  --navbar-gradient: linear-gradient(to bottom, rgb(224, 224, 224), rgb(255, 255, 255));
+  --navbar-gradient: linear-gradient(to top, rgb(224, 224, 224), rgb(255, 255, 255));
 
   --blue-card-gradient: linear-gradient(0deg,#92E7FF 0%, #F0FBFF 100%);
   --blue-card-text: #2f92b9;
@@ -38,6 +38,8 @@
 
   --login-card-gradient: linear-gradient(0deg,#b2eeff 0%, #fbfbfb 100%);
   --green-button-gradient: linear-gradient(180deg,rgb(101, 255, 165) 0%, rgb(34, 158, 85) 100%);
+
+  --card-header-gradient: linear-gradient(0deg,rgb(210, 210, 210) 0%,rgb(244, 244, 244) 100%);
 }
 
 /* @theme inline {
@@ -90,6 +92,8 @@ html.dark {
 
   --login-card-gradient: linear-gradient(0deg, #08202e 0%, rgba(54, 147, 179, 0.7) 100%);
   --green-button-gradient: linear-gradient(180deg,rgba(76, 217, 135, 1) 0%, rgba(24, 125, 66, 1) 100%);
+
+  --card-header-gradient: linear-gradient(0deg,rgb(180, 180, 180) 0%,rgb(231, 231, 231) 100%);
 }
 
 html, body {
@@ -120,7 +124,7 @@ body {
   background-position: top left;
 
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
 
   min-height: 100%;
 }
@@ -142,10 +146,11 @@ body {
   padding: 15px 0px 20px 40px;
   z-index: 10900;
 
-  position: sticky;
+  width: 100%;
+  position: fixed;
   top: 0;
 
-  transition: transform 0.5s ease-in-out;
+  /* transition: transform 0.5s ease-in-out; */
 }
 
 .dropdown {
@@ -274,7 +279,7 @@ body {
   grid-row-start: 1;
   grid-row-end: 5;
 
-  padding: 65px 0px 0px 0px;
+  padding: 85px 0px 0px 0px;
 }
 
 .main-logged-in {

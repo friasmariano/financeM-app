@@ -20,7 +20,7 @@ export default function Card({ title, hasDetails, children, width = "500px", hei
                 {/* Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between'}}>
                 <div style={{ borderRadius: '30px 25px 25px 0px', width: `${headerWidth}`, height: '60px',
-                                background: 'linear-gradient(0deg,rgb(180, 180, 180) 0%,rgb(231, 231, 231) 100%)',
+                                background: 'var(--card-header-gradient)',
                                 padding: '17px 0px 20px 30px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'}}>
                     <p  style={{ fontSize: '1.4rem', fontWeight: '600' }}>
                         {title}

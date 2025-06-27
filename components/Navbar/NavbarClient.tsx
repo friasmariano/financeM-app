@@ -54,20 +54,20 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
 
     }, [isAuthenticated]);
 
-    useEffect(() => {
-        const handleScroll = () => {
-        const currentScrollY = window.scrollY;
-        if (currentScrollY > lastScrollY.current && currentScrollY > 60) {
-            setTranslateYPos('-80px');
-        } else {
-            setTranslateYPos('0px');
-        }
-        lastScrollY.current = currentScrollY;
-        };
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //     const currentScrollY = window.scrollY;
+    //     if (currentScrollY > lastScrollY.current && currentScrollY > 60) {
+    //         setTranslateYPos('-80px');
+    //     } else {
+    //         setTranslateYPos('0px');
+    //     }
+    //     lastScrollY.current = currentScrollY;
+    //     };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    // }, []);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -111,7 +111,7 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
                             <i className="bi bi-list block md:hidden"
                             style={{ position: 'absolute', color: 'var(--foreground)'}}></i>
                         </button>
-                        <h1 style={{ fontSize: '1.3rem', fontWeight: '600',
+                        <h1 style={{ fontSize: '1.3rem', fontWeight: '700',
                                     color: 'var(--foreground)',
                                     margin: '0px 20px 0px 25px'}}>
                             financeM

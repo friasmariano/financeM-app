@@ -3,7 +3,7 @@ export default function TotalTag() {
     return (
         <section>
             <div style={{ display: 'flex',
-                          background: 'linear-gradient(0deg,rgb(148, 148, 148) 0%,rgb(197, 197, 197) 100%)',
+                          background: 'var(--card-header-gradient)',
                           width: '160px', height: '67px',
                           margin: '20px 20px 20px 20px',
                           padding: '2px 20px 0px 15px',

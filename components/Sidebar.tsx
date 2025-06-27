@@ -60,7 +60,7 @@ export default function Sidebar() {
                 <ul className="sidebar-links" style={{ padding: '0px', margin: '0px', listStyleType: 'none'}}>
                 {links.map((link, index) => (
                     <li key={link.href}
-                        style={{ padding: '10px 0px 10px 40px', margin: '15px 0px 22px 0px'}}
+                        style={{ padding: '10px 0px 10px 40px', margin: '18px 0px 22px 0px'}}
                         onMouseEnter={() => setHover(index, true)}
                         onMouseLeave={() => setHover(index, false)}
                         className={pathname === link.href ? 'sidebar-active-route' : ''}>

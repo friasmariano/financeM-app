@@ -29,8 +29,8 @@ export default async function DashboardPage() {
 
   return (
     <section>
-      <div style={{ padding: '50px 20px 0px 90px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
-        <h1 className="text-4xl font-medium">Overview</h1>
+      <div style={{ padding: '50px 20px 20px 90px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
+        <h1 className="font-bold" style={{ fontSize: '2.5rem' }}>Overview</h1>
       </div>
 
       {/* Balance, Income & Expenses */}
@@ -72,11 +72,11 @@ export default async function DashboardPage() {
       </div>
 
       {/* Cards */}
-      <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }} className="pl-20">
+      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }} className="pl-20">
         <Card
           title="Pots"
           hasDetails={true}
-          width="600px"
+          width="630px"
           height="300px">
             <div className="grid grid-cols-2 gap-4 items-center pl-12 pt-1.5">
               <TotalTag />
@@ -107,7 +107,7 @@ export default async function DashboardPage() {
           title="Recurring Bills"
           hasDetails={true}
           headerWidth="240px"
-          width="600px"
+          width="630px"
           height="300px">
             <div style={{ display: 'flex', flexDirection: 'column',
                           padding: '0px 0px 0px 35px',
@@ -152,11 +152,11 @@ export default async function DashboardPage() {
         </Card>
       </div>
 
-      <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }} className="pl-20">
+      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }} className="pl-20">
         <Card
           title="Budgets"
           hasDetails={false}
-          width="600px"
+          width="630px"
           height="390px">
             <div className="grid grid-cols-2 gap-4 items-center pl-12 pt-1.5">
               <DonutChart />
@@ -176,7 +176,7 @@ export default async function DashboardPage() {
           title="Transactions"
           hasDetails={true}
           detailsText="View All"
-          width="600px"
+          width="630px"
           height="390px"
           headerWidth="240px">
             <div style={{ display: 'flex', flexDirection: 'column',
