@@ -33,6 +33,7 @@
   --theme-button-text: #19566a;
 
   --sidebar-link-background: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
+  --sidebar-link-hover-background: rgb(255, 255, 255, 0.5);
   --sidebar-link-text: white;
 
   --login-card-gradient: linear-gradient(0deg,#b2eeff 0%, #fbfbfb 100%);
@@ -84,6 +85,7 @@ html.dark {
   --theme-button-text: rgb(232, 232, 232);
 
   --sidebar-link-background: linear-gradient(0deg,#31a8c9 0%, #c1ecfc 100%);
+  --sidebar-link-hover-background: rgba(106, 106, 106, 0.3);
   --sidebar-link-text: #0B2730;
 
   --login-card-gradient: linear-gradient(0deg, #08202e 0%, rgba(54, 147, 179, 0.7) 100%);
@@ -244,6 +246,13 @@ body {
   background: var(--sidebar-link-background);
   color: var(--sidebar-link-text);
   font-weight: bold;
+}
+
+.sidebar-links > li:hover {
+  border-radius: 0px 30px 30px 0px;
+  background: var(--sidebar-link-hover-background);
+  /* color: var(--sidebar-link-text); */
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-text {

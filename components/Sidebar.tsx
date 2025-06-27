@@ -14,9 +14,9 @@ export default function Sidebar() {
 
     const [links, setLinks] = useState([
         { href: '/dashboard', label: 'Overview', icon: 'bi-house', hoverIcon: 'bi-house-fill', hovered: false },
-        // { href: '/transactions', label: 'Transactions', icon: 'bi bi-clipboard-data', hoverIcon: 'bi bi-clipboard-data-fill', hovered: false },
-        // { href: '/budgets', label: 'Budgets', icon: 'bi-pie-chart', hoverIcon: 'bi bi-pie-chart-fill', hovered: false },
-        // { href: '/bills', label: 'Bills', icon: 'bi-file-earmark-break', hoverIcon: 'bi-file-earmark-break-fill', hovered: false },
+        { href: '/transactions', label: 'Transactions', icon: 'bi bi-clipboard-data', hoverIcon: 'bi bi-clipboard-data-fill', hovered: false },
+        { href: '/budgets', label: 'Budgets', icon: 'bi-pie-chart', hoverIcon: 'bi bi-pie-chart-fill', hovered: false },
+        { href: '/bills', label: 'Bills', icon: 'bi-file-earmark-break', hoverIcon: 'bi-file-earmark-break-fill', hovered: false },
     ]);
 
     const [isMobile, setIsMobile] = useState(false);
@@ -57,10 +57,10 @@ export default function Sidebar() {
                                  transition-transform duration-300 ease-in-out
                                 ${isMobile ? (isOpened ? 'translate-x-0' : '-translate-x-full') : ''}`}
                      style={{ background: 'var(--sidebar-gradient)'}}>
-                <ul style={{ padding: '0px', margin: '0px', listStyleType: 'none'}}>
+                <ul className="sidebar-links" style={{ padding: '0px', margin: '0px', listStyleType: 'none'}}>
                 {links.map((link, index) => (
                     <li key={link.href}
-                        style={{ padding: '10px 0px 10px 40px', margin: '0px 0px 12px 0px'}}
+                        style={{ padding: '10px 0px 10px 40px', margin: '15px 0px 22px 0px'}}
                         onMouseEnter={() => setHover(index, true)}
                         onMouseLeave={() => setHover(index, false)}
                         className={pathname === link.href ? 'sidebar-active-route' : ''}>
