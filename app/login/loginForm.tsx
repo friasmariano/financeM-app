@@ -12,24 +12,24 @@ export default function LoginForm() {
     const dispatch = useAppDispatch();
     const router = useRouter();
 
-    const authenticate = async (values: { email: string; password: string }) => {
-        try {
-            const data = await authService.login(values);
-            console.log("Login successful:", data);
+    // const authenticate = async (values: { email: string; password: string }) => {
+    //     try {
+    //         const data = await authService.login(values);
+    //         console.log("Login successful:", data);
 
-            if (!data) {
-                alert("Login failed. Please check your credentials.");
-                return;
-            }
+    //         if (!data) {
+    //             alert("Login failed. Please check your credentials.");
+    //             return;
+    //         }
 
-            dispatch(login());
-            router.push('/dashboard');
+    //         dispatch(login());
+    //         router.push('/dashboard');
 
-        } catch (error: any) {
-            console.error("Login error:", error);
-            alert("Login failed. Please check your credentials.");
-        }
-    };
+    //     } catch (error: any) {
+    //         console.error("Login error:", error);
+    //         alert("Login failed. Please check your credentials.");
+    //     }
+    // };
 
     const formik = useFormik({
         initialValues: {
@@ -42,18 +42,17 @@ export default function LoginForm() {
                         .required('Email is required'),
             password: Yup.string().required('Password is required')
         }),
-         validateOnMount: true,
+        validateOnMount: true,
         onSubmit: async (values, { setSubmitting }) => {
             try {
-                const data = await authService.login(values);
-                console.log("Login successful:", data);
+                const response = await authService.login(values);
 
-                if (!data) {
+                if (!response) {
                     alert("Login failed. Please check your credentials.");
                     return;
                 }
 
-                dispatch(login());
+                dispatch(login(response.data));
                 router.push('/dashboard');
 
             } catch (error: any) {

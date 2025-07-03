@@ -21,6 +21,7 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
     const lastScrollY = useRef(0);
 
     const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
+    const user = useAppSelector((state) => state.auth.data.user);
     const router = useRouter();
 
     const navbarRef = useRef<HTMLElement>(null);
@@ -53,21 +54,6 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
         }
 
     }, [isAuthenticated]);
-
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //     const currentScrollY = window.scrollY;
-    //     if (currentScrollY > lastScrollY.current && currentScrollY > 60) {
-    //         setTranslateYPos('-80px');
-    //     } else {
-    //         setTranslateYPos('0px');
-    //     }
-    //     lastScrollY.current = currentScrollY;
-    //     };
-
-    //     window.addEventListener('scroll', handleScroll);
-    //     return () => window.removeEventListener('scroll', handleScroll);
-    // }, []);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -135,7 +121,9 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
                                 padding: '0.5rem 1.3rem 0px 0',
                                 borderRadius: '4px'
                             }}>
-                                <span style={{ margin: '0px 20px 0px 13px', userSelect: 'none'}}>John Doe</span>
+                                <span style={{ margin: '0px 20px 0px 13px', userSelect: 'none'}}>
+                                    {user?.person?.firstName} {user?.person?.lastName}
+                                </span>
                                 <FontAwesomeIcon icon={isDropDownOpen ? faChevronUp : faChevronDown} />
                         </div>
                     </div>

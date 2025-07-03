@@ -5,8 +5,6 @@ import LoginForm from "./loginForm";
 export default async function LoginPage() {
     const user = await getAuthenticatedUser();
 
-    console.log("User in login page:", user);
-
       if(user) {
         redirect('/dashboard');
     }

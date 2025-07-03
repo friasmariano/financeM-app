@@ -1,9 +1,9 @@
-import { TokenResponse } from "@/types/TokenResponse";
 import { fetchClient } from "./http/fetchClient";
+import UserResponse from "@/types/UserResponse";
 
 export const authService = {
-    login: async (credentials: { email: string; password: string }): Promise<TokenResponse | null> => {
-        return await fetchClient<TokenResponse>("auth/authenticate", {
+    login: async (credentials: { email: string; password: string }): Promise<UserResponse | null> => {
+        return await fetchClient<UserResponse>("auth/authenticate", {
         method: "POST",
         credentials: 'include',
         body: JSON.stringify(credentials),
