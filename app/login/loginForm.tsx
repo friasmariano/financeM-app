@@ -6,14 +6,13 @@ import { authService } from '@/services/authService';
 import { useAppDispatch } from "@/lib/hooks";
 import { login } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
-import { TokenResponse } from '@/types/TokenResponse';
 
 export default function LoginForm() {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
 
-    const authenticate = async (values: { username: string; password: string }) => {
+    const authenticate = async (values: { email: string; password: string }) => {
         try {
             const data = await authService.login(values);
             console.log("Login successful:", data);
@@ -32,39 +31,52 @@ export default function LoginForm() {
         }
     };
 
-
-
     const formik = useFormik({
         initialValues: {
-            username: '',
+            email: '',
             password: ''
         },
         validationSchema: Yup.object({
-            username: Yup.string().required('Username is required'),
+            email: Yup.string()
+                        .email('Invalid email address')
+                        .required('Email is required'),
             password: Yup.string().required('Password is required')
         }),
-        onSubmit: (values) => {
-            authenticate(values);
+         validateOnMount: true,
+        onSubmit: async (values, { setSubmitting }) => {
+            try {
+                const data = await authService.login(values);
+                console.log("Login successful:", data);
+
+                if (!data) {
+                    alert("Login failed. Please check your credentials.");
+                    return;
+                }
+
+                dispatch(login());
+                router.push('/dashboard');
+
+            } catch (error: any) {
+                console.error("Login error:", error);
+                alert("Login failed. Please check your credentials.");
+
+            } finally {
+                setSubmitting(false);
+            }
         }
     });
 
     return (
-        <form onSubmit={e => {
-            if (!formik.isValid) {
-                e.preventDefault();
-                return;
-            }
-            formik.handleSubmit(e);
-        }}>
+        <form onSubmit={formik.handleSubmit}>
             <div className="flex flex-col items-center gap-3">
                 <input
-                    id="username"
-                    type="text"
-                    placeholder="username"
-                    {...formik.getFieldProps('username')}
+                    id="email"
+                    type="email"
+                    placeholder="email"
+                    {...formik.getFieldProps('email')}
                 />
                 <div className="text-sm text-red-400">
-                    {!!formik.errors.username && formik.touched.username && (<p>{formik.errors.username}</p>)}
+                    {!!formik.errors.email && formik.touched.email && (<p>{formik.errors.email}</p>)}
                 </div>
 
                 <input

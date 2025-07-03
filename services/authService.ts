@@ -2,7 +2,7 @@ import { TokenResponse } from "@/types/TokenResponse";
 import { fetchClient } from "./http/fetchClient";
 
 export const authService = {
-    login: async (credentials: { username: string; password: string }): Promise<TokenResponse | null> => {
+    login: async (credentials: { email: string; password: string }): Promise<TokenResponse | null> => {
         return await fetchClient<TokenResponse>("auth/authenticate", {
         method: "POST",
         credentials: 'include',
