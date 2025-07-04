@@ -29,10 +29,10 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
     const handleLogout = async () => {
         try {
             await authService.logout();
-            dispatch(logout());
         } catch (error) {
             console.log("Logout failed:", error);
         } finally {
+            dispatch(logout());
             router.push('/login');
         }
     }
@@ -51,8 +51,9 @@ export default function NavbarClient({ isAuthenticated }: { isAuthenticated: boo
     useEffect(() => {
         if (!isAuthenticated && loggedIn) {
             dispatch(logout());
-        }
 
+            router.refresh();
+        }
     }, [isAuthenticated]);
 
     useEffect(() => {
