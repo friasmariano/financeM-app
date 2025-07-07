@@ -1,5 +1,5 @@
 import { fetchClient } from "./http/fetchClient";
-import UserResponse from "@/types/UserResponse";
+import UserResponse from "@/types/responses/UserResponse";
 
 export const authService = {
     login: async (credentials: { email: string; password: string }): Promise<UserResponse | null> => {

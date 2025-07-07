@@ -16,8 +16,8 @@ export default function Sidebar() {
         { href: '/dashboard', label: 'Overview', icon: 'bi-house', hoverIcon: 'bi-house-fill', hovered: false },
         { href: '/transactions', label: 'Transactions', icon: 'bi bi-clipboard-data', hoverIcon: 'bi bi-clipboard-data-fill', hovered: false },
         { href: '/budgets', label: 'Budgets', icon: 'bi-pie-chart', hoverIcon: 'bi bi-pie-chart-fill', hovered: false },
-        { href: '/bills', label: 'Bills', icon: 'bi-file-earmark-break', hoverIcon: 'bi-file-earmark-break-fill', hovered: false },
         { href: '/pots', label: 'Pots', icon: 'bi-piggy-bank', hoverIcon: 'bi-piggy-bank-fill', hovered: false },
+        { href: '/bills', label: 'Bills', icon: 'bi-file-earmark-break', hoverIcon: 'bi-file-earmark-break-fill', hovered: false },
     ]);
 
     const [isMobile, setIsMobile] = useState(false);
