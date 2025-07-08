@@ -12,25 +12,6 @@ export default function LoginForm() {
     const dispatch = useAppDispatch();
     const router = useRouter();
 
-    // const authenticate = async (values: { email: string; password: string }) => {
-    //     try {
-    //         const data = await authService.login(values);
-    //         console.log("Login successful:", data);
-
-    //         if (!data) {
-    //             alert("Login failed. Please check your credentials.");
-    //             return;
-    //         }
-
-    //         dispatch(login());
-    //         router.push('/dashboard');
-
-    //     } catch (error: any) {
-    //         console.error("Login error:", error);
-    //         alert("Login failed. Please check your credentials.");
-    //     }
-    // };
-
     const formik = useFormik({
         initialValues: {
             email: '',
