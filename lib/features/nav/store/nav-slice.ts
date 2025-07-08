@@ -8,11 +8,11 @@ const navSlice = createSlice({
         }
     },
     reducers: {
-        toggle: (state) => {
+        setNavbarStatus: (state) => {
             state.data.isOpen = !state.data.isOpen;
         }
     }
 })
 
-export const { toggle } = navSlice.actions;
+export const { setNavbarStatus } = navSlice.actions;
 export default navSlice.reducer;

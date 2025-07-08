@@ -6,8 +6,6 @@ export async function fetchClient<T>(
 ): Promise<T | null> {
     const url = `${API_URL}${path.startsWith('/') ? path : '/' + path}`;
 
-    console.log('API URL:', API_URL);
-
     try {
         const response = await fetch(url, {
             ...options,

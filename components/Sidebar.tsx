@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useAppDispatch, useAppSelector} from '../lib/hooks';
-import { toggle } from '../lib/features/sidebar/store/sidebar-slice'
+import { changeSidebarStatus } from '../lib/features/sidebar/store/sidebar-slice'
 
 export default function Sidebar() {
     const dispatch = useAppDispatch();
@@ -44,7 +44,7 @@ export default function Sidebar() {
     }, [])
 
     const handleBackdropClick = () => {
-        dispatch(toggle());
+        dispatch(changeSidebarStatus());
     };
 
     return (

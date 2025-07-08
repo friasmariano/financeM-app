@@ -1,5 +1,7 @@
+import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
 import { fetchClient } from "./http/fetchClient";
 import UserResponse from "@/types/responses/UserResponse";
+import LogoutResponse from "@/types/responses/LogoutResponse";
 
 export const authService = {
     login: async (credentials: { email: string; password: string }): Promise<UserResponse | null> => {
@@ -17,10 +19,12 @@ export const authService = {
         });
     },
 
-    logout: async() => {
-        return fetchClient("/auth/logout", {
+    logout: async(): Promise<boolean> => {
+        const response = await fetchClient<ApiDefaultResponse<LogoutResponse>>("/auth/logout", {
             method: "POST",
-            credentials: 'include'
-        })
+            credentials: "include"
+        });
+
+        return response?.success ?? false;
     }
 }
