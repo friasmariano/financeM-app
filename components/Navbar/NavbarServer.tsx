@@ -1,11 +1,11 @@
 
-import NavbarClient from "./NavbarClient";
 import getAuthenticatedUser from "@/lib/auth";
+import NavbarNew from "./NavbarNew";
 
 export default async function NavbarServer() {
 
     const user = await getAuthenticatedUser();
     const isAuthenticated = user !== null ? true : false;
 
-    return <NavbarClient isAuthenticated={isAuthenticated} />;
+    return <NavbarNew isAuthenticated={isAuthenticated} />;
 }

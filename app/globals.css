@@ -144,7 +144,7 @@ body {
 
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
   padding: 15px 0px 20px 40px;
-  z-index: 10900;
+  /* z-index: 10900; */
 
   width: 100%;
   position: fixed;
@@ -491,7 +491,7 @@ input {
 
 @keyframes slideDown {
     0% {
-        transform: translateY(-100px);
+        transform: translateY(-10px);
     }
     100% {
         transform: translateY(0px);
@@ -499,7 +499,8 @@ input {
 }
 
 .slideDown {
-    animation-name: slideDown;
+    /* animation-name: slideDown;
     animation-duration: 1s;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out; */
+    animation: slideDown 0.3s ease-out;
 }

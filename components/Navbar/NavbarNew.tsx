@@ -4,16 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '../../lib/hooks'
 import { logout } from "@/lib/features/auth/store/auth-slice";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { changeSidebarStatus } from '../../lib/features/sidebar/store/sidebar-slice'
 import { authService } from '@/services/authService';
 import { useRouter } from 'next/navigation';
 
-export default function NavbarNew() {
+export default function NavbarNew({ isAuthenticated }: { isAuthenticated: Boolean }) {
     const dispatch = useAppDispatch();
     const [isDropDownOpen, setDropdownStatus] = useState(false);
 
     const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
+    const user = useAppSelector((state) => state.auth.data.user);
 
     const router = useRouter();
 
@@ -28,31 +29,74 @@ export default function NavbarNew() {
         }
     }
 
-    return(
-        loggedIn ? (<nav className="navbar">
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', gap: '10px', fontSize: '1.1rem' }}>
-                    <button onClick={() => dispatch(changeSidebarStatus())}
-                            style={{ cursor: 'pointer' }}>
-                        <i className="bi bi-list md:hidden"></i>
-                    </button>
-                    <h1>FinanceM</h1>
-                </div>
-                <div></div>
-                <div style={{ cursor: 'pointer', position: 'relative' }}
-                     onClick={() => setDropdownStatus(prev => !prev)}>
-                    John Doe
-                    <FontAwesomeIcon icon={faChevronDown} style={{ margin: '0px 20px 0px 15px' }} />
+    useEffect(() => {
+        if (!isAuthenticated && loggedIn) {
+            dispatch(logout());
+            router.refresh();
+        }
+    }, [isAuthenticated]);
 
-                    {isDropDownOpen && (<ul className='dropdown'>
-                        <li>Profile</li>
-                        <li>Account Info</li>
-                        <li>
-                            <button onClick={handleLogout}>Logout</button>
-                        </li>
-                    </ul>)}
+    return (
+        loggedIn ? (
+            <nav className="navbar relative" style={{ zIndex: '10900' }}>
+                <div className="flex justify-between items-center">
+                    {/* Left */}
+                    <div className="flex gap-2 text-[1.2rem] items-center">
+                        <button
+                            onClick={() => dispatch(changeSidebarStatus())}
+                            className="cursor-pointer md:hidden"
+                        >
+                            <i className="bi bi-list"></i>
+                        </button>
+                        <h1>FinanceM</h1>
+                    </div>
+
+                    {/* Spacer */}
+                    <div
+                        className="flex-1 h-full w-full"
+                        style={{ height: '10px', width: '100%'}}
+                        onMouseEnter={() => setDropdownStatus(false)}>
+                    </div>
+
+                    {/* Right */}
+                    <div
+                        className="relative pr-5 cursor-pointer select-none flex items-center"
+                        onClick={() => setDropdownStatus(prev => !prev)}>
+                        <span className="mx-[13px] mr-5 text-[1.1rem]">
+                            {user?.person?.firstName}
+                        </span>
+                        <FontAwesomeIcon icon={isDropDownOpen ? faChevronUp : faChevronDown} />
+
+                        <div>
+                            {isDropDownOpen && (
+                                <ul
+                                    className="dropdown slideDown absolute right-0 bg-white shadow-lg rounded-md w-40 z-50"
+                                    style={{ height: '195px',
+                                             top: '22px', padding: '20px 0px 0px 25px',
+                                             zIndex: '0' }}
+                                    onMouseLeave={() => setDropdownStatus(false)}>
+
+                                    <li className="rounded p-2"
+                                        style={{ fontWeight: '500', fontSize: '1.2rem', marginBottom: '10px' }}>Profile</li>
+                                    <li className="cursor-pointer rounded p-2"
+                                        style={{ fontSize: '1rem' }}>
+                                        Account Info
+                                    </li>
+                                    <li className='cursor-pointer'>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="w-full text-left cursor-pointer rounded"
+                                            style={{ fontSize: '1rem' }}>
+                                            <i className="bi bi-box-arrow-right"
+                                                        style={{ marginRight: '10px' }}></i>Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            )}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </nav>) : <p></p>
+            </nav>
+        ) : <p></p>
     )
 }
