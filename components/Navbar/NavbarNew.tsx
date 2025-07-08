@@ -4,14 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '../../lib/hooks'
 import { logout } from "@/lib/features/auth/store/auth-slice";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { changeSidebarStatus } from '../../lib/features/sidebar/store/sidebar-slice'
 import { authService } from '@/services/authService';
 import { useRouter } from 'next/navigation';
+import DropdownPortal from './DropdownPortal';
 
 export default function NavbarNew({ isAuthenticated }: { isAuthenticated: Boolean }) {
     const dispatch = useAppDispatch();
     const [isDropDownOpen, setDropdownStatus] = useState(false);
+
+    const triggerRef = useRef<HTMLDivElement>(null);
 
     const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
     const user = useAppSelector((state) => state.auth.data.user);
@@ -28,6 +31,31 @@ export default function NavbarNew({ isAuthenticated }: { isAuthenticated: Boolea
             router.push('/login');
         }
     }
+
+    const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+    const startCloseAnimation = () => {
+        setIsAnimatingOut(true);
+        setTimeout(() => {
+            setDropdownStatus(false);
+            setIsAnimatingOut(false);
+        }, 300);
+    };
+
+    const [dropdownStyle, setDropdownStyle] = useState({});
+    useEffect(() => {
+        if (isDropDownOpen && triggerRef.current) {
+            const rect = triggerRef.current.getBoundingClientRect();
+            setDropdownStyle({
+                position: 'fixed',
+                top: rect.bottom + 8,
+                left: rect.right - 160,
+                zIndex: 100,
+                width: '160px',
+                padding: '20px 0px 0px 25px',
+                animation: 'slideDown 0.3s ease-out'
+            });
+        }
+    }, [isDropDownOpen]);
 
     useEffect(() => {
         if (!isAuthenticated && loggedIn) {
@@ -68,31 +96,33 @@ export default function NavbarNew({ isAuthenticated }: { isAuthenticated: Boolea
                         <FontAwesomeIcon icon={isDropDownOpen ? faChevronUp : faChevronDown} />
 
                         <div>
-                            {isDropDownOpen && (
-                                <ul
-                                    className="dropdown slideDown absolute right-0 bg-white shadow-lg rounded-md w-40 z-50"
-                                    style={{ height: '195px',
-                                             top: '22px', padding: '20px 0px 0px 25px',
-                                             zIndex: '0' }}
-                                    onMouseLeave={() => setDropdownStatus(false)}>
+                            <DropdownPortal>
+                                {(isDropDownOpen || isAnimatingOut) && (
+                                    <ul
+                                        className={` ${isAnimatingOut ? 'fadeOut' : 'slideDown'} dropdown  absolute right-0 bg-white shadow-lg rounded-md w-40 z-50`}
+                                        style={{ height: '195px',
+                                                top: '22px', padding: '20px 0px 0px 25px',
+                                                zIndex: '0' }}
+                                        onMouseLeave={() => setDropdownStatus(false)}>
 
-                                    <li className="rounded p-2"
-                                        style={{ fontWeight: '500', fontSize: '1.2rem', marginBottom: '10px' }}>Profile</li>
-                                    <li className="cursor-pointer rounded p-2"
-                                        style={{ fontSize: '1rem' }}>
-                                        Account Info
-                                    </li>
-                                    <li className='cursor-pointer'>
-                                        <button
-                                            onClick={handleLogout}
-                                            className="w-full text-left cursor-pointer rounded"
+                                        <li className="rounded p-2"
+                                            style={{ fontWeight: '500', fontSize: '1.2rem', marginBottom: '10px' }}>Profile</li>
+                                        <li className="cursor-pointer rounded p-2"
                                             style={{ fontSize: '1rem' }}>
-                                            <i className="bi bi-box-arrow-right"
-                                                        style={{ marginRight: '10px' }}></i>Logout
-                                        </button>
-                                    </li>
-                                </ul>
-                            )}
+                                            Account Info
+                                        </li>
+                                        <li className='cursor-pointer'>
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full text-left cursor-pointer rounded"
+                                                style={{ fontSize: '1rem' }}>
+                                                <i className="bi bi-box-arrow-right"
+                                                            style={{ marginRight: '10px' }}></i>Logout
+                                            </button>
+                                        </li>
+                                    </ul>
+                                )}
+                            </DropdownPortal>
                         </div>
                     </div>
                 </div>

@@ -491,7 +491,7 @@ input {
 
 @keyframes slideDown {
     0% {
-        transform: translateY(-10px);
+        transform: translateY(-15px);
     }
     100% {
         transform: translateY(0px);
@@ -503,4 +503,19 @@ input {
     animation-duration: 1s;
     transition-timing-function: ease-in-out; */
     animation: slideDown 0.3s ease-out;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease-in;
 }
