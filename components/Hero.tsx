@@ -1,10 +1,12 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useAppSelector } from "@/lib/hooks";
 import { useMemo } from 'react';
 
-export default function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
+export default function Hero() {
   const pathname = usePathname();
+  const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
 
   const content = useMemo(() => {
     switch (pathname) {
@@ -33,7 +35,7 @@ export default function Hero({ isAuthenticated }: { isAuthenticated: boolean }) 
   }, [pathname]);
 
   return (
-    isAuthenticated ? (
+    loggedIn ? (
         <div
         className="h-[258px] flex flex-col gap-1 pl-[70px] pt-[75px] mx-auto
                     bg-[var(--sidebar-gradient)] backdrop-blur-[40px]
@@ -42,6 +44,6 @@ export default function Hero({ isAuthenticated }: { isAuthenticated: boolean }) 
         <h2 className="text-[1.23rem] text-muted-foreground">{content.subtitle}</h2>
         </div>)
 
-        : (<div></div>)
+        : null
     );
 }

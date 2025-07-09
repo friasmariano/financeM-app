@@ -7,7 +7,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./fontawesome.config";
 import StoreProvider from "./StoreProvider";
 import Sidebar from "@/components/Sidebar";
-import Main from "@/components/Main";
+import Main from "@/components/Main/MainServer";
 import FooterServer from "@/components/Footer/FooterServer";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from "@/components/Navbar/NavbarServer";
