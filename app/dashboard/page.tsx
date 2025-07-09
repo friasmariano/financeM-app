@@ -29,10 +29,6 @@ export default async function DashboardPage() {
 
   return (
     <section>
-      <div style={{ padding: '50px 20px 20px 90px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
-        <h1 className="font-bold" style={{ fontSize: '2.5rem' }}>Overview</h1>
-      </div>
-
       {/* Balance, Income & Expenses */}
       <div style={{ padding: '60px 20px 30px 80px', display: 'flex', gap: '20px', minWidth: '50vw', flexWrap: 'wrap' }}>
         <div className="card blue-card">

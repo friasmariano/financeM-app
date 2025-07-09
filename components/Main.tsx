@@ -1,17 +1,14 @@
-'use client';
 
 import React from "react";
-import { useAppSelector } from "../lib/hooks";
+import getAuthenticatedUser from "@/lib/auth";
+import Hero from "@/components/Hero";
 
-type MainProps = {
-  children: React.ReactNode;
-};
-
-export default function Main({ children }: MainProps) {
-    const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
+export default async function Main({ children }: MainServerProps) {
+  const user = await getAuthenticatedUser();
 
     return (
-         <main className={`main ${loggedIn ? "main-logged-in" : "main-logged-out"}`}>
+        <main className={`main ${user ? "main-logged-in" : "main-logged-out"}`}>
+            <Hero isAuthenticated={user ? true : false} />
             {children}
         </main>
     )

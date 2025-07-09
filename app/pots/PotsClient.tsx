@@ -2,11 +2,12 @@
 
 import { potService } from "@/services/potService";
 
+
 export default function PotsClient() {
   const createPot = async () => {
     const newPot = {
-      name: "Remote set up Update",
-      goalAmount: "200000",
+      name: "Camry 2021",
+      goalAmount: "1400000",
       currentAmount: "0",
     };
 
@@ -25,26 +26,6 @@ export default function PotsClient() {
       alert("There was an error creating the pot");
     }
   };
-
-  const getRoles = async () => {
-      fetch("http://localhost:8080/api/roles/getAll", {
-        method: "GET",
-        credentials: "include", // include cookies for authentication
-        headers: {
-          "Accept": "application/json"
-        }
-      })
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        console.log("Roles data:", data);
-      })
-      .catch(error => {
-        console.warn("Error fetching roles:", error);
-      });
-  }
 
   return (
     <button className="button is-green"
