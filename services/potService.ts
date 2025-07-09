@@ -6,7 +6,7 @@ import { PotRequest } from '@/types/requests/potRequest';
 
 export const potService = {
     getAll: async(): Promise<ApiDefaultResponse<Pot[]>> => {
-        const res = await fetchClient<ApiDefaultResponse<Pot[]>>("/api/pots", {
+        const res = await fetchClient<ApiDefaultResponse<Pot[]>>("/pots", {
             method: "GET",
             credentials: 'include'
         });
@@ -23,7 +23,7 @@ export const potService = {
     },
 
     getById: async (id: number): Promise<ApiDefaultResponse<Pot>> => {
-        const res = await fetchClient<ApiDefaultResponse<Pot>>(`/api/pots/${id}`, {
+        const res = await fetchClient<ApiDefaultResponse<Pot>>(`/pots/${id}`, {
             method: "GET",
             credentials: "include"
         });
@@ -40,7 +40,7 @@ export const potService = {
     },
 
     create: async (data: PotRequest): Promise<ApiDefaultResponse<Pot>> => {
-        const res = await fetchClient<ApiDefaultResponse<Pot>>("/api/pots", {
+        const res = await fetchClient<ApiDefaultResponse<Pot>>("/pots", {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(data)
@@ -58,7 +58,7 @@ export const potService = {
     },
 
     update: async (id: number, data: PotRequest): Promise<ApiDefaultResponse<Pot>> => {
-        const res = await fetchClient<ApiDefaultResponse<Pot>>(`/api/pots/${id}`, {
+        const res = await fetchClient<ApiDefaultResponse<Pot>>(`/pots/${id}`, {
             method: "PUT",
             credentials: "include",
             body: JSON.stringify(data),
@@ -76,7 +76,7 @@ export const potService = {
     },
 
     delete: async (id: number): Promise<ApiDefaultResponse<string>> => {
-        const res = await fetchClient<ApiDefaultResponse<string>>(`/api/pots/${id}`, {
+        const res = await fetchClient<ApiDefaultResponse<string>>(`/pots/${id}`, {
             method: "DELETE",
             credentials: "include"
         });

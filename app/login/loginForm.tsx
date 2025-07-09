@@ -3,13 +3,17 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { authService } from '@/services/authService';
-import { useAppDispatch } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { logout } from "@/lib/features/auth/store/auth-slice";
+import { useEffect, useState } from 'react'
 import { login } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
 
-export default function LoginForm() {
+export default function LoginForm({ isAuthenticated }: { isAuthenticated: boolean }) {
 
     const dispatch = useAppDispatch();
+    const loggedIn = useAppSelector((state) => state.auth.data.loggedIn);
+
     const router = useRouter();
 
     const formik = useFormik({
@@ -45,6 +49,13 @@ export default function LoginForm() {
             }
         }
     });
+
+    useEffect(() => {
+            if (!isAuthenticated && loggedIn) {
+                dispatch(logout());
+                router.refresh();
+            }
+        }, [isAuthenticated]);
 
     return (
         <form onSubmit={formik.handleSubmit}>

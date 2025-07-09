@@ -14,7 +14,7 @@ export default async function LoginPage() {
             <div className="text-[1.3rem] font-bold mb-[25px]">
                 financeM
             </div>
-            <LoginForm />
+            <LoginForm isAuthenticated={user ? true : false} />
         </section>
     )
 }

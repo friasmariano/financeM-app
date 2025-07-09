@@ -1,46 +1,40 @@
 
-import { potService } from "@/services/potService"
 import getAuthenticatedUser from "@/lib/auth";
 import { redirect } from "next/navigation";
+import PotsClient from "./PotsClient";
 
 export default async function PotsPage() {
-    const user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
-      if(!user) {
-        redirect('/login');
-      }
+  if (!user) {
+    redirect("/login");
+  }
 
-    const createPot = async () => {
-        const newPot = {
-            name: "",
-            goalAmount: "",
-            currentAmount: ""
-        }
+  return (
+    <section>
+      <div
+        style={{
+          height: "258px",
+          display: "flex",
+          margin: "auto",
+          gap: "5px",
+          right: "0px",
+          flexDirection: "column",
+          padding: "75px 0px 0px 70px",
+          background: "var(--sidebar-gradient",
+          backdropFilter: "blur(40px)",
+          boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.2)",
+        }}
+      >
+        <h1 style={{ fontSize: "2.6rem" }}>Pots</h1>
+        <h2 style={{ fontSize: "1.23rem" }}>
+          Easily create and manage pots to budget, save & more
+        </h2>
+      </div>
 
-        try {
-            const response = await potService.create(newPot);
-
-            if (!response) {
-                alert("I couldn't create the pot");
-                return;
-            }
-        } catch (error: any) {
-            console.log("Error on pot creation", error);
-            alert("There was an error creating the pot");
-        }
-    }
-
-    return(
-        <section>
-            <div style={{ height: '230px',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          margin: 'auto',
-                          right: '0px',
-                          background: 'var(--sidebar-gradient', backdropFilter: 'blur(25px)' }}>
-
-            </div>
-
-            <button className="button is">Create</button>
-        </section>
-    )
+      <div style={{ margin: "20px 0px 0px 30px" }}>
+        <PotsClient />
+      </div>
+    </section>
+  );
 }
