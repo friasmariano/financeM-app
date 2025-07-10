@@ -6,12 +6,17 @@
   --button-foreground: white;
 
   --background-color: #ffffff;
-  --foreground: #185366;
+  --foreground: rgb(24, 83, 102);
 
   --text-color: #185366;
 
   --sidebar-background: rgba(255, 255, 255, 0.5);
   --sidebar-gradient: linear-gradient(to bottom, rgba(224, 224, 224, 0.2), rgba(255, 255, 255, 0.2));
+
+  --hero-inner-glow-color: rgba(255, 255, 255, 0.5);
+  --hero-gradient: linear-gradient(to top, rgba(252, 252, 252, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+  --hero-glow: inset 0 0 20px 10px var(--hero-inner-glow-color);
+
   --navbar-gradient: linear-gradient(to top, rgb(224, 224, 224), rgb(255, 255, 255));
 
   --blue-card-gradient: linear-gradient(0deg,#92E7FF 0%, #F0FBFF 100%);
@@ -66,6 +71,11 @@ html.dark {
 
   --sidebar-background: rgba(0, 0, 0, 0.5);
   --sidebar-gradient: linear-gradient(0deg,rgba(27, 27, 27, 0.2) 0%, rgba(40, 40, 40, 0.2) 100%);
+
+  --hero-inner-glow-color: rgba(19, 19, 19, 0.35);
+  --hero-gradient: linear-gradient(to top, rgba(252, 252, 252, 0), rgba(54, 54, 54, 0.2), rgba(56, 56, 56, 0.4));
+  --hero-glow: inset 0 0 30px 15px var(--hero-inner-glow-color);
+
   --navbar-gradient: linear-gradient(0deg,rgb(27, 27, 27) 0%, rgb(40, 40, 40) 100%);
 
   --blue-card-gradient: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
@@ -532,3 +542,4 @@ input {
 .fadeOut {
   animation: fadeOut 0.3s ease-in;
 }
+

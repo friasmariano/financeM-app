@@ -37,12 +37,16 @@ export default function Hero() {
   return (
     loggedIn ? (
         <div
-        className="h-[258px] flex flex-col gap-1 pl-[70px] pt-[75px] mx-auto
-                    bg-[var(--sidebar-gradient)] backdrop-blur-[40px]
-                    shadow-[4px_4px_20px_rgba(0,0,0,0.2)]">
-        <h1 className="text-[2.6rem] font-bold text-foreground">{content.title}</h1>
-        <h2 className="text-[1.23rem] text-muted-foreground">{content.subtitle}</h2>
-        </div>)
+          className="h-[258px] flex flex-col gap-1 pl-[70px] pt-[75px] mx-auto
+                      shadow-[4px_4px_20px_rgba(0,0,0,0.2)]"
+                      style={{ boxShadow: 'var(--hero-glow)',
+                               background: 'var(--hero-gradient)',
+                               backdropFilter: 'blur(8px)'
+                       }}>
+            <h1 className="text-[2.6rem] font-bold text-foreground"
+                style={{ textShadow: '2px 3px 10px rgba(0, 0, 0, 0.2)' }}>{content.title}</h1>
+            <h2 className="text-[1.23rem] text-muted-foreground">{content.subtitle}</h2>
+          </div>)
 
         : null
     );
