@@ -100,13 +100,15 @@ export default function NavbarNew({ isAuthenticated }: { isAuthenticated: Boolea
                                 {(isDropDownOpen || isAnimatingOut) && (
                                     <ul
                                         className={` ${isAnimatingOut ? 'fadeOut' : 'slideDown'} dropdown  absolute right-0 bg-white shadow-lg rounded-md w-40 z-50`}
-                                        style={{ height: '195px',
+                                        style={{ height: '225px',
                                                 top: '22px', padding: '20px 0px 0px 25px',
                                                 zIndex: '0' }}
                                         onMouseLeave={() => setDropdownStatus(false)}>
 
                                         <li className="rounded p-2"
-                                            style={{ fontWeight: '500', fontSize: '1.2rem', marginBottom: '10px' }}>Profile</li>
+                                            style={{ fontWeight: '500',
+                                                     fontSize: '1.2rem',
+                                                     margin: '25px 0px 10px 0px' }}>Profile</li>
                                         <li className="cursor-pointer rounded p-2"
                                             style={{ fontSize: '1rem' }}>
                                             Account Info

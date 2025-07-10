@@ -72,9 +72,9 @@ html.dark {
   --sidebar-background: rgba(0, 0, 0, 0.5);
   --sidebar-gradient: linear-gradient(0deg,rgba(27, 27, 27, 0.2) 0%, rgba(40, 40, 40, 0.2) 100%);
 
-  --hero-inner-glow-color: rgba(19, 19, 19, 0.35);
+  --hero-inner-glow-color: rgba(255, 255, 255, 0.35);
   --hero-gradient: linear-gradient(to top, rgba(252, 252, 252, 0), rgba(54, 54, 54, 0.2), rgba(56, 56, 56, 0.4));
-  --hero-glow: inset 0 0 30px 15px var(--hero-inner-glow-color);
+  --hero-glow: inset 0 0 20px 2px var(--hero-inner-glow-color);
 
   --navbar-gradient: linear-gradient(0deg,rgb(27, 27, 27) 0%, rgb(40, 40, 40) 100%);
 

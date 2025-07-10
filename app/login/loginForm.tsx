@@ -6,8 +6,11 @@ import { authService } from '@/services/authService';
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { logout } from "@/lib/features/auth/store/auth-slice";
 import { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
 import { login } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
+import UserResponse from '@/types/responses/UserResponse';
+import User from '@/types/User';
 
 export default function LoginForm({ isAuthenticated }: { isAuthenticated: boolean }) {
 
@@ -30,20 +33,31 @@ export default function LoginForm({ isAuthenticated }: { isAuthenticated: boolea
         validateOnMount: true,
         onSubmit: async (values, { setSubmitting }) => {
             try {
-                const response = await authService.login(values);
+                const userResponse: any = await authService.login(values);
 
-                if (!response) {
-                    alert("Login failed. Please check your credentials.");
+                if (!userResponse) {
+                    toast.error('Login failed. Check your credentials.');
                     return;
                 }
 
-                dispatch(login(response.data));
+                console.log(userResponse);
+
+                const user: User = {
+                    id: userResponse.id,
+                    username: userResponse.username,
+                    person: userResponse.person
+                };
+
+                dispatch(login(user));
                 router.push('/dashboard');
 
             } catch (error: any) {
-                console.error("Login error:", error);
-                alert("Login failed. Please check your credentials.");
+                const errorMessage =
+                    error?.response?.message ||
+                    error?.message ||
+                    'Login failed. Please check your credentials.';
 
+                toast.error(errorMessage);
             } finally {
                 setSubmitting(false);
             }
@@ -89,6 +103,8 @@ export default function LoginForm({ isAuthenticated }: { isAuthenticated: boolea
                     Login
                 </button>
             </div>
+
+            <ToastContainer />
         </form>
     );
 }
