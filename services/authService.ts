@@ -4,23 +4,30 @@ import UserResponse from "@/types/responses/UserResponse";
 import LogoutResponse from "@/types/responses/LogoutResponse";
 
 export const authService = {
-  login: async (credentials: { email: string; password: string }): Promise<UserResponse> => {
-    const res = await fetchClient("/auth/authenticate", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify(credentials),
-    });
+  login: async (credentials: { email: string; password: string }): Promise<ApiDefaultResponse<UserResponse>> => {
+    try {
+      const res = await fetchClient("/auth/authenticate", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(credentials),
+      });
 
-    const apiResponse: ApiDefaultResponse<UserResponse> = await res.json();
+      const apiResponse: ApiDefaultResponse<UserResponse> = await res.json();
 
-    if (!res.ok || !apiResponse.success || !apiResponse.data) {
-      const error = new Error(apiResponse?.message || "Login failed.");
-      (error as any).response = apiResponse;
-      throw error;
+      if (!res.ok || !apiResponse.success || !apiResponse.data) {
+        console.error("Login failed:", apiResponse?.message, apiResponse);
+      }
+
+      return apiResponse;
+    } catch (err) {
+      console.error("Unexpected login error:", err);
+      return {
+        success: false,
+        message: "Unexpected error occurred.",
+      } as ApiDefaultResponse<UserResponse>;
     }
-
-    return apiResponse.data;
   },
+
 
   register: async (data: any): Promise<ApiDefaultResponse<any>> => {
     const res = await fetchClient("/auth/register", {

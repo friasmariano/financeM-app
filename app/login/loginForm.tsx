@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { login } from "@/lib/features/auth/store/auth-slice";
 import { useRouter } from 'next/navigation';
 import UserResponse from '@/types/responses/UserResponse';
+import { ApiDefaultResponse } from '@/types/ApiDefaultResponse';
 import User from '@/types/User';
 
 export default function LoginForm({ isAuthenticated }: { isAuthenticated: boolean }) {
@@ -33,19 +34,17 @@ export default function LoginForm({ isAuthenticated }: { isAuthenticated: boolea
         validateOnMount: true,
         onSubmit: async (values, { setSubmitting }) => {
             try {
-                const userResponse: any = await authService.login(values);
+                const userResponse: ApiDefaultResponse<UserResponse> = await authService.login(values);
 
                 if (!userResponse) {
                     toast.error('Login failed. Check your credentials.');
                     return;
                 }
 
-                console.log(userResponse);
-
                 const user: User = {
-                    id: userResponse.id,
-                    username: userResponse.username,
-                    person: userResponse.person
+                    id: userResponse.data.id,
+                    username: userResponse.data.username,
+                    person: userResponse.data.person
                 };
 
                 dispatch(login(user));

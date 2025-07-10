@@ -1,6 +1,7 @@
-import User from "../User";
+import Person from "../Person";
 
 export default interface UserResponse {
-    status: boolean,
-    data: User
+    id: number,
+    username: string,
+    person: Person
 }
