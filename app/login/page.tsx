@@ -5,7 +5,7 @@ import LoginForm from "./loginForm";
 export default async function LoginPage() {
     const user = await getAuthenticatedUser();
 
-      if(user) {
+    if(user) {
         redirect('/dashboard');
     }
 

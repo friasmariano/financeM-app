@@ -64,11 +64,16 @@ export default function LoginForm({ isAuthenticated }: { isAuthenticated: boolea
     });
 
     useEffect(() => {
-            if (!isAuthenticated && loggedIn) {
-                dispatch(logout());
-                router.refresh();
+        if (!isAuthenticated && loggedIn) {
+            const sessionCleanup = async() => {
+                const success = await authService.logout();
             }
-        }, [isAuthenticated]);
+
+            dispatch(logout());
+            sessionCleanup();
+            router.refresh();
+        }
+    }, [isAuthenticated]);
 
     return (
         <form onSubmit={formik.handleSubmit}>

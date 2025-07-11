@@ -17,7 +17,13 @@
   --hero-gradient: linear-gradient(to top, rgba(252, 252, 252, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
   --hero-glow: inset 0 0 20px 10px var(--hero-inner-glow-color);
 
+  --white-semitransparent-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(219, 219, 219, 0.2));
+  --soft-green-gradient: linear-gradient(to bottom, rgb(15, 191, 77), rgb(0, 84, 57));
+
+  --soft-red-gradient: linear-gradient(to bottom, rgb(191, 15, 15), rgb(84, 0, 0));
+
   --navbar-gradient: linear-gradient(to top, rgb(224, 224, 224), rgb(255, 255, 255));
+  --table-gradient: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
 
   --blue-card-gradient: linear-gradient(0deg,#92E7FF 0%, #F0FBFF 100%);
   --blue-card-text: #2f92b9;
@@ -76,7 +82,13 @@ html.dark {
   --hero-gradient: linear-gradient(to top, rgba(252, 252, 252, 0), rgba(54, 54, 54, 0.2), rgba(56, 56, 56, 0.4));
   --hero-glow: inset 0 0 20px 2px var(--hero-inner-glow-color);
 
+  --white-semitransparent-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(219, 219, 219, 0.2));
+
+  --soft-green-gradient: linear-gradient(to bottom, rgb(15, 191, 77), rgb(0, 84, 57));
+  --soft-red-gradient: linear-gradient(to bottom, rgb(249, 22, 22), rgb(133, 1, 1));
+
   --navbar-gradient: linear-gradient(0deg,rgb(27, 27, 27) 0%, rgb(40, 40, 40) 100%);
+  --table-gradient: linear-gradient(to top, rgb(218, 218, 218), rgb(255, 255, 255));
 
   --blue-card-gradient: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
   --blue-card-text: #4bd6f5;
