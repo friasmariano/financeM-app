@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { potService } from "@/services/potService";
 import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
 import { Pot } from "@/types/Pot";
+import Modal from "@/components/Modal";
 
 export default function PotsClient() {
   const [pots, setPots] = useState<Pot[]>([]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getPots = async () => {
     try {
@@ -59,35 +62,44 @@ export default function PotsClient() {
                          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                          padding: '9px 35px 9px 35px',
                          borderRadius: '20px',
-                         background: 'var(--white-semitransparent-gradient)' }}>
+                         background: 'var(--white-semitransparent-gradient)' }} onClick={() => setIsModalOpen(true)}>
           <i className="bi bi-plus-circle mr-2"></i>New Pot
         </button>
       </div>
 
       <div>
-        <div className="p-4 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
           {pots.map((pot) => (
-            <div
-              key={pot.id}
-              className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition duration-300"
-            >
-              <h2 className="text-xl font-semibold text-gray-800">{pot.name}</h2>
-              <p className="text-sm text-gray-500 mt-1"><b className="mr-1">Goal</b> {pot.goalAmount}</p>
-              <p className="text-sm text-gray-500 mt-1"><b className="mr-1">Current Amount</b>{pot.currentAmount}</p>
+            <div key={pot.id}
+                 style={{ width: '300px', height: '170px',
+                          padding: '20px 20px 30px 30px',
+                          borderRadius: '20px',
+                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)'
+                  }}>
+
+                <h2 className="font-semibold mb-2" style={{ fontSize: '1.35rem' }}>{pot.name}</h2>
+                <p className="text-sm mt-1"
+                   style={{ opacity: '0.5' }}><b className="mr-1">Goal</b> {pot.goalAmount}</p>
+                <p className="text-sm mt-1"
+                   style={{ opacity: '0.5' }}><b className="mr-1">Current Amount</b>{pot.currentAmount}</p>
 
               <div style={{ display: 'flex', gap: '5px' }}>
-                <button style={{ background: 'var(--soft-green-gradient)',
+                <button style={{ background: 'var(--soft-brown-gradient)',
                                  margin: '13px 0px 0px 0px',
                                  padding: '5px 20px 5px 20px',
                                  borderRadius: '20px',
-                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'}}>
+                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                                 cursor: 'pointer',
+                                 color: 'white'}}>
                   <i className="bi bi-pencil-square"></i>
                 </button>
                 <button style={{ background: 'var(--soft-red-gradient)',
                                  margin: '13px 0px 0px 0px',
                                  padding: '5px 20px 5px 20px',
                                  borderRadius: '20px',
-                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'}}>
+                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                                 cursor: 'pointer',
+                                 color: 'white'}}>
                   <i className="bi bi-trash3"></i>
                 </button>
               </div>
@@ -95,6 +107,17 @@ export default function PotsClient() {
           ))}
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2 className="text-xl font-bold mb-4">Welcome!</h2>
+        <p className="mb-4">This is a custom modal component.</p>
+        <button
+          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+          onClick={() => setIsModalOpen(false)}
+        >
+          Close
+        </button>
+      </Modal>
     </section>
   );
 }

@@ -20,7 +20,8 @@
   --white-semitransparent-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(219, 219, 219, 0.2));
   --soft-green-gradient: linear-gradient(to bottom, rgb(15, 191, 77), rgb(0, 84, 57));
 
-  --soft-red-gradient: linear-gradient(to bottom, rgb(191, 15, 15), rgb(84, 0, 0));
+  --soft-red-gradient: linear-gradient(to bottom, rgb(249, 22, 22), rgb(133, 1, 1));
+  --soft-brown-gradient: linear-gradient(to bottom, rgb(208, 127, 56), rgb(111, 65, 24));
 
   --navbar-gradient: linear-gradient(to top, rgb(224, 224, 224), rgb(255, 255, 255));
   --table-gradient: linear-gradient(0deg,#0B2730 0%, #3693B3 100%);
@@ -86,6 +87,7 @@ html.dark {
 
   --soft-green-gradient: linear-gradient(to bottom, rgb(15, 191, 77), rgb(0, 84, 57));
   --soft-red-gradient: linear-gradient(to bottom, rgb(249, 22, 22), rgb(133, 1, 1));
+  --soft-brown-gradient: linear-gradient(to bottom, rgb(208, 127, 56), rgb(111, 65, 24));
 
   --navbar-gradient: linear-gradient(0deg,rgb(27, 27, 27) 0%, rgb(40, 40, 40) 100%);
   --table-gradient: linear-gradient(to top, rgb(218, 218, 218), rgb(255, 255, 255));

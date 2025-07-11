@@ -64,14 +64,20 @@ export default function LoginForm({ isAuthenticated }: { isAuthenticated: boolea
     });
 
     useEffect(() => {
-        if (!isAuthenticated && loggedIn) {
-            const sessionCleanup = async() => {
-                const success = await authService.logout();
+        if (!isAuthenticated) {
+            const handleLogout = async () => {
+                try {
+                    await authService.logout();
+                } catch (error) {
+                    console.log("Logout failed:", error);
+                } finally {
+                    dispatch(logout());
+                }
             }
 
-            dispatch(logout());
-            sessionCleanup();
-            router.refresh();
+            handleLogout();
+
+            setTimeout(() => router.refresh(), 100);
         }
     }, [isAuthenticated]);
 

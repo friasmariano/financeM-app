@@ -55,7 +55,13 @@ export const authService = {
 
     if (res.status === 204) return true;
 
-    const data: ApiDefaultResponse<LogoutResponse> = await res.json();
-    return data?.success ?? false;
-  },
+    try {
+      const data: ApiDefaultResponse<LogoutResponse> = await res.json();
+      return data?.success ?? false;
+    } catch (error) {
+      console.error("Failed to parse logout response:", error);
+      return false;
+    }
+  }
+
 };
