@@ -5,6 +5,7 @@ import { potService } from "@/services/potService";
 import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
 import { Pot } from "@/types/Pot";
 import Modal from "@/components/Modal";
+import PotCard from "@/components/PotCard";
 
 export default function PotsClient() {
   const [pots, setPots] = useState<Pot[]>([]);
@@ -68,41 +69,16 @@ export default function PotsClient() {
       </div>
 
       <div>
+        {/* Pots */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
           {pots.map((pot) => (
-            <div key={pot.id}
-                 style={{ width: '300px', height: '170px',
-                          padding: '20px 20px 30px 30px',
-                          borderRadius: '20px',
-                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)'
-                  }}>
-
-                <h2 className="font-semibold mb-2" style={{ fontSize: '1.35rem' }}>{pot.name}</h2>
-                <p className="text-sm mt-1"
-                   style={{ opacity: '0.5' }}><b className="mr-1">Goal</b> {pot.goalAmount}</p>
-                <p className="text-sm mt-1"
-                   style={{ opacity: '0.5' }}><b className="mr-1">Current Amount</b>{pot.currentAmount}</p>
-
-              <div style={{ display: 'flex', gap: '5px' }}>
-                <button style={{ background: 'var(--soft-brown-gradient)',
-                                 margin: '13px 0px 0px 0px',
-                                 padding: '5px 20px 5px 20px',
-                                 borderRadius: '20px',
-                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                                 cursor: 'pointer',
-                                 color: 'white'}}>
-                  <i className="bi bi-pencil-square"></i>
-                </button>
-                <button style={{ background: 'var(--soft-red-gradient)',
-                                 margin: '13px 0px 0px 0px',
-                                 padding: '5px 20px 5px 20px',
-                                 borderRadius: '20px',
-                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                                 cursor: 'pointer',
-                                 color: 'white'}}>
-                  <i className="bi bi-trash3"></i>
-                </button>
-              </div>
+            <div key={pot.id}>
+                <PotCard
+                  id={pot.id}
+                  name={pot.name}
+                  goalAmount={pot.goalAmount}
+                  currentAmount={pot.currentAmount}
+                />
             </div>
           ))}
         </div>
