@@ -53,22 +53,7 @@ export const authService = {
       credentials: "include",
     });
 
-    if (res.status === 204) return true;
-
-    try {
-      const text = await res.text();
-
-      if (!text) {
-        return res.ok;
-      }
-
-      const data: ApiDefaultResponse<LogoutResponse> = JSON.parse(text);
-      return data?.success ?? false;
-    } catch (error) {
-      console.error("Failed to parse logout response:", error);
-      return false;
-    }
+    return res.status === 204;
   }
-
 
 };

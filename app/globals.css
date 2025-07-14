@@ -17,10 +17,10 @@
   --hero-gradient: linear-gradient(to top, rgba(252, 252, 252, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
   --hero-glow: inset 0 0 20px 10px var(--hero-inner-glow-color);
 
-  --white-semitransparent-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(219, 219, 219, 0.2));
+  --white-semitransparent-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9));
   --soft-green-gradient: linear-gradient(to bottom, rgb(15, 191, 77), rgb(0, 84, 57));
 
-  --soft-red-gradient: linear-gradient(to bottom, rgb(249, 22, 22), rgb(133, 1, 1));
+  --soft-red-gradient: linear-gradient(to bottom, rgb(251, 49, 49), rgb(189, 13, 13));
   --soft-brown-gradient: linear-gradient(to bottom, rgb(208, 127, 56), rgb(111, 65, 24));
 
   --navbar-gradient: linear-gradient(to top, rgb(224, 224, 224), rgb(255, 255, 255));
@@ -83,10 +83,10 @@ html.dark {
   --hero-gradient: linear-gradient(to top, rgba(252, 252, 252, 0), rgba(54, 54, 54, 0.2), rgba(56, 56, 56, 0.4));
   --hero-glow: inset 0 0 20px 2px var(--hero-inner-glow-color);
 
-  --white-semitransparent-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(219, 219, 219, 0.2));
+  --white-semitransparent-gradient: linear-gradient(to bottom, rgba(42, 116, 159, 0.7), rgba(24, 61, 83, 1));
 
   --soft-green-gradient: linear-gradient(to bottom, rgb(15, 191, 77), rgb(0, 84, 57));
-  --soft-red-gradient: linear-gradient(to bottom, rgb(249, 22, 22), rgb(133, 1, 1));
+  --soft-red-gradient: linear-gradient(to bottom, rgb(233, 29, 29), rgb(89, 5, 5));
   --soft-brown-gradient: linear-gradient(to bottom, rgb(208, 127, 56), rgb(111, 65, 24));
 
   --navbar-gradient: linear-gradient(0deg,rgb(27, 27, 27) 0%, rgb(40, 40, 40) 100%);
@@ -115,7 +115,7 @@ html.dark {
   --sidebar-link-text: #0B2730;
 
   --login-card-gradient: linear-gradient(0deg, #08202e 0%, rgba(54, 147, 179, 0.7) 100%);
-  --green-button-gradient: linear-gradient(180deg,rgba(76, 217, 135, 1) 0%, rgba(24, 125, 66, 1) 100%);
+  --green-button-gradient: linear-gradient(180deg,rgb(43, 200, 109) 0%, rgb(17, 93, 49) 100%);
 
   --card-header-gradient: linear-gradient(0deg,rgb(180, 180, 180) 0%,rgb(231, 231, 231) 100%);
 }
@@ -492,6 +492,10 @@ input {
 
 .is-green {
   background: var(--green-button-gradient);
+}
+
+.is-red {
+  background: var(--soft-red-gradient);
 }
 
 

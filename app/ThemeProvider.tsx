@@ -22,6 +22,7 @@ export default function ThemeProvider() {
       aria-label='Toggle theme'
       title='Toggle theme'
       onClick={() => dispatch(toggle())}
+      style={{ zIndex: '13000'}}
     >
       <FontAwesomeIcon
         icon={isDark ? faSun : faMoon}

@@ -57,13 +57,13 @@ export default function PotsClient() {
 
   return (
     <section style={{ padding: '20px 50px 0px 30px'}}>
-      <div style={{ display: "flex", justifyContent: "space-between", padding: '10px 0px 40px 0px'}}>
+      <div className="flex justify-between py-[10px] pb-[40px]">
+        {/* Blank space */}
         <div></div>
-        <button style={{ cursor: 'pointer',
-                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                         padding: '9px 35px 9px 35px',
-                         borderRadius: '20px',
-                         background: 'var(--white-semitransparent-gradient)' }} onClick={() => setIsModalOpen(true)}>
+        <button className="cursor-pointer px-[35px] py-[9px] rounded-[20px]"
+                style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                         background: 'var(--white-semitransparent-gradient)' }}
+                onClick={() => setIsModalOpen(true)}>
           <i className="bi bi-plus-circle mr-2"></i>New Pot
         </button>
       </div>
@@ -84,15 +84,12 @@ export default function PotsClient() {
         </div>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-bold mb-4">Welcome!</h2>
-        <p className="mb-4">This is a custom modal component.</p>
-        <button
-          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-          onClick={() => setIsModalOpen(false)}
-        >
-          Close
-        </button>
+      <Modal isOpen={isModalOpen}
+             onClose={() => setIsModalOpen(false)}
+             title='New Pot'
+             hasFooter={true}
+             size='medium'>
+          <div></div>
       </Modal>
     </section>
   );
