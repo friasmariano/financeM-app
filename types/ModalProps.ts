@@ -4,6 +4,10 @@ export interface ModalProps {
     onClose: () => void;
     children: React.ReactNode;
     title: string;
-    hasFooter?: boolean;
+    hasButtons?: boolean;
     size?: ModalSize;
+
+    onSave?: () => void;
+    savingDisabled: boolean;
+    isSaving: boolean;
 }

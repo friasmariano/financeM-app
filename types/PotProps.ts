@@ -4,4 +4,5 @@ export interface PotProps {
     name: string;
     goalAmount: string;
     currentAmount: string;
+    onEdit: () => void;
 }

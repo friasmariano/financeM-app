@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/lib/hooks";
 import { PotProps } from "@/types/PotProps";
 
-export default function PotCard({ id, name, goalAmount, currentAmount }: PotProps) {
+export default function PotCard({ id, name, goalAmount, currentAmount, onEdit }: PotProps) {
 
     const isDark = useAppSelector((state) => state.theme.data.isDark);
 
@@ -31,7 +31,8 @@ export default function PotCard({ id, name, goalAmount, currentAmount }: PotProp
                             borderRadius: '20px',
                             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                             cursor: 'pointer',
-                            color: 'white'}}>
+                            color: 'white'}}
+                            onClick={() => onEdit() }>
             <i className="bi bi-pencil-square"></i>
         </button>
         <button style={{ background: 'var(--soft-red-gradient)',
