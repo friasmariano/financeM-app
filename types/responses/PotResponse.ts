@@ -1,8 +1,8 @@
 
-export interface PotProps {
+export default interface PotResponse {
     id: number;
     name: string;
     goalAmount: number;
     currentAmount: number;
-    onEdit: () => void;
+    userId: number
 }

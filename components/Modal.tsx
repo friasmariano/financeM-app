@@ -4,7 +4,8 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { ModalProps } from '@/types/ModalProps'
 import { useAppSelector } from '@/lib/hooks'
-import { getSizeClass } from '@/helpers/modalSize'
+import { getSizeClass } from '@/utils/modalSize'
+import Spinner from './Spinner'
 
 export default function Modal({ isOpen, onClose, children,
                                 title, size = 'medium',
@@ -115,6 +116,7 @@ export default function Modal({ isOpen, onClose, children,
                                             disabled={savingDisabled}
                                             type="submit"
                                             onClick={onSave}>
+                                                {isSaving && <Spinner className="mr-2" /> }
                                                 {isSaving ? 'Saving...' : 'Save'}
                                             </button>
                                     <button className='button is-red text-white'

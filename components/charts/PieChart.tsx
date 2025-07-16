@@ -1,6 +1,6 @@
 import React from "react";
 import { pie, arc, PieArcDatum } from "d3";
-import { ClientTooltip, TooltipContent, TooltipTrigger } from "@/helpers/ClientTooltip";
+import { ClientTooltip, TooltipContent, TooltipTrigger } from "@/utils/ClientTooltip";
 
 type DataItem = {
   name: string;
