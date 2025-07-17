@@ -14,6 +14,7 @@ import { useAppSelector } from "@/lib/hooks";
 import { PotService } from "@/services/PotService";
 import { formatErrorMessages } from "@/utils/formatErrorMessages";
 import { formatError } from "zod";
+import { useRouter } from "next/navigation";
 
 export default function PotsClient() {
   const [formMode, setFormMode] = useState<FormMode>('create');
@@ -22,6 +23,7 @@ export default function PotsClient() {
   const [potId, setPotId] = useState<number>(0);
 
   const service = new PotService();
+  const router = useRouter();
 
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -69,43 +71,6 @@ export default function PotsClient() {
     validateOnMount: true,
     onSubmit: async (values, { setSubmitting }) => {
         if (formMode === 'create') {
-          // try {
-          //   const createPot = await fetch('http://localhost:8080/api/pots', {
-          //     method: 'POST',
-          //     headers: {
-          //       'Content-Type': 'application/json'
-          //     },
-          //     credentials: 'include',
-          //     body: JSON.stringify({
-          //       name: values.name,
-          //       goalAmount: values.goalAmount,
-          //       currentAmount: values.currentAmount
-          //     })
-          //   });
-
-          //   const response = await createPot.json();
-
-          //   if (!createPot.ok) {
-          //     const errorArray: string[] = Object.values(response.data);
-
-          //     setErrors(errorArray);
-
-          //     setTimeout(() => setErrors([]), 7000);
-
-          //     return;
-          //   }
-
-          //   setIsModalOpen(false);
-
-          //   toast.success('Pot created successfully!');
-
-          // } catch(error: unknown) {
-          //     console.log("Error creating pot", error);
-          //     toast.error('There was an error creating the pot');
-          // } finally {
-          //     getPots();
-          //     setSubmitting(false);
-          // }
 
           try {
             const result = await service.create({
@@ -115,16 +80,19 @@ export default function PotsClient() {
             });
 
             if (!result.success) {
-              console.log("Success:", result.success);
+              if (result.status === 401) {
+                setIsModalOpen(false);
+                toast.error(result.message.toString());
+
+                setTimeout(() => router.push('/login'), 3000);
+                return;
+              }
+
               formatErrorMessages(result.message, setErrors);
               setTimeout(() => setErrors([]), 7000);
 
               return;
             }
-
-            console.log("Success:", result.success);
-            console.log("Data:", result.data);
-            console.log("Message:", result.message);
 
             toast.success(result.message.toString());
             setIsModalOpen(false);
