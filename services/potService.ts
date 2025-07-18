@@ -7,41 +7,27 @@ import { potSchema } from "@/lib/schemas/potSchema";
 import { BaseService } from "./BaseService";
 
 export class PotService extends BaseService<PotResponse>{
-    public API_BASE: string = process.env.NEXT_PUBLIC_API_BASE + '' || '';
     private static potResponseSchema = apiResponseSchema(potSchema);
 
 
     async create (values: PotRequest): Promise<ApiDefaultResponse<PotResponse>> {
         const response = await this.composeResponse('pots', 'POST', values);
-
         const jsonResponse = await this.jsonResponseParsing(response, this.defaultPotData());
 
-        if (!jsonResponse.success && jsonResponse.fallback) {
-            return jsonResponse.fallback;
-        }
+        const errors = this.errorHandler<PotResponse>(
+            response,
+            jsonResponse,
+            PotService.potResponseSchema,
+            this.defaultPotData()
+        );
 
-        const json = jsonResponse.json;
-
-        const errorResponse = this.unSuccessfullResponse<PotResponse>(response, json, this.defaultPotData());
-        if (errorResponse) {
-            return errorResponse;
-        }
-
-
-        const result = PotService.potResponseSchema.safeParse(json);
-        if (!result.success) {
-            return {
-                success: false,
-                data: this.defaultPotData(),
-                message: json.data,
-                status: response.status
-            }
-        }
+        if (errors)
+            return errors;
 
         return {
-            success: result.success,
-            data: result.data.data,
-            message: result.data.message,
+            success: true,
+            data: jsonResponse.json.data,
+            message: jsonResponse.json,
             status: response.status
         };
     }

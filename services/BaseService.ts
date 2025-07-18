@@ -59,16 +59,47 @@ export abstract class BaseService<T> {
         }
     }
 
-    protected unSuccessfullResponse<T> (response: Response, json: any, fallback: T) {
+    protected unSuccessfullResponse<T> (response: Response,
+                                        json: Partial<ApiDefaultResponse<T>> | null,
+                                        fallback: T) {
         if (!response.ok) {
             return {
                 success: false,
-                data: fallback,
-                message: json?.message || "Request failed!",
-                status: response.status
+                data: json?.data || fallback,
+                message: json?.message ?? "Request failed!",
+                status: json?.status ?? response.status
             }
         }
 
-        return null as any;
+        return null;
+    }
+
+    protected errorHandler<T>(response: Response,
+                              jsonResponse: { success: boolean; fallback?: ApiDefaultResponse<T>; json: any },
+                              schema: any,
+                              defaultData: T): ApiDefaultResponse<T> | null {
+
+        if (!jsonResponse.success && jsonResponse.fallback) {
+            return jsonResponse.fallback;
+        }
+
+        const json = jsonResponse.json;
+
+        const errorResponse = this.unSuccessfullResponse<T>(response, json, defaultData);
+        if (errorResponse) {
+            return errorResponse;
+        }
+
+        const result = schema.safeParse(json);
+        if (!result.success) {
+            return {
+                success: false,
+                data: defaultData,
+                message: json.data || "Server response couln't be translated.",
+                status: response.status
+            };
+        }
+
+        return null;
     }
 }

@@ -61,23 +61,18 @@ export default function PotsClient() {
                .max(20, 'Name must be at most 20 characters'),
       goalAmount: Yup.number()
                      .required('Goal amount is required')
-                     .min(0, 'Goal amount must be greater than 0'),
-                    //  .max(99999999.99, 'Goal amount is too high'),
+                     .min(0, 'Goal amount must be greater than 0')
+                     .max(99999999.99, 'Goal amount is too high'),
       currentAmount: Yup.number()
                         .required('Current amount is required')
                         .min(0, 'Current amount must be greater than 0')
-                        // .max(99999999.99, 'Current amount is too high'),
+                        .max(99999999.99, 'Current amount is too high'),
     }),
     validateOnMount: true,
     onSubmit: async (values, { setSubmitting }) => {
         if (formMode === 'create') {
-
           try {
-            const result = await service.create({
-              name: values.name,
-              goalAmount: values.goalAmount,
-              currentAmount: values.currentAmount
-            });
+            const result = await service.create(values);
 
             if (!result.success) {
               if (result.status === 401) {
@@ -88,7 +83,8 @@ export default function PotsClient() {
                 return;
               }
 
-              formatErrorMessages(result.message, setErrors);
+              formatErrorMessages(result.data, setErrors);
+
               setTimeout(() => setErrors([]), 7000);
 
               return;
@@ -97,23 +93,14 @@ export default function PotsClient() {
             toast.success(result.message.toString());
             setIsModalOpen(false);
 
-            getPots();
+            await getPots();
 
           } catch (error: any) {
-              if (error.status === 401) {
-                toast.error('Session expired.');
-              } else if (error.body?.data) {
-                formatErrorMessages(error.body.data, setErrors);
-                setTimeout(() => setErrors([]), 7000);
-              } else {
-                toast.error('Error creating the pot');
-                console.log(error);
-              }
+              toast.error('Error creating the pot');
+              console.log(error);
           } finally {
               setSubmitting(false);
           }
-
-
         }
 
         if (formMode === 'edit') {
