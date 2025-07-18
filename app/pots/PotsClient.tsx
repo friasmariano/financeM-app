@@ -83,12 +83,21 @@ export default function PotsClient() {
                 return;
               }
 
+              if (result.status === 409) {
+                setErrors([result.message.toString()]);
+                setTimeout(() => setErrors([]), 7000);
+
+                return;
+              }
+
               formatErrorMessages(result.data, setErrors);
 
               setTimeout(() => setErrors([]), 7000);
 
               return;
             }
+
+            console.log(result)
 
             toast.success(result.message.toString());
             setIsModalOpen(false);
