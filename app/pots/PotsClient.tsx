@@ -15,6 +15,8 @@ import { PotService } from "@/services/PotService";
 import { formatErrorMessages } from "@/utils/formatErrorMessages";
 import { formatError } from "zod";
 import { useRouter } from "next/navigation";
+import hasErrorMessages from "@/utils/hasErrorMessages";
+import PotResponse from "@/types/responses/PotResponse";
 
 export default function PotsClient() {
   const [formMode, setFormMode] = useState<FormMode>('create');
@@ -27,24 +29,41 @@ export default function PotsClient() {
 
   const [errors, setErrors] = useState<string[]>([]);
 
-  const [pots, setPots] = useState<Pot[]>([]);
+  const [pots, setPots] = useState<PotResponse[]>([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getPots = async () => {
     try {
-      const response: ApiDefaultResponse<Pot[]> = await potServiceOld.getAll();
+      const result: ApiDefaultResponse<PotResponse[]> = await service.getAll();
 
-      if (!response) {
-        toast.error("I couldn't get the pots");
+      if (!result.success) {
+        console.log(result);
+
+        if (result.status === 401) {
+          toast.error(result.message.toString());
+
+          setTimeout(() => router.push('/login'), 3000);
+          return;
+        }
+
+        if (!hasErrorMessages(result.data)) {
+          setErrors([result.message.toString()]);
+
+          return;
+        }
+
+        formatErrorMessages(result.data, setErrors);
+
+        setTimeout(() => setErrors([]), 7000);
+
         return;
       }
 
-      setPots(response.data);
-
-    } catch(error: any) {
-        console.log("Error recoverying pots", error);
-        toast.error("There was an error getting the pots");
+      setPots(result.data);
+    } catch (error: any) {
+        toast.error('Error getting pots');
+        console.log(error);
     }
   }
 
@@ -83,9 +102,8 @@ export default function PotsClient() {
                 return;
               }
 
-              if (result.status === 409) {
+              if (!hasErrorMessages(result.data)) {
                 setErrors([result.message.toString()]);
-                setTimeout(() => setErrors([]), 7000);
 
                 return;
               }
@@ -96,8 +114,6 @@ export default function PotsClient() {
 
               return;
             }
-
-            console.log(result)
 
             toast.success(result.message.toString());
             setIsModalOpen(false);

@@ -4,7 +4,7 @@ import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
 export abstract class BaseService<T> {
     public API_BASE: string = process.env.NEXT_PUBLIC_API_BASE + '' || '';
 
-    protected async composeResponse(path: string, method: string, values: any) {
+    protected async composeResponse(path: string, method: string, values?: any) {
         const options: RequestInit = {
             method,
             headers: {
@@ -92,12 +92,42 @@ export abstract class BaseService<T> {
 
         const result = schema.safeParse(json);
         if (!result.success) {
+            // Marked as a false positive
+            return {
+                success: false,
+                data: json.data,
+                message: json.data.message || "Server response couln't be translated.",
+                status: response.status
+            };
+        }
+
+        return null;
+    }
+
+    protected listErrorHandler<T>(
+        response: Response,
+        jsonResponse: { success: boolean; fallback?: ApiDefaultResponse<T[]>; json: any },
+        schema: any,
+        defaultData: T[]
+    ): ApiDefaultResponse<T[]> | null {
+
+        if (!jsonResponse.success && jsonResponse.fallback)
+            return jsonResponse.fallback;
+
+        const json = jsonResponse.json;
+
+        const errorResponse = this.unSuccessfullResponse<T[]>(response, json, defaultData);
+        if (errorResponse)
+            return errorResponse;
+
+        const result = schema.safeParse(json);
+        if (!result.success) {
             return {
                 success: false,
                 data: defaultData,
-                message: json.data || "Server response couln't be translated.",
+                message: "Invalid list response format.",
                 status: response.status
-            };
+            }
         }
 
         return null;
