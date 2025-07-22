@@ -81,4 +81,26 @@ export class PotService extends BaseService<PotResponse>{
         }
 
     }
+
+    async delete(id: number): Promise<ApiDefaultResponse<PotResponse>> {
+        const response = await this.composeResponse(`pots/${id}`, 'DELETE');
+        const jsonResponse = await this.jsonResponseParsing(response, PotService.defaultPot);
+
+        const errors = this.errorHandler<PotResponse>(
+            response,
+            jsonResponse,
+            PotService.potResponseSchema,
+            PotService.defaultPot
+        );
+
+        if (errors)
+            return errors;
+
+        return {
+            success: true,
+            data: jsonResponse.json.data,
+            message: jsonResponse.json.message,
+            status: response.status
+        }
+    }
 }

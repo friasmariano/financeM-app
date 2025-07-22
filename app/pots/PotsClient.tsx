@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { potServiceOld } from "@/services/potServiceOld";
 import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
 import { Pot } from "@/types/Pot";
 import Modal from "@/components/Modal";
@@ -32,6 +31,9 @@ export default function PotsClient() {
   const [errors, setErrors] = useState<string[]>([]);
 
   const [pots, setPots] = useState<PotResponse[]>([]);
+
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -187,7 +189,7 @@ export default function PotsClient() {
   }, []);
 
   return (
-    <section style={{ padding: '20px 50px 0px 30px'}}>
+    <section style={{ padding: '20px 50px 0px 30px', maxHeight: '60vh', overflow: 'scroll'}}>
       <div className="flex justify-between py-[10px] pb-[40px]">
         {/* Blank space */}
         <div></div>
