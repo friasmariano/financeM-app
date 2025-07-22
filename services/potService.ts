@@ -57,6 +57,28 @@ export class PotService extends BaseService<PotResponse>{
             message: jsonResponse.json.message,
             status: response.status
         }
+    }
+
+    async update(id: number, values: PotRequest): Promise<ApiDefaultResponse<PotResponse>> {
+        const response = await this.composeResponse(`pots/${id}`, 'PUT', values);
+        const jsonResponse = await this.jsonResponseParsing(response, PotService.defaultPot);
+
+        const errors = this.errorHandler<PotResponse>(
+            response,
+            jsonResponse,
+            PotService.potResponseSchema,
+            PotService.defaultPot
+        );
+
+        if (errors)
+            return errors;
+
+        return {
+            success: true,
+            data: jsonResponse.json.data,
+            message: jsonResponse.json.message,
+            status: response.status
+        }
 
     }
 }

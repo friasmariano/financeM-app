@@ -36,13 +36,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <StoreProvider>
-        <Navbar />
-        <Sidebar />
-        <Main>
-          {children}
-        </Main>
-        <FooterServer />
-        <ThemeProvider />
+          <Navbar />
+          <Sidebar />
+          <Main>
+            {children}
+          </Main>
+          <FooterServer />
+          <ThemeProvider />
         </StoreProvider>
       </body>
     </html>

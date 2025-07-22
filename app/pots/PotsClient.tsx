@@ -16,7 +16,9 @@ import { formatErrorMessages } from "@/utils/formatErrorMessages";
 import { formatError } from "zod";
 import { useRouter } from "next/navigation";
 import hasErrorMessages from "@/utils/hasErrorMessages";
+import { PotRequest } from "@/types/requests/potRequest";
 import PotResponse from "@/types/responses/PotResponse";
+import { apiErrorHandler } from "@/utils/apiErrorHandler";
 
 export default function PotsClient() {
   const [formMode, setFormMode] = useState<FormMode>('create');
@@ -33,7 +35,7 @@ export default function PotsClient() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const getPots = async () => {
+  const getAll = async () => {
     try {
       const result: ApiDefaultResponse<PotResponse[]> = await service.getAll();
 
@@ -67,6 +69,46 @@ export default function PotsClient() {
     }
   }
 
+  const create = async (setSubmitting: (isSubmitting: boolean) => void, values: PotRequest) => {
+    try {
+      const result = await service.create(values);
+
+      if (apiErrorHandler(result, { router, setErrors, setIsModalOpen }))
+        return;
+
+      toast.success(result.message.toString());
+      setIsModalOpen(false);
+
+      await getAll();
+
+    } catch (error: any) {
+        toast.error('Error creating the pot');
+        console.log(error);
+    } finally {
+        setSubmitting(false);
+    }
+  }
+
+  const update = async (setSubmitting: (isSubmitting: boolean) => void, id: number, values: PotRequest) => {
+    try {
+      const result = await service.update(id, values);
+
+      if (apiErrorHandler(result, { router, setErrors, setIsModalOpen }))
+        return;
+
+      toast.success(result.message.toString());
+      setIsModalOpen(false);
+
+      await getAll();
+
+    } catch(error: any) {
+        toast.error('Error updating the pot');
+        console.log(error);
+    } finally {
+        setSubmitting(false);
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -90,66 +132,13 @@ export default function PotsClient() {
     validateOnMount: true,
     onSubmit: async (values, { setSubmitting }) => {
         if (formMode === 'create') {
-          try {
-            const result = await service.create(values);
+          await create(setSubmitting, values);
 
-            if (!result.success) {
-              if (result.status === 401) {
-                setIsModalOpen(false);
-                toast.error(result.message.toString());
-
-                setTimeout(() => router.push('/login'), 3000);
-                return;
-              }
-
-              if (!hasErrorMessages(result.data)) {
-                setErrors([result.message.toString()]);
-
-                return;
-              }
-
-              formatErrorMessages(result.data, setErrors);
-
-              setTimeout(() => setErrors([]), 7000);
-
-              return;
-            }
-
-            toast.success(result.message.toString());
-            setIsModalOpen(false);
-
-            await getPots();
-
-          } catch (error: any) {
-              toast.error('Error creating the pot');
-              console.log(error);
-          } finally {
-              setSubmitting(false);
-          }
+          return;
         }
 
         if (formMode === 'edit') {
-          try {
-            const potResponse: ApiDefaultResponse<Pot> = await potServiceOld.update(1, values);
-
-            if (!potResponse) {
-              toast.error("Pot edition failed.");
-              return;
-            }
-
-            toast.success("Pot updated successfully!");
-
-          }
-          catch(error: any) {
-            console.log("Error on pot edition", error);
-
-            toast.error("There was an error editing the pot");
-          }
-          finally {
-            getPots();
-            setSubmitting(false);
-            setIsModalOpen(false);
-          }
+          await update(setSubmitting, potId, values);
         }
     }
   })
@@ -170,6 +159,8 @@ export default function PotsClient() {
   };
 
   const editPot = (potId: number) => {
+    formik.resetForm();
+
     const potToEdit = pots.find(p => p.id === potId);
 
     if (!potToEdit) {
@@ -188,13 +179,11 @@ export default function PotsClient() {
       currentAmount: potToEdit.currentAmount.toString()
     });
 
-    formik.resetForm();
-
     setIsModalOpen(true);
   }
 
   useEffect(() => {
-    getPots();
+    getAll();
   }, []);
 
   return (
