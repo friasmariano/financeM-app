@@ -92,7 +92,8 @@ export abstract class BaseService<T> {
 
         const result = schema.safeParse(json);
         if (!result.success) {
-            // Marked as a false positive
+            console.log("❌ Zod Validation Error:", result.error.format());
+
             return {
                 success: false,
                 data: json.data,

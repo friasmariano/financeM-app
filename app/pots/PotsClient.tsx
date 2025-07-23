@@ -12,18 +12,20 @@ import { FormMode } from "@/types/FormMode";
 import { useAppSelector } from "@/lib/hooks";
 import { PotService } from "@/services/PotService";
 import { formatErrorMessages } from "@/utils/formatErrorMessages";
-import { formatError } from "zod";
+import { formatError, set } from "zod";
 import { useRouter } from "next/navigation";
 import hasErrorMessages from "@/utils/hasErrorMessages";
 import { PotRequest } from "@/types/requests/potRequest";
 import PotResponse from "@/types/responses/PotResponse";
 import { apiErrorHandler } from "@/utils/apiErrorHandler";
+import ConfirmDialog from "@/components/ConfirmDialog";
 
 export default function PotsClient() {
   const [formMode, setFormMode] = useState<FormMode>('create');
   const isDark = useAppSelector((state) => state.theme.data.isDark);
   const [modalTitle, setModalTitle] = useState('');
   const [potId, setPotId] = useState<number>(0);
+  const [potName, setPotName] = useState<string>('');
 
   const service = new PotService();
   const router = useRouter();
@@ -32,37 +34,16 @@ export default function PotsClient() {
 
   const [pots, setPots] = useState<PotResponse[]>([]);
 
-  const [toastVisible, setToastVisible] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isConfirmOpen, setConfirmOpen] = useState(false);
 
   const getAll = async () => {
     try {
       const result: ApiDefaultResponse<PotResponse[]> = await service.getAll();
 
-      if (!result.success) {
-        console.log(result);
-
-        if (result.status === 401) {
-          toast.error(result.message.toString());
-
-          setTimeout(() => router.push('/login'), 3000);
-          return;
-        }
-
-        if (!hasErrorMessages(result.data)) {
-          setErrors([result.message.toString()]);
-
-          return;
-        }
-
-        formatErrorMessages(result.data, setErrors);
-
-        setTimeout(() => setErrors([]), 7000);
-
+      if (apiErrorHandler(result, { router, setErrors, setIsModalOpen }))
         return;
-      }
 
       setPots(result.data);
     } catch (error: any) {
@@ -111,6 +92,47 @@ export default function PotsClient() {
     }
   }
 
+  const deletePot = async(id: number) => {
+    try {
+      const result = await service.delete(id);
+
+      if (!result.success) {
+          if (result.status === 401) {
+              setIsModalOpen?.(false);
+              toast.error(result.message.toString());
+
+              setTimeout(() => { router.push('/login') }, 3000);
+              return;
+          }
+
+          if (!hasErrorMessages(result.data)) {
+              toast.error(result.message.toString());
+              return;
+          }
+
+          Object.entries(result.data).forEach(([key, message]) => {
+            if (typeof message === 'string') {
+              toast.error(message);
+            }
+          });
+
+          console.log(result);
+
+          return;
+        }
+
+      toast.success(result.message.toString());
+
+      await getAll();
+
+    } catch (error: any) {
+      toast.error('Error deleting the pot.');
+      console.log(error);
+    } finally {
+      //
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -146,6 +168,11 @@ export default function PotsClient() {
   })
 
   const createPot = () => {
+    if (pots.length >= 20) {
+      toast.info('You can only create up to 20 pots.');
+      return;
+    }
+
     setFormMode('create');
     setModalTitle('New Pot');
 
@@ -184,19 +211,42 @@ export default function PotsClient() {
     setIsModalOpen(true);
   }
 
+  const deletePotItem = (id: number, name: string) => {
+    const potToEdit = pots.find(p => p.id === id);
+
+    if (!potToEdit) {
+      toast.error('Pot not found.');
+      return;
+    }
+
+    setPotId(id);
+    setPotName(name);
+
+    // Open confirm dialog
+    setConfirmOpen(true);
+  }
+
   useEffect(() => {
     getAll();
   }, []);
 
   return (
-    <section style={{ padding: '20px 50px 0px 30px', maxHeight: '60vh', overflow: 'scroll'}}>
+    <section style={{ padding: '20px 50px 0px 20px', maxHeight: '72vh', overflow: 'scroll'}}>
       <div className="flex justify-between py-[10px] pb-[40px]">
+        <div>
+          <p>
+            <span style={{ fontSize: '2rem', fontWeight: '500' }}>Total</span>
+            <span style={{ marginLeft: '10px', fontSize: '1.2rem' }}>{pots.length}/20</span>
+          </p>
+        </div>
+
         {/* Blank space */}
         <div></div>
 
         <button className="cursor-pointer px-[35px] py-[9px] rounded-[20px]"
                 style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                         background: 'var(--white-semitransparent-gradient)' }}
+                         background: 'var(--white-semitransparent-gradient)',
+                         height: '45px' }}
                 onClick={createPot}>
           <i className="bi bi-plus-circle mr-2"></i>
           New Pot
@@ -205,7 +255,7 @@ export default function PotsClient() {
 
       <div>
         {/* Pots */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', padding: '0px 0px 60px 0px' }}>
           {pots.map((pot) => (
             <div key={pot.id}>
                 <PotCard
@@ -217,6 +267,9 @@ export default function PotsClient() {
                       editPot(pot.id);
                     }
                   }
+                  onDelete={() => {
+                    deletePotItem(pot.id, pot.name);
+                  }}
                 />
             </div>
           ))}
@@ -312,6 +365,22 @@ export default function PotsClient() {
               </form>
             </div>
       </Modal>
+
+      <ConfirmDialog
+        isOpen={isConfirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        title="Delete Pot"
+        onSave={() => {
+          deletePot(potId);
+          setConfirmOpen(false);
+        }}
+        isSaving={false}>
+          <p>Do you want to delete pot</p>
+          <p style={{}}>
+            <span style={{ fontWeight: '500', fontSize: '2rem'  }}>{potName}</span>
+            <span style={{ fontSize: '2rem'  }}> ?</span>
+          </p>
+      </ConfirmDialog>
 
       <ToastContainer theme={isDark ? 'dark' : 'light' } />
     </section>

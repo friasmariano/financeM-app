@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/lib/hooks";
 import { PotProps } from "@/types/PotProps";
 
-export default function PotCard({ id, name, goalAmount, currentAmount, onEdit }: PotProps) {
+export default function PotCard({ id, name, goalAmount, currentAmount, onEdit, onDelete }: PotProps) {
 
     const isDark = useAppSelector((state) => state.theme.data.isDark);
 
@@ -41,7 +41,8 @@ export default function PotCard({ id, name, goalAmount, currentAmount, onEdit }:
                             borderRadius: '20px',
                             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                             cursor: 'pointer',
-                            color: 'white'}}>
+                            color: 'white'}}
+                            onClick={() => onDelete() }>
             <i className="bi bi-trash3"></i>
         </button>
         </div>

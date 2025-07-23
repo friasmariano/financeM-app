@@ -6,12 +6,9 @@ import { ModalProps } from '@/types/ModalProps'
 import { useAppSelector } from '@/lib/hooks'
 import { getSizeClass } from '@/utils/modalSize'
 import Spinner from './Spinner'
+import { ConfirmDialogProps } from '@/types/ConfirmDialogProps'
 
-export default function Modal({ isOpen, onClose, children,
-                                title, size = 'medium',
-                                hasButtons, savingDisabled,
-                                onSave,
-                                isSaving } : ModalProps) {
+export default function ConfirmDialog({ isOpen, onClose, children, title, onSave, isSaving } : ConfirmDialogProps) {
     const isDark = useAppSelector((state) => state.theme.data.isDark);
 
     useEffect(() => {
@@ -48,7 +45,7 @@ export default function Modal({ isOpen, onClose, children,
                     backgroundColor: isDark ? 'rgba(13,51,64,0.5)' : 'rgba(232, 231, 231, 0.8)',
                     borderRadius: '1rem',
                     boxShadow: '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1)',
-                    width: getSizeClass(size),
+                    width: '45vw',
                     position: 'relative',
                     animation: 'fadeIn 0.3s ease-in-out',
                 }}
@@ -92,7 +89,7 @@ export default function Modal({ isOpen, onClose, children,
                                   justifyContent: 'center',
                                   alignItems: 'center',
                                   flexDirection: 'column',
-                                  minHeight: '300px' }}>
+                                  minHeight: '265px' }}>
                         {children}
                     </div>
 
@@ -107,24 +104,21 @@ export default function Modal({ isOpen, onClose, children,
                                       backgroundColor: isDark ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.8)',
                                       borderRadius: '0px 0px 20px 20px',
                          }}>
-                            {hasButtons ?
-                                <div style={ { display: 'flex', gap: '10px', flexWrap: 'wrap'}}>
-                                    <button className='button is-green text-white'
+                            <div style={ { display: 'flex', gap: '10px', flexWrap: 'wrap'}}>
+                                    <button className='button is-red text-white'
                                             style={{ fontWeight: '500',
-                                                     cursor: savingDisabled ? 'not-allowed' : 'pointer',
-                                                     opacity: savingDisabled ? '0.3' : '1' }}
-                                            disabled={savingDisabled}
+                                                     cursor: isSaving ? 'not-allowed' : 'pointer',
+                                                     opacity: isSaving ? '0.3' : '1' }}
+                                            disabled={isSaving}
                                             type="submit"
                                             onClick={onSave}>
                                                 {isSaving && <Spinner className="mr-2" /> }
-                                                {isSaving ? 'Saving...' : 'Save'}
+                                                Confirm
                                             </button>
-                                    <button className='button is-red text-white'
+                                    <button className='button is-green text-white'
                                             style={{ fontWeight: '500', cursor: 'pointer' }}
                                             onClick={onClose}>Cancel</button>
-                                </div>
-
-                            : null}
+                            </div>
                         </div>
                     </section>
             </div>

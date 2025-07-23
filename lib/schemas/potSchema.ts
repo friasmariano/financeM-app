@@ -7,7 +7,7 @@ export const potSchema = z.object({
     name: z.string(),
     goalAmount: z.number(),
     currentAmount: z.number(),
-    userId: z.number()
+    userId: z.number().optional(),
 });
 
 export const potResponseSchema = apiResponseSchema(potSchema);
