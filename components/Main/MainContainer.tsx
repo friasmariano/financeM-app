@@ -9,7 +9,8 @@ export default function MainContainer({ children }: MainServerProps) {
     if (!loggedIn) return <section>{children}</section>;
 
     return (
-        <section className="bg-[var(--sidebar-gradient)] m-5 rounded-[15px] pb-[0px] backdrop-blur-[30px] shadow-[0px_0px_18px_rgba(0,0,0,0.2)]">
+        <section className="bg-[var(--sidebar-gradient)] m-5 rounded-[15px] pb-[0px] backdrop-blur-[30px] shadow-[0px_0px_18px_rgba(0,0,0,0.2)]"
+                 style={{ minHeight: "500px" }}>
             {children}
         </section>
     );

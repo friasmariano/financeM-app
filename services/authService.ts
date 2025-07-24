@@ -15,12 +15,12 @@ export const authService = {
       const apiResponse: ApiDefaultResponse<UserResponse> = await res.json();
 
       if (!res.ok || !apiResponse.success || !apiResponse.data) {
-        console.error("Login failed:", apiResponse?.message, apiResponse);
+        console.log("Login failed:", apiResponse?.message, apiResponse);
       }
 
       return apiResponse;
     } catch (err) {
-      console.error("Unexpected login error:", err);
+      console.log("Unexpected login error:", err);
       return {
         success: false,
         message: "Unexpected error occurred.",
@@ -38,10 +38,11 @@ export const authService = {
     const responseBody: ApiDefaultResponse<any> = await res.json();
 
     if (!res.ok || !responseBody.success) {
-      const message = responseBody?.message || "Registration failed.";
-      const error = new Error(message);
-      (error as any).response = responseBody;
-      throw error;
+      // const message = responseBody?.message || "Registration failed.";
+      // const error = new Error(message);
+      // (error as any).response = responseBody;
+      console.log("Auth response error:", responseBody?.message, responseBody);
+      // throw error;
     }
 
     return responseBody;

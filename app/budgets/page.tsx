@@ -1,5 +1,6 @@
 import getAuthenticatedUser from "@/lib/auth";
 import { redirect } from 'next/navigation';
+import { BudgetsClient } from "./BudgetsClient";
 
 export default function BudgetsPage() {
     const user = getAuthenticatedUser();
@@ -9,7 +10,10 @@ export default function BudgetsPage() {
     }
 
     return (
-        <>
-        </>
+        <section>
+            <div style={{ margin: '20px 0px 0px 30px' }}>
+                <BudgetsClient />
+            </div>
+        </section>
     );
 }

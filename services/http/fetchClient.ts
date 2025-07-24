@@ -17,7 +17,11 @@ export async function fetchClient(
 
     return response;
   } catch (error) {
-    console.error(`Fetch error for ${url}:`, error);
-    throw error;
+    console.log(`Fetch error for ${url}:`, error);
+    // throw error;
+    return new Response(null, {
+      status: 500,
+      statusText: 'Internal Server Error',
+    });
   }
 }
