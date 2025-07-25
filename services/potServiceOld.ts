@@ -1,7 +1,7 @@
 import { ApiDefaultResponse } from '@/types/ApiDefaultResponse';
 import { fetchClient } from './http/fetchClient';
 import { Pot } from '@/types/Pot';
-import { PotRequest } from '@/types/requests/potRequest';
+import { PotRequest } from '@/types/requests/PotRequest';
 
 export const potServiceOld = {
   getAll: async (): Promise<ApiDefaultResponse<Pot[]>> => {

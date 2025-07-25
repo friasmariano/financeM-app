@@ -2,7 +2,7 @@
 import PotResponse from "@/types/responses/PotResponse";
 import { apiResponseSchema } from "@/lib/schemas/apiResponseSchema";
 import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
-import { PotRequest } from "@/types/requests/potRequest";
+import { PotRequest } from "@/types/requests/PotRequest";
 import { potSchema } from "@/lib/schemas/potSchema";
 import { BaseService } from "./BaseService";
 import { DefaultFactory } from "@/utils/DefaultFactory";

@@ -15,7 +15,7 @@ import { formatErrorMessages } from "@/utils/formatErrorMessages";
 import { formatError, set } from "zod";
 import { useRouter } from "next/navigation";
 import hasErrorMessages from "@/utils/hasErrorMessages";
-import { PotRequest } from "@/types/requests/potRequest";
+import { PotRequest } from "@/types/requests/PotRequest";
 import PotResponse from "@/types/responses/PotResponse";
 import { apiErrorHandler } from "@/utils/apiErrorHandler";
 import ConfirmDialog from "@/components/ConfirmDialog";

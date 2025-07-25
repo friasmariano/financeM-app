@@ -52,7 +52,7 @@ export default function Hero() {
                 <h2 className="text-[1.23rem] text-muted-foreground">{content.subtitle}</h2>
               </div>
 
-              <div style={{ display: 'flex' }}>
+              {/* <div style={{ display: 'flex' }}>
                 <Image
                   src="/Piggy.png"
                   alt="Hero Illustration"
@@ -62,7 +62,7 @@ export default function Hero() {
                             opacity: '0.1',
                    }}
                 />
-              </div>
+              </div> */}
             </div>
           </div>)
 
