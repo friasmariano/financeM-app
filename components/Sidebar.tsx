@@ -58,14 +58,14 @@ export default function Sidebar() {
                                  transition-transform duration-300 ease-in-out
                                 ${isMobile ? (isOpened ? 'translate-x-0' : '-translate-x-full') : ''}`}
                      style={{ background: 'var(--sidebar-gradient)'}}>
-                <ul className="sidebar-links" style={{ padding: '0px', margin: '0px', listStyleType: 'none'}}>
+                <ul style={{ padding: '0px', margin: '0px', listStyleType: 'none'}}>
                 {links.map((link, index) => (
                     <li key={link.href}
                         style={{ padding: '10px 0px 10px 40px', margin: '18px 0px 22px 0px'}}
                         onMouseEnter={() => setHover(index, true)}
                         onMouseLeave={() => setHover(index, false)}
                         className={pathname === link.href ? 'sidebar-active-route' : ''}>
-                        <Link href={link.href} style={{ }}>
+                        <Link href={link.href}>
                             <i className={`bi ${link.hovered || pathname === link.href ? link.hoverIcon : link.icon} mr-2`}></i>
                             <span className='sidebar-text'>{link.label}</span>
                         </Link>

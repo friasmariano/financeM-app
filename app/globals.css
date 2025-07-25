@@ -282,10 +282,17 @@ body {
   font-weight: bold;
 }
 
+/* .sidebar-links > li:hover {
+  border-radius: 0px 30px 30px 0px;
+  background: var(--sidebar-link-hover-background);
+  color: var(--sidebar-link-text);
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.05);
+} */
+
 .sidebar-links > li:hover {
   border-radius: 0px 30px 30px 0px;
   background: var(--sidebar-link-hover-background);
-  /* color: var(--sidebar-link-text); */
+  color: var(--sidebar-link-text);
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.05);
 }
 

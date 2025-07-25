@@ -1,9 +1,9 @@
 import getAuthenticatedUser from "@/lib/auth";
 import { redirect } from 'next/navigation';
-import { BudgetsClient } from "./BudgetsClient";
+import BudgetsClient from "./BudgetsClient";
 
-export default function BudgetsPage() {
-    const user = getAuthenticatedUser();
+export default async function BudgetsPage() {
+    const user = await getAuthenticatedUser();
 
     if (!user) {
         redirect('/login');
@@ -12,7 +12,7 @@ export default function BudgetsPage() {
     return (
         <section>
             <div style={{ margin: '20px 0px 0px 30px' }}>
-                <BudgetsClient />
+                <BudgetsClient isAuthenticated={user ? true: false} />
             </div>
         </section>
     );
