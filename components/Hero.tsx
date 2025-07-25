@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useAppSelector } from "@/lib/hooks";
 import { useMemo } from 'react';
+import Image from 'next/image';
 
 export default function Hero() {
   const pathname = usePathname();
@@ -41,11 +42,28 @@ export default function Hero() {
                       shadow-[4px_4px_20px_rgba(0,0,0,0.2)]"
                       style={{ boxShadow: 'var(--hero-glow)',
                                background: 'var(--hero-gradient)',
-                               backdropFilter: 'blur(8px)'
+                               backdropFilter: 'blur(8px)',
+                               overflow: 'hidden'
                        }}>
-            <h1 className="text-[2.6rem] font-bold text-foreground"
-                style={{ textShadow: '2px 3px 10px rgba(0, 0, 0, 0.2)' }}>{content.title}</h1>
-            <h2 className="text-[1.23rem] text-muted-foreground">{content.subtitle}</h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <h1 className="text-[2.6rem] font-bold text-foreground"
+                    style={{ textShadow: '2px 3px 10px rgba(0, 0, 0, 0.2)' }}>{content.title}</h1>
+                <h2 className="text-[1.23rem] text-muted-foreground">{content.subtitle}</h2>
+              </div>
+
+              <div style={{ display: 'flex' }}>
+                <Image
+                  src="/Piggy.png"
+                  alt="Hero Illustration"
+                  width={800}
+                  height={800}
+                  style={{ margin: '-105px 0px 0px 0px',
+                            opacity: '0.1',
+                   }}
+                />
+              </div>
+            </div>
           </div>)
 
         : null

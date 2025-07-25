@@ -569,3 +569,14 @@ input {
   background-color: hsl(0, 0%, 16%);
 }
 
+.icon-3d-container {
+  perspective: 800px;
+}
+
+.icon-3d {
+  font-size: 4rem;
+  color: #ff69b4;
+  display: inline-block;
+  transform: rotateY(25deg) rotateX(15deg);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
