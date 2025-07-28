@@ -5,7 +5,7 @@ import { apiResponseSchema } from "@/lib/schemas/apiResponseSchema";
 import budgetDefault from "@/defaults/budgetDefault";
 import { DefaultFactory } from "@/utils/DefaultFactory";
 import { z } from "zod";
-import { BudgetRequest } from "@/types/requests/budgetRequest";
+import { BudgetRequest } from "@/types/requests/BudgetRequest";
 import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
 
 export class BudgetService extends BaseService<BudgetResponse>{

@@ -1,5 +1,6 @@
 "use client";
 
+import { useSessionGuard } from "@/hooks/useSessionGuard";
 import { useEffect, useState } from "react";
 import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
 import { Pot } from "@/types/Pot";
@@ -20,7 +21,9 @@ import PotResponse from "@/types/responses/PotResponse";
 import { apiErrorHandler } from "@/utils/apiErrorHandler";
 import ConfirmDialog from "@/components/ConfirmDialog";
 
-export default function PotsClient() {
+export default function PotsClient({ isAuthenticated } : { isAuthenticated: boolean }) {
+  useSessionGuard(isAuthenticated);
+
   const [formMode, setFormMode] = useState<FormMode>('create');
   const isDark = useAppSelector((state) => state.theme.data.isDark);
   const [modalTitle, setModalTitle] = useState('');

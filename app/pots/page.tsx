@@ -14,7 +14,7 @@ export default async function PotsPage() {
     <section>
 
       <div style={{ margin: "20px 0px 0px 30px" }}>
-        <PotsClient />
+        <PotsClient isAuthenticated={user ? true : false } />
       </div>
     </section>
   );
