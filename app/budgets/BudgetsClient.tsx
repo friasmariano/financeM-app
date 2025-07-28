@@ -98,8 +98,41 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
     }
 
     return(
-        <div style={{ padding: '20px 50px 0px 20px', maxHeight: '72vh', overflow: 'scroll'}}>
-            Lorem Ipsum dolor sit amet, consectetur adipiscing elit.
-        </div>
+        <section style={{ display: 'flex',
+                          padding: '20px 50px 0px 20px',
+                          maxHeight: '72vh', overflow: 'scroll'}}>
+
+            <div style={{ display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '0px' }}>
+                <div style={{ position: 'relative',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center'}}>
+                    <i className="bi bi-folder"
+                       style={{ fontSize: '5.5rem',
+                                background: 'linear-gradient(0deg, rgba(255, 255, 255, 0), #ffffffff)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                opacity: '0.5',
+                                textShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
+                            }}></i>
+                    <i className="bi bi-pie-chart"
+                       style={{ position: 'absolute',
+                                fontSize: '1.5rem',
+                                transform: 'translate(0px, 2px)',
+                                background: 'linear-gradient(0deg, rgba(255, 255, 255, 0), #ffffffff)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                opacity: '0.6',
+                                textShadow: '0 2px 6px rgba(0, 0, 0, 0.2)'
+                            }}></i>
+                </div>
+
+                <p style={{ transform: 'translate(0px, -10px)' }}>New Home</p>
+            </div>
+        </section>
     )
 }
