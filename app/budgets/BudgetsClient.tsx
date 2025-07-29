@@ -11,6 +11,7 @@ import { useAppSelector } from "@/lib/hooks";
 import { BudgetRequest } from "@/types/requests/BudgetRequest";
 import { ToastContainer, toast } from "react-toastify";
 import { handleDeleteError } from "@/utils/handleDeleteError";
+import BudgetIcon from "@/components/BudgetIcon";
 
 export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: boolean }) {
     useSessionGuard(isAuthenticated);
@@ -103,36 +104,15 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
                           maxHeight: '72vh', overflow: 'scroll'}}>
 
             <div style={{ display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: '0px' }}>
-                <div style={{ position: 'relative',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center'}}>
-                    <i className="bi bi-folder"
-                       style={{ fontSize: '5.5rem',
-                                background: 'linear-gradient(0deg, rgba(255, 255, 255, 0), #ffffffff)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                opacity: '0.5',
-                                textShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
-                            }}></i>
-                    <i className="bi bi-pie-chart"
-                       style={{ position: 'absolute',
-                                fontSize: '1.5rem',
-                                transform: 'translate(0px, 2px)',
-                                background: 'linear-gradient(0deg, rgba(255, 255, 255, 0), #ffffffff)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                opacity: '0.6',
-                                textShadow: '0 2px 6px rgba(0, 0, 0, 0.2)'
-                            }}></i>
-                </div>
-
-                <p style={{ transform: 'translate(0px, -10px)' }}>New Home</p>
+                          gap: '60px',
+                          flexWrap: 'wrap',
+                          padding: '20px 0px 0px 10px' }}>
+                <BudgetIcon title="New Home" />
+                <BudgetIcon title="Emergency Fund" />
+                <BudgetIcon title="Car" />
             </div>
+
+            <ToastContainer theme={isDark ? 'dark' : 'light' } />
         </section>
     )
 }
