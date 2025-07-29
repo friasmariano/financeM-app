@@ -6,12 +6,15 @@ import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
 import BudgetResponse from "@/types/responses/BudgetResponse";
 import { apiErrorHandler } from "@/utils/apiErrorHandler";
 import { useRouter } from "next/navigation";
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppSelector } from "@/lib/hooks";
 import { BudgetRequest } from "@/types/requests/BudgetRequest";
 import { ToastContainer, toast } from "react-toastify";
 import { handleDeleteError } from "@/utils/handleDeleteError";
 import BudgetIcon from "@/components/BudgetIcon";
+import { useFormik } from "formik";
+import * as Yup from 'yup';
+import { FormMode } from "@/types/FormMode";
 
 export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: boolean }) {
     useSessionGuard(isAuthenticated);
@@ -25,6 +28,7 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
     const [budgets, setBudgets] = useState<BudgetResponse[]>([]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formMode, setFormMode] = useState<FormMode>("create");
 
     const getAll = async () => {
         try {
@@ -34,6 +38,7 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
                 return;
 
             setBudgets(result.data);
+            console.log(result.data);
         } catch(error: any) {
             toast.error('Error getting budgets.');
             console.log(error);
@@ -98,16 +103,65 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
         }
     }
 
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            limitAmount: 0,
+        },
+        validationSchema: Yup.object({
+            name: Yup.string()
+                    .required()
+                    .min(3, 'Name must be at least 3 characters long')
+                    .max(20, 'Name must be at most 20 characters long'),
+            limitAmount: Yup.number()
+                            .required()
+                            .min(0, 'Limit amount must be greater than 0')
+                            .max(99999999.99, 'Limit amount must be less than 99999999.99')
+        }),
+        validateOnMount: true,
+        onSubmit: async (values, { setSubmitting }) => {
+            if (formMode === 'create') {
+                await create(setSubmitting, values);
+
+                return;
+            }
+
+            if (formMode === 'edit') {
+                // await update(setSubmitting, budgetId, values);
+            }
+        }
+    });
+
+    useEffect(() => {
+        getAll();
+    }, []);
+
     return(
         <section style={{ display: 'flex',
                           padding: '20px 50px 0px 20px',
-                          maxHeight: '72vh', overflow: 'scroll'}}>
+                          maxHeight: '72vh', overflow: 'scroll',
+                          flexDirection: 'column' }}>
+
+            <div className="flex justify-between py-[10px] pb-[40px]">
+                {/* Blank space */}
+                <div></div>
+
+                <button className="cursor-pointer px-[35px] py-[9px] rounded-[20px]"
+                        style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                                background: 'var(--white-semitransparent-gradient)',
+                                height: '45px' }}>
+                <i className="bi bi-plus-circle mr-2"></i>
+                    New Budget
+                </button>
+            </div>
 
             <div style={{ display: 'flex',
                           gap: '60px',
                           flexWrap: 'wrap',
                           padding: '20px 0px 0px 10px' }}>
-                <BudgetIcon title="New Home" />
+                <BudgetIcon
+                    title="New Home"
+                    onClick={() => alert("Hello")} />
                 <BudgetIcon title="Emergency Fund" />
                 <BudgetIcon title="Car" />
             </div>

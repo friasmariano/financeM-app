@@ -1,6 +1,5 @@
 
 export interface BudgetRequest {
-    categoryId: number;
+    name: string;
     limitAmount: number;
-    userId: number;
 }

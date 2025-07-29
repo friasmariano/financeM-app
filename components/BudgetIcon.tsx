@@ -2,8 +2,11 @@
 
 import { BudgetIconProps } from "@/types/BudgetIconProps";
 import { useAppSelector } from "@/lib/hooks";
+import { useState } from "react";
 
-export default function BudgetIcon({ title }: BudgetIconProps) {
+export default function BudgetIcon({ title, onClick }: BudgetIconProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   const isDark = useAppSelector((state) => state.theme.data.isDark);
 
   return (
@@ -15,12 +18,25 @@ export default function BudgetIcon({ title }: BudgetIconProps) {
       gap: "0px",
       cursor: 'pointer'
     }}>
-      <div style={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}>
+      <div onMouseEnter={() => setIsHovered(true)}
+           onMouseLeave={() => setIsHovered(false)}
+           onClick={onClick}
+           onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onClick?.()
+            }
+           }}
+           role="button"
+           tabIndex={0}
+           aria-label={title}
+           style={{position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: 'transform 0.3s ease',
+                    transform: isHovered ? 'scale(1.09)' : 'scale(1)'}}>
+
         {/* Folder Icon */}
         <svg
           width="88"
@@ -28,7 +44,7 @@ export default function BudgetIcon({ title }: BudgetIconProps) {
           viewBox="0 0 16 16"
           xmlns="http://www.w3.org/2000/svg"
           style={{
-            opacity: isDark ? 0.6 : 0.7,
+            opacity: isHovered ? '1': '0.7',
             textShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
             filter: "drop-shadow(0px 3px 8px rgba(0,0,0,0.2))"
           }}
@@ -44,7 +60,7 @@ export default function BudgetIcon({ title }: BudgetIconProps) {
                 </>
               ) : (
                 <>
-                  <stop offset="0%" stopColor="rgba(11, 39, 48, 1)" stopOpacity="0.6" />
+                  <stop offset="0%" stopColor="rgba(11, 39, 48, 1)" stopOpacity="0.7" />
                   <stop offset="100%" stopColor="rgba(54, 147, 179, 1)" />
                 </>
               )}
@@ -69,7 +85,7 @@ export default function BudgetIcon({ title }: BudgetIconProps) {
           style={{
             position: "absolute",
             transform: "translate(0px, 2px)",
-            opacity: isDark ? 0.6 : 0.8,
+            opacity: isHovered ? '1' : '0.8',
             textShadow: "0 2px 6px rgba(0, 0, 0, 0.2)"
           }}
           role="img"
