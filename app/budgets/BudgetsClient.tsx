@@ -179,11 +179,32 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
                     onSave={formik.handleSubmit}
                     savingDisabled={!formik.isValid || formik.isSubmitting}
                     isSaving={formik.isSubmitting}>
-                <div>
-                    <BudgetIcon
+                <div style={{ display: 'flex',
+                              justifyContent: 'left',
+                              alignItems: 'left',
+                              width: '100%',
+                              height: '150px',
+                              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0),  rgba(0, 0, 0, 0.2))' }}>
+                    {/* <div></div> */}
+                    <div style={{ padding: '20px 30px 0px 50px' }}>
+                        <BudgetIcon
                         title=""
                         fillIcons={true}
                         allowHoverEffect={false} />
+                    </div>
+                    <div style={{ display: 'flex',
+                                  flexDirection: 'column',
+                                  padding: '0px 0px 0px 30px',
+                                  borderLeft: isDark ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(24, 83, 102, 0.2)' }}>
+                        <p style={{ fontSize: '1.9rem' }}>New Home</p>
+                        <p>Limit Amount</p>
+                    </div>
+                </div>
+
+                <div style={{ padding: '30px 40px 50px 60px' }}>
+                    Details
+
+                    <p style={{ textAlign: 'justify' }}>Duis euismod est lacus, ac facilisis dui porttitor eget. Pellentesque id quam et turpis posuere ultricies. Suspendisse ac ultricies ipsum. Sed sed quam arcu. Curabitur malesuada blandit quam, ut dapibus magna ultricies at. Aenean pharetra tristique odio, vel porta nunc hendrerit eget. Morbi eleifend velit eu luctus auctor. Pellentesque congue nulla ac risus elementum, vitae rutrum leo lobortis. Nam semper odio sit amet risus pulvinar, sed luctus ipsum cursus.</p>
                 </div>
             </Modal>
         </section>
