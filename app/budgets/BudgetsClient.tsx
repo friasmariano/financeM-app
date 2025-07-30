@@ -15,6 +15,7 @@ import BudgetIcon from "@/components/BudgetIcon";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { FormMode } from "@/types/FormMode";
+import Modal from "@/components/Modal";
 
 export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: boolean }) {
     useSessionGuard(isAuthenticated);
@@ -149,7 +150,8 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
                 <button className="cursor-pointer px-[35px] py-[9px] rounded-[20px]"
                         style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                                 background: 'var(--white-semitransparent-gradient)',
-                                height: '45px' }}>
+                                height: '45px' }}
+                                onClick={() => setIsModalOpen(true) }>
                 <i className="bi bi-plus-circle mr-2"></i>
                     New Budget
                 </button>
@@ -167,6 +169,23 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
             </div>
 
             <ToastContainer theme={isDark ? 'dark' : 'light' } />
+
+            <Modal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    title='Budget'
+                    hasButtons={true} size='medium'
+
+                    onSave={formik.handleSubmit}
+                    savingDisabled={!formik.isValid || formik.isSubmitting}
+                    isSaving={formik.isSubmitting}>
+                <div>
+                    <BudgetIcon
+                        title=""
+                        fillIcons={true}
+                        allowHoverEffect={false} />
+                </div>
+            </Modal>
         </section>
     )
 }
