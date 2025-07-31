@@ -59,13 +59,13 @@ export default function BudgetIcon({ title, fillIcons, onClick, allowHoverEffect
               <linearGradient id="folderGradient2" x1="0%" y1="100%" x2="0%" y2="0%">
                 {isDark ? (
                   <>
-                    <stop offset="0%" stopColor="rgba(196, 196, 196, 1)" stopOpacity="1" />
-                    <stop offset="100%" stopColor="white" />
+                    <stop offset="0%" stopColor="rgba(196, 196, 196, 1)" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="white" stopOpacity="1" />
                   </>
                 ) : (
                   <>
-                    <stop offset="0%" stopColor="rgba(11, 39, 48, 1)" stopOpacity="0.7" />
-                    <stop offset="100%" stopColor="rgba(54, 147, 179, 1)" />
+                    <stop offset="0%" stopColor="rgba(11, 39, 48, 1)" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="rgba(54, 147, 179, 1)" stopOpacity="0.9" />
                   </>
                 )}
               </linearGradient>

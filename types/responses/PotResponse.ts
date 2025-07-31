@@ -5,4 +5,5 @@ export default interface PotResponse {
     goalAmount: number;
     currentAmount: number;
     userId: number
+    budgetId?: number;
 }

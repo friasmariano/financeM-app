@@ -1,2 +1,2 @@
 
-type ModalSize = 'small' | 'medium' | 'large' | 'full';
+type ModalSize = 'small' | 'regular' | 'medium' | 'large' | 'full';
