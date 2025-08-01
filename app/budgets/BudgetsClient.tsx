@@ -1,6 +1,5 @@
 'use client'
 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkSlash } from '@fortawesome/free-solid-svg-icons';
 import { useSessionGuard } from "@/hooks/useSessionGuard"
@@ -18,6 +17,7 @@ import BudgetIcon from "@/components/BudgetIcon";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { FormMode } from "@/types/FormMode";
+import { Tooltip } from 'react-tooltip'
 import Modal from "@/components/Modal";
 
 export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: boolean }) {
@@ -230,72 +230,78 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
                                   alignItems: 'left',
                                   gap: '20px',
                                   margin: '25px 0px 40px 0px' }}>
-                        {/* Related pots: */}
+                    {/* Related pots: */}
 
-                        <div style={{ width: '350px',
-                                    //   height: '50px',
-                                      borderRadius: '20px',
-                                      background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.075))',
-                                      boxShadow: '0 3px 25px rgba(0, 0, 0, 0.1)',
-                                      display: 'flex', padding: '8px 20px 0px 23px',
-                                      flexDirection: 'column' }}>
+                    <div style={{ width: '350px',
+                                //   height: '50px',
+                                    borderRadius: '20px',
+                                    background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.075))',
+                                    boxShadow: '0 3px 25px rgba(0, 0, 0, 0.1)',
+                                    display: 'flex', padding: '8px 20px 0px 23px',
+                                    flexDirection: 'column' }}>
 
-                            <div style={{ display: 'flex', padding: '10px 0px 0px 10px' }}>
-                                <i className="bi bi-piggy-bank-fill" style={{ fontSize: '1.5rem' }}></i>
-                                <p style={{ padding: '4px 0px 0px 10px', fontSize: '1.2rem' }}>New Home</p>
-                            </div>
-
-                            <div style={{ display: 'flex', flexDirection: 'column', padding: '10px 0px 25px 30px' }}>
-                                <p><b>Current Amount</b><span className="ml-2">1500.00</span></p>
-                                <p><b>Goal</b><span className="ml-2">2000.00</span></p>
-                            </div>
-
-                            <div style={{ display: 'flex',
-                                          width: '50px',
-                                          height: '40px',
-                                          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(233, 11, 11, 0.8), rgba(233, 11, 11, 1))',
-                                          margin: '0px 0px 25px 30px',
-                                          padding: '20px',
-                                          borderRadius: '15px',
-                                          justifyContent: 'center',
-                                          alignItems: 'center',
-                                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)' }}>
-                                <FontAwesomeIcon icon={faLinkSlash} style={{ fontSize: '0.9rem' }} />
-                            </div>
+                        <div style={{ display: 'flex', padding: '10px 0px 0px 10px' }}>
+                            <i className="bi bi-piggy-bank-fill" style={{ fontSize: '1.5rem' }}></i>
+                            <p style={{ padding: '4px 0px 0px 10px',
+                                        fontSize: '1.3rem' }}>New Home</p>
                         </div>
 
-                        <div style={{ width: '350px',
-                                    //   height: '50px',
-                                      borderRadius: '20px',
-                                      background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.075))',
-                                      boxShadow: '0 3px 25px rgba(0, 0, 0, 0.1)',
-                                      display: 'flex', padding: '8px 20px 0px 23px',
-                                      flexDirection: 'column' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 0px 25px 30px' }}>
+                            <p><b>Current Amount</b><span className="ml-2">1500.00</span></p>
+                            <p><b>Goal</b><span className="ml-2">2000.00</span></p>
+                        </div>
 
-                            <div style={{ display: 'flex', padding: '10px 0px 0px 10px' }}>
-                                <i className="bi bi-piggy-bank-fill" style={{ fontSize: '1.5rem' }}></i>
-                                <p style={{ padding: '4px 0px 0px 10px', fontSize: '1.2rem' }}>New Home</p>
-                            </div>
+                        <div style={{ display: 'flex',
+                                        width: '50px',
+                                        height: '40px',
+                                        background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(233, 11, 11, 0.8), rgba(233, 11, 11, 1))',
+                                        margin: '0px 0px 25px 30px',
+                                        padding: '20px',
+                                        borderRadius: '15px',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        cursor: 'pointer',
+                                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)' }}
+                             data-tooltip-id="unlink-button"
+                             data-tooltip-content="Unlink">
+                            <FontAwesomeIcon icon={faLinkSlash} style={{ fontSize: '0.9rem' }} />
+                        </div>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', padding: '10px 0px 25px 30px' }}>
-                                <p><b>Current Amount</b><span className="ml-2">1500.00</span></p>
-                                <p><b>Goal</b><span className="ml-2">2000.00</span></p>
-                            </div>
+                        <Tooltip id="unlink-button" place='right' />
+                    </div>
 
-                            <div style={{ display: 'flex',
-                                          width: '50px',
-                                          height: '40px',
-                                          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(233, 11, 11, 0.8), rgba(233, 11, 11, 1))',
-                                          margin: '0px 0px 25px 30px',
-                                          padding: '20px',
-                                          borderRadius: '15px',
-                                          justifyContent: 'center',
-                                          alignItems: 'center',
-                                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)' }}>
-                                <FontAwesomeIcon icon={faLinkSlash} style={{ fontSize: '0.9rem' }} />
-                            </div>
+                    <div style={{ width: '350px',
+                                //   height: '50px',
+                                    borderRadius: '20px',
+                                    background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.075))',
+                                    boxShadow: '0 3px 25px rgba(0, 0, 0, 0.1)',
+                                    display: 'flex', padding: '8px 20px 0px 23px',
+                                    flexDirection: 'column' }}>
+
+                        <div style={{ display: 'flex', padding: '10px 0px 0px 10px' }}>
+                            <i className="bi bi-piggy-bank-fill" style={{ fontSize: '1.5rem' }}></i>
+                            <p style={{ padding: '4px 0px 0px 10px', fontSize: '1.2rem' }}>New Home</p>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', padding: '10px 0px 25px 30px' }}>
+                            <p><b>Current Amount</b><span className="ml-2">1500.00</span></p>
+                            <p><b>Goal</b><span className="ml-2">2000.00</span></p>
+                        </div>
+
+                        <div style={{ display: 'flex',
+                                        width: '50px',
+                                        height: '40px',
+                                        background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(233, 11, 11, 0.8), rgba(233, 11, 11, 1))',
+                                        margin: '0px 0px 25px 30px',
+                                        padding: '20px',
+                                        borderRadius: '15px',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)' }}>
+                            <FontAwesomeIcon icon={faLinkSlash} style={{ fontSize: '0.9rem' }} />
                         </div>
                     </div>
+                </div>
             </Modal>
         </section>
     )
