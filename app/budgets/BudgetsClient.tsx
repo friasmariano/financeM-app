@@ -1,5 +1,8 @@
 'use client'
 
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkSlash } from '@fortawesome/free-solid-svg-icons';
 import { useSessionGuard } from "@/hooks/useSessionGuard"
 import { BudgetService } from '@/services/BudgetService'
 import { ApiDefaultResponse } from "@/types/ApiDefaultResponse";
@@ -174,7 +177,7 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     title='Budget'
-                    hasButtons={true} size='medium'
+                    hasButtons={false} size='large'
 
                     onSave={formik.handleSubmit}
                     savingDisabled={!formik.isValid || formik.isSubmitting}
@@ -183,10 +186,11 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
                               justifyContent: 'left',
                               alignItems: 'left',
                               width: '100%',
-                              height: '180px',
-                              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0),  rgba(0, 0, 0, 0.2))' }}>
+                              height: '245px',
+                              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0),  rgba(0, 0, 0, 0.2))',
+                              boxShadow: '0 5px 10px rgba(0, 0, 0, 0.1)' }}>
                     {/* <div></div> */}
-                    <div style={{ padding: '45px 30px 0px 50px' }}>
+                    <div style={{ padding: '39px 30px 0px 50px' }}>
                         <BudgetIcon
                             title=""
                             fillIcons={true}
@@ -194,35 +198,104 @@ export default function BudgetsClient({ isAuthenticated }: { isAuthenticated: bo
                     </div>
                     <div style={{ display: 'flex',
                                   flexDirection: 'column',
-                                  padding: '54px 0px 0px 30px',
+                                  padding: '35px 0px 0px 30px',
                                   borderLeft: isDark ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(24, 83, 102, 0.2)' }}>
-                        <p style={{ fontSize: '1.9rem' }}>New Home</p>
-                        <p>Limit Amount</p>
+                        <p style={{ margin: '0px 0px 7px 14px',
+                                    fontSize: '1.9rem',
+                                    fontWeight: '450' }}>New Home</p>
+                        {/* <p style={{ margin: '0px 0px 4px 14px' }}>Limit Amount</p> */}
+
+                        <div style={{ display: 'flex',
+                                      flexDirection: 'column',
+                                      gap: '3px' }}>
+                            <input type="text"
+                                    name="name"
+                                    placeholder="Name"
+                                    style={{ width: '240px', height: '40px', margin: '0px' }} />
+                            <input type="text"
+                                name="limitAmount"
+                                placeholder="Limit Amount"
+                                style={{ width: '240px', height: '40px', margin: '0px' }} />
+                            <button style={{ width: '100px',
+                                             height: '32px',
+                                             borderRadius: '30px',
+                                             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                                             margin: '9px 0px 0px 0px' }}
+                                    className='is-green'>Save</button>
+                        </div>
                     </div>
                 </div>
 
-                <div style={{ padding: '30px 40px 50px 60px' }}>
+                <div style={{ display: 'flex',
+                                  alignItems: 'left',
+                                  gap: '20px',
+                                  margin: '25px 0px 40px 0px' }}>
+                        {/* Related pots: */}
 
-                    <div>
-                        <form style={{ display: 'flex',
-                                       flexDirection: 'column',
-                                       gap: '10px',
-                                       padding: '10px 0px 0px 0px' }}>
-                            <input type="text" name="name" placeholder="Name" />
-                            <input type="number" name="limitAmount" placeholder="Limit Amount" />
-                        </form>
+                        <div style={{ width: '350px',
+                                    //   height: '50px',
+                                      borderRadius: '20px',
+                                      background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.075))',
+                                      boxShadow: '0 3px 25px rgba(0, 0, 0, 0.1)',
+                                      display: 'flex', padding: '8px 20px 0px 23px',
+                                      flexDirection: 'column' }}>
+
+                            <div style={{ display: 'flex', padding: '10px 0px 0px 10px' }}>
+                                <i className="bi bi-piggy-bank-fill" style={{ fontSize: '1.5rem' }}></i>
+                                <p style={{ padding: '4px 0px 0px 10px', fontSize: '1.2rem' }}>New Home</p>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', padding: '10px 0px 25px 30px' }}>
+                                <p><b>Current Amount</b><span className="ml-2">1500.00</span></p>
+                                <p><b>Goal</b><span className="ml-2">2000.00</span></p>
+                            </div>
+
+                            <div style={{ display: 'flex',
+                                          width: '50px',
+                                          height: '40px',
+                                          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(233, 11, 11, 0.8), rgba(233, 11, 11, 1))',
+                                          margin: '0px 0px 25px 30px',
+                                          padding: '20px',
+                                          borderRadius: '15px',
+                                          justifyContent: 'center',
+                                          alignItems: 'center',
+                                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)' }}>
+                                <FontAwesomeIcon icon={faLinkSlash} style={{ fontSize: '0.9rem' }} />
+                            </div>
+                        </div>
+
+                        <div style={{ width: '350px',
+                                    //   height: '50px',
+                                      borderRadius: '20px',
+                                      background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.075))',
+                                      boxShadow: '0 3px 25px rgba(0, 0, 0, 0.1)',
+                                      display: 'flex', padding: '8px 20px 0px 23px',
+                                      flexDirection: 'column' }}>
+
+                            <div style={{ display: 'flex', padding: '10px 0px 0px 10px' }}>
+                                <i className="bi bi-piggy-bank-fill" style={{ fontSize: '1.5rem' }}></i>
+                                <p style={{ padding: '4px 0px 0px 10px', fontSize: '1.2rem' }}>New Home</p>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', padding: '10px 0px 25px 30px' }}>
+                                <p><b>Current Amount</b><span className="ml-2">1500.00</span></p>
+                                <p><b>Goal</b><span className="ml-2">2000.00</span></p>
+                            </div>
+
+                            <div style={{ display: 'flex',
+                                          width: '50px',
+                                          height: '40px',
+                                          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(233, 11, 11, 0.8), rgba(233, 11, 11, 1))',
+                                          margin: '0px 0px 25px 30px',
+                                          padding: '20px',
+                                          borderRadius: '15px',
+                                          justifyContent: 'center',
+                                          alignItems: 'center',
+                                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)' }}>
+                                <FontAwesomeIcon icon={faLinkSlash} style={{ fontSize: '0.9rem' }} />
+                            </div>
+                        </div>
                     </div>
-
-                    {/* <div>
-                        Related pots:
-
-                        <ul>
-                            <li>Pot 1</li>
-                            <li>Pot 2</li>
-                            <li>Pot 3</li>
-                        </ul>
-                    </div> */}
-                </div>
             </Modal>
         </section>
     )
